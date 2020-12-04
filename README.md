@@ -3,7 +3,7 @@
 ## Introdução
 LogiKids é um jogo educativo para auxiliar crianças no desenvolvimento lógico.
 
-## Integrantes
+## Grupo
 - Ketlyn Sena
 - Ricardo Barbosa
 - Scarlet Gianasi Viana
