@@ -10,7 +10,15 @@ LogiKids é um jogo educativo para auxiliar crianças no desenvolvimento lógico
 - Willian Douglas Brito Braga
 
 ## Escopo Funcional
-#TODO
+- Cadastro de usuário
+- Remoção de usuário
+- Modo história com pequenos jogos
+- Botão ajuda com tutorial
+- Botão sair da aplicação
+-	Pontuação do usuário
+-	Interação com objetos na tela
+-	Dicas
+-	Seleção de dificuldade
 
 ## Tecnologias
 - Linguagens: `c++`
