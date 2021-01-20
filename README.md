@@ -4,7 +4,7 @@
 LogiKids é um jogo educativo para auxiliar crianças no desenvolvimento lógico. Utiliza diversos problemas comuns da Computação de maneira lúdica para estimular o raciocínio e familiarizar o público infantil com problemas lógicos. Possui puzzles variados como o problema das N-Rainhas, Caixeiro Viajante e a Torre de Hanói.
 
 ## Grupo
-- Ketlyn Sena
+- Ketlyn Caroline de Sena Castro
 - Scarlet Gianasi Viana
 
 ## Escopo Funcional
@@ -24,18 +24,18 @@ LogiKids é um jogo educativo para auxiliar crianças no desenvolvimento lógico
 
 **Histórias e Tarefas:**
 - Menu principal
-  - Inicializar o Jogo
-  - Renderizador de Texturas
-  - Gerenciador de Texturas
+  - Inicializar o Jogo - Scarlet
+  - Renderizador de Texturas - Scarlet 
+  - Gerenciador de Texturas - Scarlet 
 - Menu de Seleção de Nível
-  - Mudança de Seleção de Estados do Jogo
-  - Criação de Objetos do Jogo
-  - Reposicionamento e Movimento de objeto do Jogo
-  - Gerenciador de Eventos
+  - Mudança de Seleção de Estados do Jogo - Ketlyn
+  - Criação de Objetos do Jogo - Ketlyn
+  - Reposicionamento e Movimento de objeto do Jogo - Ketlyn
+  - Gerenciador de Eventos - Ketlyn
 - Modo História
-  - Renderização de Texto
-  - Mockups das Telas do Jogo
-  - Geração de Assets
+  - Renderização de Texto - Scarlet
+  - Mockups das Telas do Jogo - Scarlet
+  - Geração de Assets - Scarlet
 
 ### Retrospectiva:
 - **O que deu certo no Sprint?**
