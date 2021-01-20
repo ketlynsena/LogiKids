@@ -33,4 +33,6 @@ LogiKids é um jogo educativo para auxiliar crianças no desenvolvimento lógico
   - Reposicionamento e Movimento de objeto do Jogo
 - Modo História
   - Renderização de Texto
+  - Mockups das Telas do Jogo
+  - Geração de Assets
 
