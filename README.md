@@ -24,13 +24,13 @@ LogiKids é um jogo educativo para auxiliar crianças no desenvolvimento lógico
 
 **Histórias e Tarefas:**
 - Menu principal
--- Inicializar o Jogo
--- Renderizador de Texturas
--- Gerenciador de Texturas
+  - Inicializar o Jogo
+  - Renderizador de Texturas
+  - Gerenciador de Texturas
 - Menu de Seleção de Nível
--- Mudança de Seleção de Estados do Jogo
--- Criação de Objetos do Jogo
--- Reposicionamento e Movimento de objeto do Jogo
+  - Mudança de Seleção de Estados do Jogo
+  - Criação de Objetos do Jogo
+  - Reposicionamento e Movimento de objeto do Jogo
 - Modo História
--- Renderização de Texto
+  - Renderização de Texto
 
