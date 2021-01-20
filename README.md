@@ -18,4 +18,19 @@ LogiKids é um jogo educativo para auxiliar crianças no desenvolvimento lógico
 
 ## Tecnologias
 - Linguagem: `C++`
-- Framework: `SDL`
+- Framework: `SDL2`
+
+# SPRINT 1
+
+**Histórias e Tarefas:**
+- Menu principal
+-- Inicializar o Jogo
+-- Renderizador de Texturas
+-- Gerenciador de Texturas
+- Menu de Seleção de Nível
+-- Mudança de Seleção de Estados do Jogo
+-- Criação de Objetos do Jogo
+-- Reposicionamento e Movimento de objeto do Jogo
+- Modo História
+-- Renderização de Texto
+
