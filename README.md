@@ -1,18 +1,14 @@
 # LogiKids - Jogo Educativo
 
 ## Introdução
-LogiKids é um jogo educativo para auxiliar crianças no desenvolvimento lógico.
+LogiKids é um jogo educativo para auxiliar crianças no desenvolvimento lógico. Utiliza diversos problemas comuns da Computação de maneira lúdica para estimular o raciocínio e familiarizar o público infantil com problemas lógicos. Possui puzzles variados como o problema das N-Rainhas, Caixeiro Viajante e a Torre de Hanói.
 
 ## Grupo
 - Ketlyn Sena
-- Ricardo Barbosa
 - Scarlet Gianasi Viana
-- Willian Douglas Brito Braga
 
 ## Escopo Funcional
-- Cadastro de usuário
-- Remoção de usuário
-- Modo história com pequenos jogos
+- Modo história com pequenos puzzles
 - Botão ajuda com tutorial
 - Botão sair da aplicação
 -	Pontuação do usuário
@@ -21,5 +17,5 @@ LogiKids é um jogo educativo para auxiliar crianças no desenvolvimento lógico
 -	Seleção de dificuldade
 
 ## Tecnologias
-- Linguagens: `c++`
-- Frameworks (Apenas um): `Godot`, `SDL`, `SFML`, `Alegro`
+- Linguagem: `C++`
+- Framework: `SDL`
