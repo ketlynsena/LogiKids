@@ -51,64 +51,97 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
         isRunning = true;
     }
-    dragon = new GameObject("assets/dragon.png", 0, 0);
-    tela_principal = new GameObject("assets/tela_principal.png", 0, 0);
-    modo_historia = new GameObject("assets/modo_historia.png", 0, 0);
-    selecao_nivel = new GameObject("assets/selecao_nivel.png", 0, 0);
-    botao_x = new GameObject("assets/botao_x.png", 740, 20);
-    botao_play = new GameObject("assets/botao_play.png", 740, 550);
-    botao_x_s = new Button();
-    botao_x_s->setPosition(740, 20);
-    botao_play_s = new Button();
-    botao_play_s->setPosition(740, 550);
-    n_rainhas = new GameObject("assets/nrainhas.png", 0, 0);
+    dragon          = new GameObject("assets/dragon.png", 0, 0);
+    tela_principal  = new GameObject("assets/tela_principal.png", 0, 0);
+    modo_historia   = new GameObject("assets/modo_historia.png", 0, 0);
+    selecao_nivel   = new GameObject("assets/selecao_nivel.png", 0, 0);
+    botao_x         = new GameObject("assets/botao_x.png", 740, 20);
+    botao_play      = new GameObject("assets/botao_play.png", 740, 550);
+    botao_x_s       = new Button("x", 740, 20);
+    //botao_x_s->setPosition(740, 20);
+    botao_play_s    = new Button("play", 740, 550);
+    //botao_play_s->setPosition(740, 550);
+    n_rainhas       = new GameObject("assets/fundo_nrainhas.png", 0, 0);
 }
+
+
+void Game::handleMenuEvents(SDL_Event* event) {
+    switch (event->type) {
+    case SDL_KEYDOWN:
+        state = GAME_STORY;
+        break;
+    default:
+        break;
+    }
+}
+
 
 void Game::handleEvents()
 {
     SDL_Event event;
     SDL_PollEvent(&event);
 
-    switch (event.type) {
-    case SDL_QUIT:
+    if (event.type == SDL_QUIT) {
         isRunning = false;
-        break;
-    case SDL_MOUSEBUTTONDOWN:
-        if (botao_x_s->currentState() == BUTTON_SPRITE_MOUSE_DOWN || botao_play_s->currentState() == BUTTON_SPRITE_MOUSE_DOWN)
-        {
-            if (state == GAME_MENU) {
-                state = GAME_STORY;
-            }
-            else if (state == GAME_STORY)
-            {
-                state = GAME_LEVELS;
-            }
-            else if (state == GAME_LEVELS)
-            {
-                state = GAME_STORY;
-            }
-        }
-
-        break;
-    case SDL_KEYDOWN:
-        if (state == GAME_MENU) {
-            state = GAME_STORY;
-        }
-        else if (state == GAME_STORY)
-        {
-            state = GAME_LEVELS;
-        }
-        else if (state == GAME_LEVELS)
-        {
-            state = GAME_QUEENS;
-        }
-        else if (state == GAME_QUEENS)
-        {
-            state = GAME_MENU;
-        }
-    default:
-        break;
     }
+    else {
+        switch (state) {
+        case GAME_MENU:
+            //printf("GAME: MENU");
+            handleMenuEvents(&event);
+            break;
+        case GAME_STORY:
+            //printf("GAME: STORY");
+            break;
+        case GAME_LEVELS:
+            break;
+        case GAME_QUEENS:
+            break;
+        default:
+            break;
+        }
+    }
+
+    //switch (event.type) {
+    //case SDL_QUIT:
+    //    isRunning = false;
+    //    break;
+    //case SDL_MOUSEBUTTONDOWN:
+    //    if (botao_x_s->currentState() == BUTTON_SPRITE_MOUSE_DOWN || botao_play_s->currentState() == BUTTON_SPRITE_MOUSE_DOWN)
+    //    {
+    //        if (state == GAME_MENU) {
+    //            state = GAME_STORY;
+    //        }
+    //        else if (state == GAME_STORY)
+    //        {
+    //            state = GAME_LEVELS;
+    //        }
+    //        else if (state == GAME_LEVELS)
+    //        {
+    //            state = GAME_STORY;
+    //        }
+    //    }
+
+    //    break;
+    //case SDL_KEYDOWN:
+    //    if (state == GAME_MENU) {
+    //        state = GAME_STORY;
+    //    }
+    //    else if (state == GAME_STORY)
+    //    {
+    //        state = GAME_LEVELS;
+    //    }
+    //    else if (state == GAME_LEVELS)
+    //    {
+    //        state = GAME_QUEENS;
+    //    }
+    //    else if (state == GAME_QUEENS)
+    //    {
+    //        state = GAME_MENU;
+    //    }
+    //default:
+    //    break;
+    //}
 }
 
 void Game::update()
@@ -126,8 +159,8 @@ void Game::render()
         break;
     case GAME_STORY:
         modo_historia->render();
-        botao_play->render();
-        botao_x->render();
+        botao_play_s->render();
+        botao_x_s->render();
         break;
     case GAME_LEVELS:
         selecao_nivel->render();

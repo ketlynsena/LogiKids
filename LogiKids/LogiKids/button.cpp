@@ -1,7 +1,10 @@
+#include "texture_manager.h"
 #include "game_object.h"
 #include "button.h"
+#include <iostream>
+#include <string>
 
-Button::Button()
+Button::Button(const char* textureSheet, int xpos, int ypos)
 {
     topPosition.x = 0;
     topPosition.y = 0;
@@ -9,7 +12,29 @@ Button::Button()
     w = 38;
 
     currentSprite = BUTTON_SPRITE_MOUSE_OUT;
+
+    std::string filename = "assets/buttons/";
+    filename += textureSheet;
+    filename += "_0.png";
+
+    spriteClips[BUTTON_SPRITE_MOUSE_OUT] = TextureManager::loadTexture(filename.c_str());// "assets/buttons/" + textureSheet + "_0.png");
+    spriteClips[BUTTON_SPRITE_MOUSE_OVER_MOTION] = TextureManager::loadTexture(filename.c_str());// "assets/buttons/" + textureSheet + "_1.png");
+    spriteClips[BUTTON_SPRITE_MOUSE_DOWN] = TextureManager::loadTexture(filename.c_str());// "assets/buttons/" + textureSheet + "_2.png");
+    spriteClips[BUTTON_SPRITE_MOUSE_UP] = TextureManager::loadTexture(filename.c_str());// ("assets/buttons/" + textureSheet + "_3.png");
+    spriteClips[BUTTON_SPRITE_TOTAL] = TextureManager::loadTexture(filename.c_str());// "assets/buttons/" + textureSheet + "_4.png");
+    
+    SDL_QueryTexture(spriteClips[BUTTON_SPRITE_MOUSE_OUT], NULL, NULL, &srcRect.w, &srcRect.h);
+
+    srcRect.x = 0;
+    srcRect.y = 0;
+
+    destRect.x = xpos;
+    destRect.y = ypos;
+    destRect.w = srcRect.w;
+    destRect.h = srcRect.h;
 }
+
+Button::~Button(){}
 
 void Button::setPosition(int x, int y)
 {
@@ -82,8 +107,9 @@ void Button::handleEvent(SDL_Event* e)
     }
 }
 
-//void Button::render()
-//{
+void Button::render()
+{
     //Show current button sprite
     //gButtonSpriteSheetTexture.render( topPosition.x, topPosition.y, &gSpriteClips[ currentSprite ] );
-//}
+    SDL_RenderCopy(Game::renderer, spriteClips[currentSprite], &srcRect, &destRect);
+}
