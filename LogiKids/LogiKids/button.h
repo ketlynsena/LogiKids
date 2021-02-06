@@ -21,7 +21,7 @@ public:
     ~Button();
     void setPosition(int x, int y);
     void setSize(int h, int w);
-    void handleEvent(SDL_Event* e);
+    bool handleEvent(SDL_Event* e);
     button_sprite currentState();
     void render();
 

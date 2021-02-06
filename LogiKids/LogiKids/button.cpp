@@ -1,13 +1,14 @@
 #include "texture_manager.h"
-#include "game_object.h"
+//#include "game_object.h"
+#include "game.h"
 #include "button.h"
 #include <iostream>
 #include <string>
 
 Button::Button(const char* textureSheet, int xpos, int ypos)
 {
-    topPosition.x = 0;
-    topPosition.y = 0;
+    topPosition.x = xpos;
+    topPosition.y = ypos;
     h = 38;
     w = 38;
 
@@ -17,11 +18,11 @@ Button::Button(const char* textureSheet, int xpos, int ypos)
     filename += textureSheet;
     filename += "_0.png";
 
-    spriteClips[BUTTON_SPRITE_MOUSE_OUT] = TextureManager::loadTexture(filename.c_str());// "assets/buttons/" + textureSheet + "_0.png");
-    spriteClips[BUTTON_SPRITE_MOUSE_OVER_MOTION] = TextureManager::loadTexture(filename.c_str());// "assets/buttons/" + textureSheet + "_1.png");
-    spriteClips[BUTTON_SPRITE_MOUSE_DOWN] = TextureManager::loadTexture(filename.c_str());// "assets/buttons/" + textureSheet + "_2.png");
-    spriteClips[BUTTON_SPRITE_MOUSE_UP] = TextureManager::loadTexture(filename.c_str());// ("assets/buttons/" + textureSheet + "_3.png");
-    spriteClips[BUTTON_SPRITE_TOTAL] = TextureManager::loadTexture(filename.c_str());// "assets/buttons/" + textureSheet + "_4.png");
+    spriteClips[BUTTON_SPRITE_MOUSE_OUT] = TextureManager::loadTexture(filename.c_str());
+    spriteClips[BUTTON_SPRITE_MOUSE_OVER_MOTION] = TextureManager::loadTexture(filename.c_str());
+    spriteClips[BUTTON_SPRITE_MOUSE_DOWN] = TextureManager::loadTexture(filename.c_str());
+    spriteClips[BUTTON_SPRITE_MOUSE_UP] = TextureManager::loadTexture(filename.c_str());
+    spriteClips[BUTTON_SPRITE_TOTAL] = TextureManager::loadTexture(filename.c_str());
     
     SDL_QueryTexture(spriteClips[BUTTON_SPRITE_MOUSE_OUT], NULL, NULL, &srcRect.w, &srcRect.h);
 
@@ -53,8 +54,9 @@ button_sprite Button::currentState()
     return currentSprite;
 }
 
-void Button::handleEvent(SDL_Event* e)
+bool Button::handleEvent(SDL_Event* e)
 {
+    bool button_pressed = false;
     if (e->type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP)
     {
         int x, y;
@@ -92,24 +94,29 @@ void Button::handleEvent(SDL_Event* e)
             switch (e->type)
             {
             case SDL_MOUSEMOTION:
+                //printf("MOUSE MOTION\n");
                 currentSprite = BUTTON_SPRITE_MOUSE_OVER_MOTION;
                 break;
 
             case SDL_MOUSEBUTTONDOWN:
+                printf("MOUSE BUTTON DOWN\n");
                 currentSprite = BUTTON_SPRITE_MOUSE_DOWN;
+                button_pressed = true;
                 break;
 
             case SDL_MOUSEBUTTONUP:
+                printf("MOUSE BUTTON UP\n");
                 currentSprite = BUTTON_SPRITE_MOUSE_UP;
+                button_pressed = false;
                 break;
             }
         }
     }
+    return button_pressed;
 }
 
 void Button::render()
 {
     //Show current button sprite
-    //gButtonSpriteSheetTexture.render( topPosition.x, topPosition.y, &gSpriteClips[ currentSprite ] );
     SDL_RenderCopy(Game::renderer, spriteClips[currentSprite], &srcRect, &destRect);
 }

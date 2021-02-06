@@ -34,6 +34,7 @@ public:
     void clean();
     bool running() { return isRunning; }
     void handleMenuEvents(SDL_Event* event);
+    void handleStoryEvents(SDL_Event* event);
 
     static SDL_Renderer* renderer;
     GameState state = GAME_MENU;

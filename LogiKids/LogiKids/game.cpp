@@ -75,6 +75,16 @@ void Game::handleMenuEvents(SDL_Event* event) {
     }
 }
 
+void Game::handleStoryEvents(SDL_Event* event) {
+    if (botao_x_s->handleEvent(event)) {
+        printf("Button X was pressed.\n");
+        state = GAME_MENU;
+    }
+    if (botao_play_s->handleEvent(event)) {
+        printf("Button Play was pressed.\n");
+        state = GAME_LEVELS;
+    }
+}
 
 void Game::handleEvents()
 {
@@ -92,6 +102,7 @@ void Game::handleEvents()
             break;
         case GAME_STORY:
             //printf("GAME: STORY");
+            handleStoryEvents(&event);
             break;
         case GAME_LEVELS:
             break;
@@ -123,25 +134,6 @@ void Game::handleEvents()
     //    }
 
     //    break;
-    //case SDL_KEYDOWN:
-    //    if (state == GAME_MENU) {
-    //        state = GAME_STORY;
-    //    }
-    //    else if (state == GAME_STORY)
-    //    {
-    //        state = GAME_LEVELS;
-    //    }
-    //    else if (state == GAME_LEVELS)
-    //    {
-    //        state = GAME_QUEENS;
-    //    }
-    //    else if (state == GAME_QUEENS)
-    //    {
-    //        state = GAME_MENU;
-    //    }
-    //default:
-    //    break;
-    //}
 }
 
 void Game::update()
