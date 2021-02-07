@@ -3,6 +3,7 @@
 #include "game_object.h"
 #include "game.h"
 #include "button.h"
+#include "sprite.h"
 #include <iostream>
 #include <string>
 
@@ -19,6 +20,7 @@ private:
 	bool board[4][4];
 	GameObject* background;
 	GameObject* board_texture;
+	Sprite* queen;
 
 };
 

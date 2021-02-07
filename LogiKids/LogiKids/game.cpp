@@ -7,9 +7,6 @@
 GameObject* tela_principal;
 GameObject* modo_historia;
 GameObject* selecao_nivel;
-GameObject* botao_x;
-GameObject* botao_play;
-GameObject* n_rainhas;
 
 N_Queens* nrainhas;
 
@@ -56,11 +53,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     tela_principal  = new GameObject("assets/tela_principal.png", 0, 0);
     modo_historia   = new GameObject("assets/modo_historia.png", 0, 0);
     selecao_nivel   = new GameObject("assets/selecao_nivel.png", 0, 0);
-    botao_x         = new GameObject("assets/botao_x.png", 740, 20);
-    botao_play      = new GameObject("assets/botao_play.png", 740, 550);
     botao_x_s       = new Button("x", 740, 20);
     botao_play_s    = new Button("play", 740, 550);
-    n_rainhas       = new GameObject("assets/fundo_nrainhas.png", 0, 0);
     nrainhas = new N_Queens();
 }
 
@@ -120,6 +114,7 @@ void Game::handleEvents()
 void Game::update()
 {
     //dragon->update();
+    nrainhas->update();
 }
 
 void Game::render()
@@ -137,10 +132,9 @@ void Game::render()
         break;
     case GAME_LEVELS:
         selecao_nivel->render();
-        botao_x->render();
+        botao_x_s->render();
         break;
     case GAME_QUEENS:
-        //n_rainhas->render();
         nrainhas->render();
         botao_x_s->render();
     default:
