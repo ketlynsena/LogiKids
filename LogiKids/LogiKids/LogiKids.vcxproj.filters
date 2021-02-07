@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Arquivos de Origem\assets">
+      <UniqueIdentifier>{c47457af-7738-4163-9156-63e86a5e9d22}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -56,5 +59,55 @@
     <ClInclude Include="sprite.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="assets\botao_play.png">
+      <Filter>Arquivos de Origem\assets</Filter>
+    </Image>
+    <Image Include="assets\botao_play_escuro.png">
+      <Filter>Arquivos de Origem\assets</Filter>
+    </Image>
+    <Image Include="assets\botao_x.png">
+      <Filter>Arquivos de Origem\assets</Filter>
+    </Image>
+    <Image Include="assets\botao_x_escuro.png">
+      <Filter>Arquivos de Origem\assets</Filter>
+    </Image>
+    <Image Include="assets\dica.png">
+      <Filter>Arquivos de Origem\assets</Filter>
+    </Image>
+    <Image Include="assets\dragon.png">
+      <Filter>Arquivos de Origem\assets</Filter>
+    </Image>
+    <Image Include="assets\fundo_nrainhas.png">
+      <Filter>Arquivos de Origem\assets</Filter>
+    </Image>
+    <Image Include="assets\logo.png">
+      <Filter>Arquivos de Origem\assets</Filter>
+    </Image>
+    <Image Include="assets\modo_historia.png">
+      <Filter>Arquivos de Origem\assets</Filter>
+    </Image>
+    <Image Include="assets\nrainhas.png">
+      <Filter>Arquivos de Origem\assets</Filter>
+    </Image>
+    <Image Include="assets\parabens.png">
+      <Filter>Arquivos de Origem\assets</Filter>
+    </Image>
+    <Image Include="assets\rainha.png">
+      <Filter>Arquivos de Origem\assets</Filter>
+    </Image>
+    <Image Include="assets\selecao_nivel.png">
+      <Filter>Arquivos de Origem\assets</Filter>
+    </Image>
+    <Image Include="assets\tabuleiro.png">
+      <Filter>Arquivos de Origem\assets</Filter>
+    </Image>
+    <Image Include="assets\tela_principal.png">
+      <Filter>Arquivos de Origem\assets</Filter>
+    </Image>
+    <Image Include="assets\tela_principal_fundo.png">
+      <Filter>Arquivos de Origem\assets</Filter>
+    </Image>
   </ItemGroup>
 </Project>

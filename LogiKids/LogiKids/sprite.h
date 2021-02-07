@@ -16,6 +16,7 @@ public:
 	void resetPosition();
 	int getWidth();
 	int getHeight();
+	bool isGrabbed();
 
 private:
 	SDL_Rect srcRect, destRect;

@@ -38,11 +38,13 @@ void Sprite::update()
     if (grab) {
         SDL_GetMouseState(&x, &y);
         setPosition(x, y);
-
-        destRect.x = x;
-        destRect.y = y;
     }
 
+}
+
+bool Sprite::isGrabbed()
+{
+    return grab;
 }
 
 void Sprite::render()
@@ -119,10 +121,14 @@ SDL_Point Sprite::getOriginalPosition(){
 void Sprite::setPosition(int xpos, int ypos){
 	current_pos.x = xpos;
 	current_pos.y = ypos;
+    destRect.x = xpos;
+    destRect.y = ypos;
 }
 
 void Sprite::resetPosition(){
 	current_pos = original_pos;
+    destRect.x = original_pos.x;
+    destRect.y = original_pos.y;
 }
 
 int Sprite::getWidth(){
