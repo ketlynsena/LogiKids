@@ -19,5 +19,6 @@ private:
 	bool board[4][4];
 	GameObject* background;
 	GameObject* board_texture;
+
 };
 
