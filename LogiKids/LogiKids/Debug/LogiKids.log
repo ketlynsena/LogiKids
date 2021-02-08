@@ -1,0 +1,11 @@
+﻿  button.cpp
+C:\Users\Ketlyn\source\repos\ketlynsena\LogiKids\LogiKids\LogiKids\game.h(5,10): fatal error C1083: Não é possível abrir arquivo incluir: 'SDL.h': No such file or directory
+  game.cpp
+C:\Users\Ketlyn\source\repos\ketlynsena\LogiKids\LogiKids\LogiKids\game.h(5,10): fatal error C1083: Não é possível abrir arquivo incluir: 'SDL.h': No such file or directory
+  game_object.cpp
+C:\Users\Ketlyn\source\repos\ketlynsena\LogiKids\LogiKids\LogiKids\game.h(5,10): fatal error C1083: Não é possível abrir arquivo incluir: 'SDL.h': No such file or directory
+  main.cpp
+C:\Users\Ketlyn\source\repos\ketlynsena\LogiKids\LogiKids\LogiKids\game.h(5,10): fatal error C1083: Não é possível abrir arquivo incluir: 'SDL.h': No such file or directory
+  texture_manager.cpp
+C:\Users\Ketlyn\source\repos\ketlynsena\LogiKids\LogiKids\LogiKids\game.h(5,10): fatal error C1083: Não é possível abrir arquivo incluir: 'SDL.h': No such file or directory
+  Gerando Código...
