@@ -7,10 +7,6 @@
 #include <iostream>
 #include <string>
 
-#define GRABBED 0
-#define NONE 1
-#define DROPPED 2
-
 typedef struct TilePosition{
 	int i; // x
 	int j; // y
@@ -27,8 +23,10 @@ public:
 	N_Queens();
 	~N_Queens();
 	bool addQueenToBoard(TilePosition index, Sprite* queenPiece);
+	void removeQueenFromBoard(TilePosition index);
 	void resetLevel();
 	void resetBoard();
+	bool checkWin();
 	void handleQueenPieceEvent(SDL_Event* e, Sprite* queenPiece);
 	void handleEvent(SDL_Event* e);
 	void update();

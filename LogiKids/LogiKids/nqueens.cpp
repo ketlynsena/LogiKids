@@ -31,6 +31,11 @@ bool N_Queens::addQueenToBoard(TilePosition index, Sprite* queenPiece) {
 	return false;
 }
 
+void N_Queens::removeQueenFromBoard(TilePosition index)
+{
+	board[index.i][index.j] = false;
+}
+
 void N_Queens::resetLevel()
 {
 	queens[0]->resetPosition();
@@ -48,6 +53,32 @@ void N_Queens::resetBoard()
 	for(i = 0; i < 4; i++) // TODO - remover hardcoded board size
 		for (j = 0; j < 4; j++)
 			board[i][j] = false;
+}
+
+bool N_Queens::checkWin()
+{
+	int pieces = 0, line_count = 0, col_count = 0;
+
+	for (int i = 0; i < 4; i++) {
+		line_count = 0;
+		col_count = 0;
+		for (int j = 0; j < 4; j++)
+		{
+			if (board[i][j]) { // scan by lines
+				line_count++;
+				pieces++;
+			}
+			if (board[j][i]) //scan by columns
+				col_count++;
+		}
+		if (col_count != 1 || line_count != 1) // if queens attack each other
+			return false;
+	}
+	
+	if (pieces == 4) // TODO - if all queens are on board
+		return true;
+	else 
+		return false;
 }
 
 void N_Queens::handleQueenPieceEvent(SDL_Event* e, Sprite* queenPiece)
@@ -73,6 +104,18 @@ void N_Queens::handleQueenPieceEvent(SDL_Event* e, Sprite* queenPiece)
 		else {
 			printf("Queen outside\n");
 			queenPiece->resetPosition();
+		}
+	}
+	if (queenPiece->grabbed()) {
+		SDL_Point grab_pos;
+		printf("Queen was grabbed at: ");
+		grab_pos = queenPiece->getGrabPosition();
+		printf("%d, %d\n", grab_pos.x, grab_pos.y);
+		if (insideBoard(queenPiece)) {
+			printf("Queen grabbed from board ");
+			currentIndex = getBoardIndex(queenPiece);
+			printf("at index: %d,%d\n", currentIndex.i, currentIndex.j);
+			removeQueenFromBoard(currentIndex);
 		}
 	}
 }
@@ -145,6 +188,9 @@ void N_Queens::update()
 	queens[1]->update();
 	queens[2]->update();
 	queens[3]->update();
+
+	if (checkWin())
+		printf("WON THE GAME!\n");
 }
 
 void N_Queens::render() 

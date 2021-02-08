@@ -11,10 +11,11 @@ GameObject* selecao_nivel;
 N_Queens* nrainhas;
 
 SDL_Renderer* Game::renderer = nullptr;
+TTF_Font* Game::gFont = nullptr;
 
 //Buttons objects
-Button* botao_x_s;
-Button* botao_play_s;
+Button* botao_x;
+Button* botao_play;
 Button* level_marker;
 SDL_Rect spriteClips[3];
 
@@ -50,14 +51,33 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
         }
 
         isRunning = true;
+
+        //Initialize SDL_ttf
+        if (TTF_Init() == -1)
+        {
+            printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
+            isRunning = false;
+        }
     }
+
+    gFont = TTF_OpenFont("assets/fonts/learners.ttf", 28);
+    if (gFont == NULL)
+    {
+        printf("Failed to load font! SDL_ttf Error: %s\n", TTF_GetError());
+        isRunning = false;
+    }
+    SDL_Color textColor = { 0, 0, 0 };
+    SDL_Texture* textTexture;
+    textTexture = TextureManager::loadFromRenderedText("The quick brown fox jumps over the lazy dog", textColor);
+
     tela_principal  = new GameObject("assets/tela_principal.png", 0, 0);
     modo_historia   = new GameObject("assets/modo_historia.png", 0, 0);
     selecao_nivel   = new GameObject("assets/selecao_nivel.png", 0, 0);
-    botao_x_s       = new Button("x", 740, 20);
-    botao_play_s    = new Button("play", 740, 550);
+    botao_x       = new Button("x", 740, 20);
+    botao_play    = new Button("play", 740, 550);
     level_marker    = new Button("level_marker", 250, 500);
     nrainhas        = new N_Queens();
+
 }
 
 
@@ -68,16 +88,16 @@ void Game::handleMenuEvents(SDL_Event* event) {
 }
 
 void Game::handleStoryEvents(SDL_Event* event) {
-    if (botao_x_s->handleEvent(event)) {
+    if (botao_x->handleEvent(event)) {
         state = GAME_MENU;
     }
-    if (botao_play_s->handleEvent(event)) {
+    if (botao_play->handleEvent(event)) {
         state = GAME_LEVELS;
     }
 }
 
 void Game::handleNQueensEvents(SDL_Event* event) {
-    if (botao_x_s->handleEvent(event)) {
+    if (botao_x->handleEvent(event)) {
         nrainhas->resetLevel();
         state = GAME_MENU;
     }
@@ -91,7 +111,7 @@ void Game::handleLevelEvents(SDL_Event* event)
         state = GAME_QUEENS;
     }
 
-    if (botao_x_s->handleEvent(event)) {
+    if (botao_x->handleEvent(event)) {
         state = GAME_MENU;
     }
 }
@@ -143,17 +163,17 @@ void Game::render()
         break;
     case GAME_STORY:
         modo_historia->render();
-        botao_play_s->render();
-        botao_x_s->render();
+        botao_play->render();
+        botao_x->render();
         break;
     case GAME_LEVELS:
         selecao_nivel->render();
-        botao_x_s->render();
+        botao_x->render();
         level_marker->render();
         break;
     case GAME_QUEENS:
         nrainhas->render();
-        botao_x_s->render();
+        botao_x->render();
     default:
         break;
     }
@@ -163,8 +183,12 @@ void Game::render()
 
 void Game::clean()
 {
+    TTF_CloseFont(gFont);
+    gFont = NULL;
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
+    TTF_Quit();
+    IMG_Quit();
     SDL_Quit();
     std::cout << "Game Cleaned" << std::endl;
 }

@@ -4,7 +4,7 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
-//#include <SDL_ttf.h>
+#include <SDL_ttf.h>
 #include <stdio.h>
 #include <iostream>
 #include <string>
@@ -40,6 +40,7 @@ public:
     void handleLevelEvents(SDL_Event* event);
 
     static SDL_Renderer* renderer;
+    static TTF_Font* gFont;
     GameState state = GAME_MENU;
 
 private:

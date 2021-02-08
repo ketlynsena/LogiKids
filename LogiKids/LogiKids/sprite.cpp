@@ -56,21 +56,37 @@ bool Sprite::dropped()
     }
 }
 
-bool Sprite::grabEvent() // true = grabbed, false = dropped
+bool Sprite::grabbed()
 {
-    bool now = grab;
-
-    if (lastGrabState == false && now == true)
+    if (grab == false)
     {
-        lastGrabState == true;
-        return true; // Grabbed piece
+        lastDropState = true;
+        return false;
     }
-    if (lastGrabState == true && now == false)
-    {
-        lastGrabState = false;
-        return false; // Dropped piece
+    else{
+        if (lastDropState == true) {
+            lastDropState = false;
+            setGrabPosition(current_pos);
+            return true;
+        }
     }
+}
 
+int Sprite::grabEvent() // true = grabbed, false = dropped
+{
+    return 0;
+
+}
+
+void Sprite::setGrabPosition(SDL_Point position)
+{
+    grab_pos.x = position.x;
+    grab_pos.y = position.y;
+}
+
+SDL_Point Sprite::getGrabPosition()
+{
+    return grab_pos;
 }
 
 bool Sprite::isGrabbed()
@@ -122,14 +138,14 @@ bool Sprite::handleEvent(SDL_Event* event){
             //    break;
 
             case SDL_MOUSEBUTTONDOWN:
-                printf("MOUSE BUTTON DOWN\n");
+                //printf("MOUSE BUTTON DOWN\n");
                 //currentSprite = BUTTON_SPRITE_MOUSE_DOWN;
                 sprite_pressed = true;
                 grab = true;
                 break;
 
             case SDL_MOUSEBUTTONUP:
-                printf("MOUSE BUTTON UP\n");
+                //printf("MOUSE BUTTON UP\n");
                 //currentSprite = BUTTON_SPRITE_MOUSE_UP;
                 sprite_pressed = false;
                 grab = false;
