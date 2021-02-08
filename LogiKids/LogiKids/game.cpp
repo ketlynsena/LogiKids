@@ -79,6 +79,7 @@ void Game::handleStoryEvents(SDL_Event* event) {
 void Game::handleNQueensEvents(SDL_Event* event) {
     if (botao_x_s->handleEvent(event)) {
         //printf("Button X was pressed.\n");
+        nrainhas->resetLevel();
         state = GAME_MENU;
     }
     nrainhas->handleEvent(event);

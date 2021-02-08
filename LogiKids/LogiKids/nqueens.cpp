@@ -28,6 +28,27 @@ bool N_Queens::addQueenToBoard(TilePosition index, Sprite* queenPiece) {
 	return false;
 }
 
+void N_Queens::resetLevel()
+{
+	queens[0]->resetPosition();
+	queens[1]->resetPosition();
+
+	resetBoard();
+}
+
+void N_Queens::resetBoard()
+{
+	int i, j;
+
+	for(i = 0; i < 4; i++) // TODO - remover hardcoded board size
+	{
+		for (j = 0; j < 4; j++)
+		{
+			board[i][j] = false;
+		}
+	}
+}
+
 void N_Queens::handleQueenPieceEvent(SDL_Event* e, Sprite* queenPiece)
 {
 	queenPiece->handleEvent(e);
@@ -57,7 +78,6 @@ void N_Queens::handleQueenPieceEvent(SDL_Event* e, Sprite* queenPiece)
 
 void N_Queens::handleEvent(SDL_Event* e) 
 {
-	handleQueenPieceEvent(e, queen);
 	handleQueenPieceEvent(e, queens[0]);
 	handleQueenPieceEvent(e, queens[1]);
 }
@@ -109,7 +129,6 @@ bool N_Queens::insideBoard(Sprite* queenPiece)
 
 void N_Queens::update() 
 {
-	queen->update();
 	queens[0]->update();
 	queens[1]->update();
 }
@@ -118,7 +137,6 @@ void N_Queens::render()
 {
 	background->render();
 	board_texture->render();
-	//queen->render();
 	queens[0]->render();
 	queens[1]->render();
 }

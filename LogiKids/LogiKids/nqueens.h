@@ -27,6 +27,8 @@ public:
 	N_Queens();
 	~N_Queens();
 	bool addQueenToBoard(TilePosition index, Sprite* queenPiece);
+	void resetLevel();
+	void resetBoard();
 	void handleQueenPieceEvent(SDL_Event* e, Sprite* queenPiece);
 	void handleEvent(SDL_Event* e);
 	void update();
