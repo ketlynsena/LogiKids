@@ -19,6 +19,7 @@ class Button
 public:
     Button(const char* textureSheet, int xpos, int ypos);
     ~Button();
+    std::string appendFilenameToPath(const char* textureSheet, const char* path);
     void setPosition(int x, int y);
     void setSize(int h, int w);
     bool handleEvent(SDL_Event* e);

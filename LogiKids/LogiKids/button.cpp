@@ -1,5 +1,4 @@
 #include "texture_manager.h"
-//#include "game_object.h"
 #include "game.h"
 #include "button.h"
 #include <iostream>
@@ -14,15 +13,11 @@ Button::Button(const char* textureSheet, int xpos, int ypos)
 
     currentSprite = BUTTON_SPRITE_MOUSE_OUT;
 
-    std::string filename = "assets/buttons/";
-    filename += textureSheet;
-    filename += "_0.png";
-
-    spriteClips[BUTTON_SPRITE_MOUSE_OUT] = TextureManager::loadTexture(filename.c_str());
-    spriteClips[BUTTON_SPRITE_MOUSE_OVER_MOTION] = TextureManager::loadTexture(filename.c_str());
-    spriteClips[BUTTON_SPRITE_MOUSE_DOWN] = TextureManager::loadTexture(filename.c_str());
-    spriteClips[BUTTON_SPRITE_MOUSE_UP] = TextureManager::loadTexture(filename.c_str());
-    spriteClips[BUTTON_SPRITE_TOTAL] = TextureManager::loadTexture(filename.c_str());
+    spriteClips[BUTTON_SPRITE_MOUSE_OUT] = TextureManager::loadTexture(appendFilenameToPath(textureSheet, "_0.png").c_str());// filename.c_str());
+    spriteClips[BUTTON_SPRITE_MOUSE_OVER_MOTION] = TextureManager::loadTexture(appendFilenameToPath(textureSheet, "_1.png").c_str());
+    spriteClips[BUTTON_SPRITE_MOUSE_DOWN] = TextureManager::loadTexture(appendFilenameToPath(textureSheet, "_2.png").c_str());
+    spriteClips[BUTTON_SPRITE_MOUSE_UP] = TextureManager::loadTexture(appendFilenameToPath(textureSheet, "_3.png").c_str());
+    spriteClips[BUTTON_SPRITE_TOTAL] = TextureManager::loadTexture(appendFilenameToPath(textureSheet, "_4.png").c_str());
     
     SDL_QueryTexture(spriteClips[BUTTON_SPRITE_MOUSE_OUT], NULL, NULL, &srcRect.w, &srcRect.h);
 
@@ -36,6 +31,14 @@ Button::Button(const char* textureSheet, int xpos, int ypos)
 }
 
 Button::~Button(){}
+
+std::string Button::appendFilenameToPath(const char* textureSheet, const char* path)
+{
+    std::string filename = "assets/buttons/";
+    filename += textureSheet;
+    filename += path; 
+    return filename;
+}
 
 void Button::setPosition(int x, int y)
 {
@@ -69,7 +72,7 @@ bool Button::handleEvent(SDL_Event* e)
             inside = false;
         }
         //Mouse is right of the button
-        else if (x > topPosition.x + w)//BUTTON_WIDTH )
+        else if (x > topPosition.x + w)
         {
             inside = false;
         }
@@ -79,7 +82,7 @@ bool Button::handleEvent(SDL_Event* e)
             inside = false;
         }
         //Mouse below the button
-        else if (y > topPosition.y + h)//BUTTON_HEIGHT )
+        else if (y > topPosition.y + h)
         {
             inside = false;
         }

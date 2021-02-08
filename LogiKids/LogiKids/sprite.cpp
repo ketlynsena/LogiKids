@@ -37,7 +37,38 @@ void Sprite::update()
 
     if (grab) {
         SDL_GetMouseState(&x, &y);
-        setPosition(x, y);
+        setPosition(x-(w/2), y-(h/2));
+    }
+
+}
+
+bool Sprite::dropped()
+{   
+    if (grab == true) {
+        lastGrabState = true;
+        return false;
+    }
+    else {
+        if (lastGrabState == true) {
+            lastGrabState = false;
+            return true;
+        }
+    }
+}
+
+bool Sprite::grabEvent() // true = grabbed, false = dropped
+{
+    bool now = grab;
+
+    if (lastGrabState == false && now == true)
+    {
+        lastGrabState == true;
+        return true; // Grabbed piece
+    }
+    if (lastGrabState == true && now == false)
+    {
+        lastGrabState = false;
+        return false; // Dropped piece
     }
 
 }
@@ -85,10 +116,10 @@ bool Sprite::handleEvent(SDL_Event* event){
         {
             switch (event->type)
             {
-            case SDL_MOUSEMOTION:
-                printf("MOUSE MOTION\n");
+            //case SDL_MOUSEMOTION:
+            //    printf("MOUSE MOTION\n");
                 //currentSprite = BUTTON_SPRITE_MOUSE_OVER_MOTION;
-                break;
+            //    break;
 
             case SDL_MOUSEBUTTONDOWN:
                 printf("MOUSE BUTTON DOWN\n");

@@ -113,8 +113,11 @@ void Game::handleEvents()
 
 void Game::update()
 {
-    //dragon->update();
-    nrainhas->update();
+    switch (state) {
+    case GAME_QUEENS:
+        nrainhas->update();
+    }
+    
 }
 
 void Game::render()

@@ -41,3 +41,11 @@ int GameObject::getYpos()
 {
     return ypos;
 }
+
+int GameObject::getHeight() {
+    return destRect.h;
+}
+
+int GameObject::getWidth() {
+    return destRect.w;
+}

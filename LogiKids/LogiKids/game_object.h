@@ -14,6 +14,8 @@ public:
     void render();
     int getXpos();
     int getYpos();
+    int getHeight();
+    int getWidth();
 
 private:
     int xpos;

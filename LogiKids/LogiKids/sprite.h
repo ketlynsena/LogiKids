@@ -17,6 +17,8 @@ public:
 	int getWidth();
 	int getHeight();
 	bool isGrabbed();
+	bool dropped();
+	bool grabEvent();
 
 private:
 	SDL_Rect srcRect, destRect;
@@ -26,6 +28,7 @@ private:
 	int h;
 	SDL_Texture* spriteTexture;
 	bool grab = false;
+	bool lastGrabState = false; // false = not dropped, true = dropped
 
 };
 
