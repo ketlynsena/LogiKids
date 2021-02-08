@@ -16,7 +16,7 @@ TEST(TestGameObject, TestGetXpos) {
 	//GameTest = new GameObject("../../LogiKids/assets/tela_principal.png", 0, 0);
 	//GameTest = new GameObject("0", 0, 0);
 	//int xpos = GameTest->getXpos();
-	//EXPECT_EQ(xpos, 0);
+	EXPECT_EQ(xpos, 0);
 	EXPECT_TRUE(true);
 }
 
