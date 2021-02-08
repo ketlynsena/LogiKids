@@ -41,8 +41,8 @@ private:
 	TilePosition currentIndex; // variavel auxiliar
 	GameObject* background;
 	GameObject* board_texture;
-	Sprite* queen;
 	Sprite* queens[4]; // TODO
 	Button* help;
+	Button* reset;
 };
 

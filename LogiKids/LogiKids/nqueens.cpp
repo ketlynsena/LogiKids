@@ -2,14 +2,14 @@
 
 N_Queens::N_Queens()
 {
-	background = new GameObject("assets/fundo_nrainhas.png", 0, 0);
+	background	  = new GameObject("assets/fundo_nrainhas.png", 0, 0);
 	board_texture = new GameObject("assets/tabuleiro.png", 360, 150);
-	queen = new Sprite("assets/rainha.png", 360, 150);
-	queens[0] = new Sprite("assets/rainha.png", 50, 350);
-	queens[1] = new Sprite("assets/rainha.png", 170, 350);
-	queens[2] = new Sprite("assets/rainha.png", 50, 470);
-	queens[3] = new Sprite("assets/rainha.png", 170, 470);
-	help = new Button("help", 740, 540);
+	queens[0]	  = new Sprite("assets/rainha.png", 70, 340);
+	queens[1]	  = new Sprite("assets/rainha.png", 190, 340);
+	queens[2]	  = new Sprite("assets/rainha.png", 70, 450);
+	queens[3]	  = new Sprite("assets/rainha.png", 190, 450);
+	help		  = new Button("help", 740, 540);
+	reset		  = new Button("reset", 15, 550);
 }
 
 N_Queens::~N_Queens()
@@ -46,12 +46,8 @@ void N_Queens::resetBoard()
 	int i, j;
 
 	for(i = 0; i < 4; i++) // TODO - remover hardcoded board size
-	{
 		for (j = 0; j < 4; j++)
-		{
 			board[i][j] = false;
-		}
-	}
 }
 
 void N_Queens::handleQueenPieceEvent(SDL_Event* e, Sprite* queenPiece)
@@ -91,6 +87,10 @@ void N_Queens::handleEvent(SDL_Event* e)
 	if (help->handleEvent(e)) {
 		printf("Button Help was pressed.\n");
 		//state = GAME_MENU;
+	}
+	if (reset->handleEvent(e)) {
+		printf("Button Reset was pressed.\n");
+		resetLevel();
 	}
 }
 
@@ -152,6 +152,7 @@ void N_Queens::render()
 	background->render();
 	board_texture->render();
 	help->render();
+	reset->render();
 	queens[0]->render();
 	queens[1]->render();
 	queens[2]->render();
