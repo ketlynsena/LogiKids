@@ -8,8 +8,7 @@ Button::Button(const char* textureSheet, int xpos, int ypos)
 {
     topPosition.x = xpos;
     topPosition.y = ypos;
-    h = 38;
-    w = 38;
+    
 
     currentSprite = BUTTON_SPRITE_MOUSE_OUT;
 
@@ -28,6 +27,8 @@ Button::Button(const char* textureSheet, int xpos, int ypos)
     destRect.y = ypos;
     destRect.w = srcRect.w;
     destRect.h = srcRect.h;
+    h = destRect.h;
+    w = destRect.w;
 }
 
 Button::~Button(){}

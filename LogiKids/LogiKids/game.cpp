@@ -15,6 +15,7 @@ SDL_Renderer* Game::renderer = nullptr;
 //Buttons objects
 Button* botao_x_s;
 Button* botao_play_s;
+Button* level_marker;
 SDL_Rect spriteClips[3];
 
 Game::Game() {}
@@ -55,7 +56,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     selecao_nivel   = new GameObject("assets/selecao_nivel.png", 0, 0);
     botao_x_s       = new Button("x", 740, 20);
     botao_play_s    = new Button("play", 740, 550);
-    nrainhas = new N_Queens();
+    level_marker    = new Button("level_marker", 250, 500);
+    nrainhas        = new N_Queens();
 }
 
 
@@ -67,22 +69,31 @@ void Game::handleMenuEvents(SDL_Event* event) {
 
 void Game::handleStoryEvents(SDL_Event* event) {
     if (botao_x_s->handleEvent(event)) {
-        //printf("Button X was pressed.\n");
         state = GAME_MENU;
     }
     if (botao_play_s->handleEvent(event)) {
-        //printf("Button Play was pressed.\n");
-        state = GAME_QUEENS;//GAME_LEVELS;
+        state = GAME_LEVELS;
     }
 }
 
 void Game::handleNQueensEvents(SDL_Event* event) {
     if (botao_x_s->handleEvent(event)) {
-        //printf("Button X was pressed.\n");
         nrainhas->resetLevel();
         state = GAME_MENU;
     }
     nrainhas->handleEvent(event);
+}
+
+void Game::handleLevelEvents(SDL_Event* event)
+{
+    if (level_marker->handleEvent(event))
+    {
+        state = GAME_QUEENS;
+    }
+
+    if (botao_x_s->handleEvent(event)) {
+        state = GAME_MENU;
+    }
 }
 
 void Game::handleEvents()
@@ -102,6 +113,7 @@ void Game::handleEvents()
             handleStoryEvents(&event);
             break;
         case GAME_LEVELS:
+            handleLevelEvents(&event);
             break;
         case GAME_QUEENS:
             handleNQueensEvents(&event);
@@ -137,6 +149,7 @@ void Game::render()
     case GAME_LEVELS:
         selecao_nivel->render();
         botao_x_s->render();
+        level_marker->render();
         break;
     case GAME_QUEENS:
         nrainhas->render();

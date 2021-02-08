@@ -7,6 +7,9 @@ N_Queens::N_Queens()
 	queen = new Sprite("assets/rainha.png", 360, 150);
 	queens[0] = new Sprite("assets/rainha.png", 50, 350);
 	queens[1] = new Sprite("assets/rainha.png", 170, 350);
+	queens[2] = new Sprite("assets/rainha.png", 50, 470);
+	queens[3] = new Sprite("assets/rainha.png", 170, 470);
+	help = new Button("help", 740, 540);
 }
 
 N_Queens::~N_Queens()
@@ -32,6 +35,8 @@ void N_Queens::resetLevel()
 {
 	queens[0]->resetPosition();
 	queens[1]->resetPosition();
+	queens[2]->resetPosition();
+	queens[3]->resetPosition();
 
 	resetBoard();
 }
@@ -80,6 +85,13 @@ void N_Queens::handleEvent(SDL_Event* e)
 {
 	handleQueenPieceEvent(e, queens[0]);
 	handleQueenPieceEvent(e, queens[1]);
+	handleQueenPieceEvent(e, queens[2]);
+	handleQueenPieceEvent(e, queens[3]);
+
+	if (help->handleEvent(e)) {
+		printf("Button Help was pressed.\n");
+		//state = GAME_MENU;
+	}
 }
 
 TilePosition N_Queens::getBoardIndex(Sprite* queenPiece)
@@ -131,12 +143,18 @@ void N_Queens::update()
 {
 	queens[0]->update();
 	queens[1]->update();
+	queens[2]->update();
+	queens[3]->update();
 }
 
 void N_Queens::render() 
 {
 	background->render();
 	board_texture->render();
+	help->render();
 	queens[0]->render();
 	queens[1]->render();
+	queens[2]->render();
+	queens[3]->render();
+
 }

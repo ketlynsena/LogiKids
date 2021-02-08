@@ -37,11 +37,12 @@ public:
 	TilePosition getBoardIndex(Sprite* queenPiece);
 
 private:
-	bool board[4][4];
+	bool board[4][4]; // TODO
 	TilePosition currentIndex; // variavel auxiliar
 	GameObject* background;
 	GameObject* board_texture;
 	Sprite* queen;
-	Sprite* queens[2];
+	Sprite* queens[4]; // TODO
+	Button* help;
 };
 

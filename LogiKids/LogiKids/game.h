@@ -37,6 +37,8 @@ public:
     void handleStoryEvents(SDL_Event* event);
     void handleNQueensEvents(SDL_Event* event);
 
+    void handleLevelEvents(SDL_Event* event);
+
     static SDL_Renderer* renderer;
     GameState state = GAME_MENU;
 
