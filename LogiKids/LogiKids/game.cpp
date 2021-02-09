@@ -7,6 +7,8 @@
 GameObject* tela_principal;
 GameObject* modo_historia;
 GameObject* selecao_nivel;
+GameObject* parabens;
+GameObject* overlay;
 
 N_Queens* nrainhas;
 
@@ -17,6 +19,7 @@ TTF_Font* Game::gFont = nullptr;
 Button* botao_x;
 Button* botao_play;
 Button* level_marker;
+Button* botao_continuar;
 SDL_Rect spriteClips[3];
 
 Game::Game() {}
@@ -77,9 +80,11 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     botao_play    = new Button("play", 740, 550);
     level_marker    = new Button("level_marker", 250, 500);
     nrainhas        = new N_Queens();
+    parabens = new GameObject("assets/parabens.png", 210, 180);
+    botao_continuar = new Button("play", 380, 345);
+    overlay = new GameObject("assets/overlay.png", 0, 0);
 
 }
-
 
 void Game::handleMenuEvents(SDL_Event* event) {
     if (event->type == SDL_KEYDOWN || event->type == SDL_MOUSEBUTTONDOWN) {
@@ -100,6 +105,13 @@ void Game::handleNQueensEvents(SDL_Event* event) {
     if (botao_x->handleEvent(event)) {
         nrainhas->resetLevel();
         state = GAME_MENU;
+    }
+    if (nrainhas->getGameState())
+    {
+        if (botao_continuar->handleEvent(event)) {
+            nrainhas->resetLevel();
+            state = GAME_LEVELS;
+        }
     }
     nrainhas->handleEvent(event);
 }
@@ -172,7 +184,13 @@ void Game::render()
         level_marker->render();
         break;
     case GAME_QUEENS:
-        nrainhas->render();
+        nrainhas->render();        
+        if (nrainhas->getGameState()) {
+            //state = GAME_WIN;
+            overlay->render();
+            parabens->render();
+            botao_continuar->render();
+        }
         botao_x->render();
     default:
         break;

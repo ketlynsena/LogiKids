@@ -44,6 +44,8 @@ void N_Queens::resetLevel()
 	queens[3]->resetPosition();
 
 	resetBoard();
+
+	gameWin = false;
 }
 
 void N_Queens::resetBoard()
@@ -57,7 +59,8 @@ void N_Queens::resetBoard()
 
 bool N_Queens::checkWin()
 {
-	int pieces = 0, line_count = 0, col_count = 0;
+	int pieces = 0, line_count = 0, col_count = 0, diag_count = 0;
+	TilePosition queen_index[4];
 
 	for (int i = 0; i < 4; i++) {
 		line_count = 0;
@@ -65,56 +68,111 @@ bool N_Queens::checkWin()
 		for (int j = 0; j < 4; j++)
 		{
 			if (board[i][j]) { // scan by lines
+				queen_index[pieces].i = i;
+				queen_index[pieces].j = j;
 				line_count++;
 				pieces++;
+				
 			}
 			if (board[j][i]) //scan by columns
 				col_count++;
 		}
-		if (col_count != 1 || line_count != 1) // if queens attack each other
+		if (col_count > 1 || line_count > 1) // if queens attack each other
 			return false;
 	}
+
+	/*for (int k = 0; k < 4 * 2; k++) {
+		diag_count = 0;
+		for (int j = 0; j <= k; j++) {
+			int i = k - j;
+			if (i < 4 && j < 4) {
+				if (board[i][j]) {
+					diag_count++;
+				}					
+			}
+		}
+		if (diag_count > 1)
+			return false;
+	}*/
+
 	
 	if (pieces == 4) // TODO - if all queens are on board
-		return true;
+	{
+		return checkConflict(queen_index);
+	}
+		
 	else 
 		return false;
 }
+
+bool N_Queens::checkConflict(TilePosition* index_list)
+{
+	/*
+	printf("Reverse diagonal:\n");
+
+	int maxSum = 4 + 4 - 2;
+
+	for (int sum = 0; sum <= maxSum; sum++) {
+		for (int i = 0; i < 4; i++) {
+			for (int j = 0; j < 4; j++) {
+				if (i + j - sum == 0) {
+					printf("%d ", board[i][j]);
+				}
+			}
+		}
+		printf("\n");
+	}
+	printf("\n");
+	*/
+
+	// Test for slash diagonal
+	if ((board[1][0] + board[0][1] < 2) &&
+		(board[2][0] + board[1][1] + board[0][2] < 2) &&
+		(board[3][0] + board[2][1] + board[1][2] + board[0][3] < 2) &&
+		(board[3][1] + board[2][2] + board[1][3] < 2) &&
+		(board[3][2] + board[2][3] < 2) &&
+		// Test for backslash diagonal
+		(board[2][0] + board[3][1] < 2) &&
+		(board[1][0] + board[2][1] + board[3][2] < 2) &&
+		(board[0][0] + board[0][1] + board[2][2] + board[3][3] < 2) &&
+		(board[0][1] + board[1][2] + board[2][3] < 2) &&
+		(board[0][2] + board[1][3] < 2)
+		) return true;
+	else
+		return false;
+}
+
 
 void N_Queens::handleQueenPieceEvent(SDL_Event* e, Sprite* queenPiece)
 {
 	queenPiece->handleEvent(e);
 	if (queenPiece->dropped())
 	{
-		printf("Dropped queen\n");
+		//printf("Dropped queen\n");
 		if (insideBoard(queenPiece))
 		{
-			printf("Queen inside board\n");
+			//printf("Queen inside board\n");
 			currentIndex = getBoardIndex(queenPiece);
-			printf("Current index: %d,%d\n", currentIndex.i, currentIndex.j);
-			if (addQueenToBoard(currentIndex, queenPiece))
+			//printf("Current index: %d,%d\n", currentIndex.i, currentIndex.j);
+			if (!addQueenToBoard(currentIndex, queenPiece))
 			{
-				printf("Added queen to board\n");
-			}
-			else {
-				printf("Could not add queen to tile\n");
 				queenPiece->resetPosition();
 			}
 		}
 		else {
-			printf("Queen outside\n");
+			//printf("Queen outside\n");
 			queenPiece->resetPosition();
 		}
 	}
 	if (queenPiece->grabbed()) {
 		SDL_Point grab_pos;
-		printf("Queen was grabbed at: ");
+		//printf("Queen was grabbed at: ");
 		grab_pos = queenPiece->getGrabPosition();
-		printf("%d, %d\n", grab_pos.x, grab_pos.y);
+		//printf("%d, %d\n", grab_pos.x, grab_pos.y);
 		if (insideBoard(queenPiece)) {
-			printf("Queen grabbed from board ");
+			//printf("Queen grabbed from board ");
 			currentIndex = getBoardIndex(queenPiece);
-			printf("at index: %d,%d\n", currentIndex.i, currentIndex.j);
+			//printf("at index: %d,%d\n", currentIndex.i, currentIndex.j);
 			removeQueenFromBoard(currentIndex);
 		}
 	}
@@ -122,18 +180,17 @@ void N_Queens::handleQueenPieceEvent(SDL_Event* e, Sprite* queenPiece)
 
 void N_Queens::handleEvent(SDL_Event* e) 
 {
-	handleQueenPieceEvent(e, queens[0]);
-	handleQueenPieceEvent(e, queens[1]);
-	handleQueenPieceEvent(e, queens[2]);
-	handleQueenPieceEvent(e, queens[3]);
+	if (!gameWin) {
+		handleQueenPieceEvent(e, queens[0]);
+		handleQueenPieceEvent(e, queens[1]);
+		handleQueenPieceEvent(e, queens[2]);
+		handleQueenPieceEvent(e, queens[3]);
 
-	if (help->handleEvent(e)) {
-		printf("Button Help was pressed.\n");
-		//state = GAME_MENU;
-	}
-	if (reset->handleEvent(e)) {
-		printf("Button Reset was pressed.\n");
-		resetLevel();
+		help->handleEvent(e);
+
+		if (reset->handleEvent(e)) {
+			resetLevel();
+		}
 	}
 }
 
@@ -156,6 +213,11 @@ TilePosition N_Queens::getBoardIndex(Sprite* queenPiece)
 	index.j = (queenCenterY - boardY) / (boardH / 4); // TODO
 
 	return index;
+}
+
+bool N_Queens::getGameState()
+{
+	return gameWin;
 }
 
 bool N_Queens::insideBoard(Sprite* queenPiece)
@@ -184,13 +246,16 @@ bool N_Queens::insideBoard(Sprite* queenPiece)
 
 void N_Queens::update() 
 {
-	queens[0]->update();
-	queens[1]->update();
-	queens[2]->update();
-	queens[3]->update();
-
-	if (checkWin())
-		printf("WON THE GAME!\n");
+	if (checkWin()) {
+		gameWin = true;
+	}
+	else // Only move queens if game is not won 
+	{ 
+		queens[0]->update();
+		queens[1]->update();
+		queens[2]->update();
+		queens[3]->update();
+	}	
 }
 
 void N_Queens::render() 
@@ -203,5 +268,4 @@ void N_Queens::render()
 	queens[1]->render();
 	queens[2]->render();
 	queens[3]->render();
-
 }

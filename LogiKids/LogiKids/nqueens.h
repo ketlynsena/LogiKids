@@ -6,6 +6,7 @@
 #include "sprite.h"
 #include <iostream>
 #include <string>
+#include <stdlib.h> 
 
 typedef struct TilePosition{
 	int i; // x
@@ -27,12 +28,14 @@ public:
 	void resetLevel();
 	void resetBoard();
 	bool checkWin();
+	bool checkConflict(TilePosition* index_list);
 	void handleQueenPieceEvent(SDL_Event* e, Sprite* queenPiece);
 	void handleEvent(SDL_Event* e);
 	void update();
 	void render();
 	bool insideBoard(Sprite* queenPiece); 
 	TilePosition getBoardIndex(Sprite* queenPiece);
+	bool getGameState();
 
 private:
 	bool board[4][4]; // TODO
@@ -42,5 +45,6 @@ private:
 	Sprite* queens[4]; // TODO
 	Button* help;
 	Button* reset;
+	bool gameWin = false;
 };
 
