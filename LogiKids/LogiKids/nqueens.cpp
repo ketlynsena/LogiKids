@@ -2,14 +2,14 @@
 
 N_Queens::N_Queens()
 {
-	background	  = new GameTexture("assets/fundo_nrainhas.png", 0, 0, false, false);
-	board_texture = new GameTexture("assets/tabuleiro.png", 360, 150, false, false);
-	queens[0]	  = new GameTexture("assets/rainha.png", 70, 340, false, true);
-	queens[1]	  = new GameTexture("assets/rainha.png", 190, 340, false, true);
-	queens[2]	  = new GameTexture("assets/rainha.png", 70, 450, false, true);
-	queens[3]	  = new GameTexture("assets/rainha.png", 190, 450, false, true);
-	help		  = new GameTexture("assets/buttons/help", 740, 540, true, false);
-	reset		  = new GameTexture("assets/buttons/reset", 15, 550, true, false);
+	background	  = new GameTexture("assets/fundo_nrainhas.png",   0, 0,   false, false);
+	board_texture = new GameTexture("assets/tabuleiro.png",		 360, 150, false, false);
+	queens[0]	  = new GameTexture("assets/rainha.png",		  70, 340, false, true);
+	queens[1]	  = new GameTexture("assets/rainha.png",		 190, 340, false, true);
+	queens[2]	  = new GameTexture("assets/rainha.png",		  70, 450, false, true);
+	queens[3]	  = new GameTexture("assets/rainha.png",		 190, 450, false, true);
+	help		  = new GameTexture("assets/buttons/help",		 740, 540,  true, false);
+	reset		  = new GameTexture("assets/buttons/reset",		  15, 550,  true, false);
 }
 
 N_Queens::~N_Queens()
@@ -23,10 +23,8 @@ bool N_Queens::addQueenToBoard(TilePosition index, GameTexture* queenPiece) {
 		int x, y;
 		SDL_Point currPos = board_texture->getCurrentPosition();
 
-		//x = board_texture->getXpos() + index.i * (board_texture->getWidth()/4); // TODO - hardcoded
-		//y = board_texture->getYpos() + index.j * (board_texture->getHeight() / 4);
-		x = currPos.x + index.i * (board_texture->getWidth() / 4); // TODO - hardcoded
-		y = currPos.y + index.j * (board_texture->getHeight() / 4);
+		x = currPos.x + index.i * (board_texture->getWidth() / BOARD_SIZE); 
+		y = currPos.y + index.j * (board_texture->getHeight() / BOARD_SIZE);
 
 		queenPiece->setPosition(x, y);
 		return true;
@@ -41,13 +39,10 @@ void N_Queens::removeQueenFromBoard(TilePosition index)
 
 void N_Queens::resetLevel()
 {
-	queens[0]->resetPosition();
-	queens[1]->resetPosition();
-	queens[2]->resetPosition();
-	queens[3]->resetPosition();
+	for (int i = 0; i < BOARD_SIZE; i++)
+		queens[i]->resetPosition();
 
 	resetBoard();
-
 	gameWin = false;
 }
 
@@ -55,20 +50,20 @@ void N_Queens::resetBoard()
 {
 	int i, j;
 
-	for(i = 0; i < 4; i++) // TODO - remover hardcoded board size
-		for (j = 0; j < 4; j++)
+	for(i = 0; i < BOARD_SIZE; i++) // TODO - remover hardcoded board size
+		for (j = 0; j < BOARD_SIZE; j++)
 			board[i][j] = false;
 }
 
 bool N_Queens::checkWin()
 {
 	int pieces = 0, line_count = 0, col_count = 0, diag_count = 0;
-	TilePosition queen_index[4];
+	TilePosition queen_index[BOARD_SIZE];
 
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < BOARD_SIZE; i++) {
 		line_count = 0;
 		col_count = 0;
-		for (int j = 0; j < 4; j++)
+		for (int j = 0; j < BOARD_SIZE; j++)
 		{
 			if (board[i][j]) { // scan by lines
 				queen_index[pieces].i = i;
@@ -99,7 +94,7 @@ bool N_Queens::checkWin()
 	}*/
 
 	
-	if (pieces == 4) // TODO - if all queens are on board
+	if (pieces == BOARD_SIZE) // If all queens are on board
 	{
 		return checkConflict(queen_index);
 	}
@@ -169,13 +164,9 @@ void N_Queens::handleQueenPieceEvent(SDL_Event* e, GameTexture* queenPiece)
 	}
 	if (queenPiece->grabbed()) {
 		SDL_Point grab_pos;
-		//printf("Queen was grabbed at: ");
 		grab_pos = queenPiece->getGrabPosition();
-		//printf("%d, %d\n", grab_pos.x, grab_pos.y);
 		if (insideBoard(queenPiece)) {
-			//printf("Queen grabbed from board ");
 			currentIndex = getBoardIndex(queenPiece);
-			//printf("at index: %d,%d\n", currentIndex.i, currentIndex.j);
 			removeQueenFromBoard(currentIndex);
 		}
 	}
@@ -184,16 +175,13 @@ void N_Queens::handleQueenPieceEvent(SDL_Event* e, GameTexture* queenPiece)
 void N_Queens::handleEvent(SDL_Event* e) 
 {
 	if (!gameWin) {
-		handleQueenPieceEvent(e, queens[0]);
-		handleQueenPieceEvent(e, queens[1]);
-		handleQueenPieceEvent(e, queens[2]);
-		handleQueenPieceEvent(e, queens[3]);
+		for (int i = 0; i < BOARD_SIZE; i++)
+			handleQueenPieceEvent(e, queens[i]);
 
 		help->handleEvent(e);
 
-		if (reset->handleEvent(e)) {
+		if (reset->handleEvent(e))
 			resetLevel();
-		}
 	}
 }
 
@@ -201,76 +189,57 @@ TilePosition N_Queens::getBoardIndex(GameTexture* queenPiece)
 {	
 	TilePosition index;
 	SDL_Point boardPos = board_texture->getCurrentPosition();
-	int boardX, boardY, boardH, boardW;
-	int queenCenterX, queenCenterY;
 
-	queenCenterX = queenPiece->getCurrentPosition().x + (queenPiece->getWidth() / 2);
-	queenCenterY = queenPiece->getCurrentPosition().y + (queenPiece->getHeight() / 2);	
+	int boardH = board_texture->getHeight(), 
+		boardW = board_texture->getWidth(),
+	    queenCenterX = queenPiece->getCurrentPosition().x + (queenPiece->getWidth() / 2), 
+	    queenCenterY = queenPiece->getCurrentPosition().y + (queenPiece->getHeight() / 2);
 
-	boardX = boardPos.x;//board_texture->getXpos();
-	boardY = boardPos.y;//board_texture->getYpos();
-
-	boardH = board_texture->getHeight();
-	boardW = board_texture->getWidth();
-
-	index.i = (queenCenterX - boardX) / (boardW/4); // TODO - tirar hardcoded board size
-	index.j = (queenCenterY - boardY) / (boardH / 4); // TODO
+	index.i = (queenCenterX - boardPos.x) / (boardW / BOARD_SIZE); 
+	index.j = (queenCenterY - boardPos.y) / (boardH / BOARD_SIZE); 
 
 	return index;
 }
 
-bool N_Queens::getGameState()
+bool N_Queens::gameWon()
 {
 	return gameWin;
 }
 
 bool N_Queens::insideBoard(GameTexture* queenPiece)
 {
-	int queenCenterX, queenCenterY;
+	int queenCenterX = queenPiece->getCurrentPosition().x + (queenPiece->getWidth() / 2), 
+		queenCenterY = queenPiece->getCurrentPosition().y + (queenPiece->getHeight() / 2),
+		boardH = board_texture->getHeight(), 
+		boardW = board_texture->getWidth();
+
 	SDL_Point boardPos = board_texture->getCurrentPosition();
-	queenCenterX = queenPiece->getCurrentPosition().x + (queenPiece->getWidth() / 2);
-	queenCenterY = queenPiece->getCurrentPosition().y + (queenPiece->getHeight() / 2);
 
-	int boardX, boardY, boardH, boardW;
-
-	boardX = boardPos.x;//board_texture->getXpos();
-	boardY = boardPos.y;//board_texture->getYpos();
-
-	boardH = board_texture->getHeight();
-	boardW = board_texture->getWidth();
-
-	if ((queenCenterX >= boardX && queenCenterX < (boardX + boardW)) &&
-		(queenCenterY >= boardY && queenCenterY < (boardY + boardH)))
+	if ((queenCenterX >= boardPos.x && queenCenterX < (boardPos.x + boardW)) &&
+		(queenCenterY >= boardPos.y && queenCenterY < (boardPos.y + boardH)))
 	{
 		return true;
 	}
 
 	return false;
-
 }
 
 void N_Queens::update() 
 {
-	if (checkWin()) {
+	if (checkWin()) 
 		gameWin = true;
-	}
-	else // Only move queens if game is not won 
-	{ 
-		queens[0]->updatePosFromMouseState();
-		queens[1]->updatePosFromMouseState();
-		queens[2]->updatePosFromMouseState();
-		queens[3]->updatePosFromMouseState();
-	}	
+	else // Only move queens if game is not won  
+		for (int i = 0; i < BOARD_SIZE; i++)
+			queens[i]->updatePosFromMouseState();
 }
 
 void N_Queens::render() 
 {
-	background->render();
+	background	 ->render();
 	board_texture->render();
-	help->render();
-	reset->render();
-	queens[0]->render();
-	queens[1]->render();
-	queens[2]->render();
-	queens[3]->render();
+	help		 ->render();
+	reset		 ->render();
+
+	for (int i = 0; i < BOARD_SIZE; i++)
+		queens[i]->render();
 }

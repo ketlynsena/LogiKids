@@ -33,11 +33,10 @@ public:
     void update();
     void clean();
     bool running() { return isRunning; }
-    void handleMenuEvents(SDL_Event* event);
-    void handleStoryEvents(SDL_Event* event);
+    void handleMenuEvents   (SDL_Event* event);
+    void handleStoryEvents  (SDL_Event* event);
     void handleNQueensEvents(SDL_Event* event);
-
-    void handleLevelEvents(SDL_Event* event);
+    void handleLevelEvents  (SDL_Event* event);
 
     static SDL_Renderer* renderer;
     static TTF_Font* gFont;
@@ -46,7 +45,6 @@ public:
 private:
     bool isRunning;
     SDL_Window* window;
-
 };
 
 #endif // GAME_H_INCLUDED

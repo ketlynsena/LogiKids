@@ -172,37 +172,26 @@ bool GameTexture::handleEvent(SDL_Event* event) {
 		bool inside = true;
 
 		if (x < destRect.x)
-		{
 			inside = false;
-		}
 		else if (x > destRect.x + width)
-		{
 			inside = false;
-		}
 		else if (y < destRect.y)
-		{
 			inside = false;
-		}
 		else if (y > destRect.y + height)
-		{
 			inside = false;
-		}
+
 		if (!inside)
-		{
 		    currentSprite = MOUSE_OUT;
-		}
 		//Mouse is inside area
 		else
 		{
 			switch (event->type)
 			{
 				case SDL_MOUSEMOTION:
-				//  printf("MOUSE MOTION\n");
 					currentSprite = MOUSE_OVER_MOTION;
 				    break;
 
 			case SDL_MOUSEBUTTONDOWN:
-				//printf("MOUSE BUTTON DOWN\n");
 				currentSprite = MOUSE_DOWN;
 				//pixelColor = TextureManager::getPixelColor(spriteSurface, x, y);
 				//printf("r:%i, g:%i, b:%i, a: %i\n", pixelColor.r, pixelColor.g, pixelColor.b, pixelColor.a);
@@ -211,7 +200,6 @@ bool GameTexture::handleEvent(SDL_Event* event) {
 				break;
 
 			case SDL_MOUSEBUTTONUP:
-				//printf("MOUSE BUTTON UP\n");
 				currentSprite = MOUSE_UP;
 				spritePressed = false;
 				grab = false;

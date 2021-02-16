@@ -11,14 +11,13 @@ GameTexture* overlay;
 N_Queens* nrainhas;
 
 SDL_Renderer* Game::renderer = nullptr;
-TTF_Font* Game::gFont        = nullptr;
+TTF_Font*     Game::gFont        = nullptr;
 
 //Buttons objects
 GameTexture* botao_x;
 GameTexture* botao_play;
 GameTexture* level_marker;
 GameTexture* botao_continuar;
-
 
 Game::Game()  {}
 Game::~Game() {}
@@ -104,7 +103,7 @@ void Game::handleNQueensEvents(SDL_Event* event) {
         nrainhas->resetLevel();
         state = GAME_MENU;
     }
-    if (nrainhas->getGameState())
+    if (nrainhas->gameWon())
     {
         if (botao_continuar->handleEvent(event)) {
             nrainhas->resetLevel();
@@ -139,15 +138,19 @@ void Game::handleEvents()
         case GAME_MENU:
             handleMenuEvents(&event);
             break;
+
         case GAME_STORY:
             handleStoryEvents(&event);
             break;
+
         case GAME_LEVELS:
             handleLevelEvents(&event);
             break;
+
         case GAME_QUEENS:
             handleNQueensEvents(&event);
             break;
+
         default:
             break;
         }
@@ -171,25 +174,28 @@ void Game::render()
     case GAME_MENU:
         tela_principal->render();
         break;
+
     case GAME_STORY:
         modo_historia->render();
-        botao_play->render();
-        botao_x->render();
+        botao_play   ->render();
+        botao_x      ->render();
         break;
+
     case GAME_LEVELS:
         selecao_nivel->render();
-        botao_x->render();
-        level_marker->render();
+        botao_x      ->render();
+        level_marker ->render();
         break;
+
     case GAME_QUEENS:
         nrainhas->render();        
-        if (nrainhas->getGameState()) {
-            //state = GAME_WIN;
-            overlay->render();
+        if (nrainhas->gameWon()) {
+            overlay ->render();
             parabens->render();
             botao_continuar->render();
         }
         botao_x->render();
+
     default:
         break;
     }

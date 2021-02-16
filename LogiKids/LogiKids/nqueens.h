@@ -6,6 +6,8 @@
 #include <string>
 #include <stdlib.h> 
 
+#define BOARD_SIZE 4
+
 typedef struct TilePosition{
 	int i; // x
 	int j; // y
@@ -33,14 +35,14 @@ public:
 	void render();
 	bool insideBoard(GameTexture* queenPiece); 
 	TilePosition getBoardIndex(GameTexture* queenPiece);
-	bool getGameState();
+	bool gameWon();
 
 private:
-	bool board[4][4]; // TODO
+	bool board[BOARD_SIZE][BOARD_SIZE]; 
 	TilePosition currentIndex; // variavel auxiliar
 	GameTexture* background;
 	GameTexture* board_texture;
-	GameTexture* queens[4]; // TODO
+	GameTexture* queens[BOARD_SIZE];
 	GameTexture* help;
 	GameTexture* reset;
 	bool gameWin = false;
