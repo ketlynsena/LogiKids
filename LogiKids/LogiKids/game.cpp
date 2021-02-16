@@ -1,23 +1,9 @@
 #include "game.h"
-#include "game_texture.h"
-#include "nqueens.h"
-
-GameTexture* tela_principal;
-GameTexture* modo_historia;
-GameTexture* selecao_nivel;
-GameTexture* parabens;
-GameTexture* overlay;
 
 N_Queens* nrainhas;
 
 SDL_Renderer* Game::renderer = nullptr;
-TTF_Font*     Game::gFont        = nullptr;
-
-//Buttons objects
-GameTexture* botao_x;
-GameTexture* botao_play;
-GameTexture* level_marker;
-GameTexture* botao_continuar;
+TTF_Font*     Game::gFont    = nullptr;
 
 Game::Game()  {}
 Game::~Game() {}
@@ -27,20 +13,15 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     int flags = 0;
 
     if (fullscreen)
-    {
         flags = SDL_WINDOW_FULLSCREEN;
-    }
 
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
     {
         std::cout << "Subsystems Initialized" << std::endl;
-
         window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
 
         if (window)
-        {
             std::cout << "Window created" << std::endl;
-        }
 
         renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 
@@ -162,8 +143,7 @@ void Game::update()
     switch (state) {
     case GAME_QUEENS:
         nrainhas->update();
-    }
-    
+    }    
 }
 
 void Game::render()
@@ -200,7 +180,6 @@ void Game::render()
         break;
     }
     SDL_RenderPresent(renderer);
-
 }
 
 void Game::clean()

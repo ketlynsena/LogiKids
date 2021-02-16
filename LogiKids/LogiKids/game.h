@@ -10,6 +10,9 @@
 #include <string>
 #include <cmath>
 
+#include "game_texture.h"
+#include "nqueens.h"
+
 enum GameState {
     GAME_ACTIVE,
     GAME_MENU,
@@ -45,6 +48,16 @@ public:
 private:
     bool isRunning;
     SDL_Window* window;
+    GameTexture* tela_principal;
+    GameTexture* modo_historia;
+    GameTexture* selecao_nivel;
+    GameTexture* parabens;
+    GameTexture* overlay;
+    //Buttons objects
+    GameTexture* botao_x;
+    GameTexture* botao_play;
+    GameTexture* level_marker;
+    GameTexture* botao_continuar;
 };
 
 #endif // GAME_H_INCLUDED
