@@ -32,9 +32,11 @@ private:
 	SDL_Point original_pos;
 	SDL_Point current_pos;
 	SDL_Point grab_pos;
+	SDL_Color pixelColor = { 0, 0, 0, 0 };
 	int w;
 	int h;
 	SDL_Texture* spriteTexture;
+	SDL_Surface* spriteSurface;
 	bool grab = false;
 	bool lastGrabState = false; // false = not dropped, true = dropped
 	bool lastDropState = true;

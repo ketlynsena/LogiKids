@@ -13,6 +13,7 @@ Sprite::Sprite(const char* textureSheet, int xpos, int ypos)
     current_pos.y = original_pos.y;
 
 	spriteTexture = TextureManager::loadTexture(textureSheet);
+    spriteSurface = TextureManager::loadSurface(textureSheet);
 
 	SDL_QueryTexture(spriteTexture, NULL, NULL, &srcRect.w, &srcRect.h);
 	srcRect.x = 0;
@@ -29,6 +30,7 @@ Sprite::Sprite(const char* textureSheet, int xpos, int ypos)
 
 Sprite::~Sprite()
 {
+    SDL_FreeSurface(spriteSurface);
 }
 
 void Sprite::update()
@@ -140,8 +142,11 @@ bool Sprite::handleEvent(SDL_Event* event){
             case SDL_MOUSEBUTTONDOWN:
                 //printf("MOUSE BUTTON DOWN\n");
                 //currentSprite = BUTTON_SPRITE_MOUSE_DOWN;
+                //pixelColor = TextureManager::getPixelColor(spriteSurface, x, y);
+                printf("r:%i, g:%i, b:%i, a: %i\n", pixelColor.r, pixelColor.g, pixelColor.b, pixelColor.a);
                 sprite_pressed = true;
                 grab = true;
+                
                 break;
 
             case SDL_MOUSEBUTTONUP:

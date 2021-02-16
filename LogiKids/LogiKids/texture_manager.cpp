@@ -13,6 +13,29 @@ SDL_Texture* TextureManager::loadTexture(const char* filename)
     return texture;
 }
 
+SDL_Surface* TextureManager::loadSurface(const char* filename)
+{
+    SDL_Surface* surface = IMG_Load(filename);
+    if (!surface) {
+        printf("Unable to load image %s! SDL_image Error: %s\n", filename, IMG_GetError());
+    }
+    return surface;
+}
+
+SDL_Color TextureManager::getPixelColor(SDL_Surface* pSurface, const int X, const int Y)
+{
+    int Bpp = pSurface->format->BytesPerPixel;
+    Uint8* pPixel = (Uint8*)pSurface->pixels + Y * pSurface->pitch + X * Bpp;
+
+    Uint32 PixelColor = *(Uint32*)pPixel;
+
+    SDL_Color Color = { 0, 0, 0, 0 };
+
+    SDL_GetRGBA(PixelColor, pSurface->format, &Color.r, &Color.g, &Color.b, &Color.a);
+
+    return Color;
+}
+
 SDL_Texture* TextureManager::loadFromRenderedText(std::string textureText, SDL_Color textColor)
 {
     //Render text surface

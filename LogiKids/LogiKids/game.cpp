@@ -1,28 +1,26 @@
 #include "game.h"
-#include "texture_manager.h"
-#include "game_object.h"
-#include "button.h"
+#include "game_texture.h"
 #include "nqueens.h"
 
-GameObject* tela_principal;
-GameObject* modo_historia;
-GameObject* selecao_nivel;
-GameObject* parabens;
-GameObject* overlay;
+GameTexture* tela_principal;
+GameTexture* modo_historia;
+GameTexture* selecao_nivel;
+GameTexture* parabens;
+GameTexture* overlay;
 
 N_Queens* nrainhas;
 
 SDL_Renderer* Game::renderer = nullptr;
-TTF_Font* Game::gFont = nullptr;
+TTF_Font* Game::gFont        = nullptr;
 
 //Buttons objects
-Button* botao_x;
-Button* botao_play;
-Button* level_marker;
-Button* botao_continuar;
-SDL_Rect spriteClips[3];
+GameTexture* botao_x;
+GameTexture* botao_play;
+GameTexture* level_marker;
+GameTexture* botao_continuar;
 
-Game::Game() {}
+
+Game::Game()  {}
 Game::~Game() {}
 
 void Game::init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen)
@@ -71,18 +69,18 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     }
     SDL_Color textColor = { 0, 0, 0 };
     SDL_Texture* textTexture;
-    textTexture = TextureManager::loadFromRenderedText("The quick brown fox jumps over the lazy dog", textColor);
+    //textTexture = TextureManager::loadFromRenderedText("The quick brown fox jumps over the lazy dog", textColor);
 
-    tela_principal  = new GameObject("assets/tela_principal.png", 0, 0);
-    modo_historia   = new GameObject("assets/modo_historia.png", 0, 0);
-    selecao_nivel   = new GameObject("assets/selecao_nivel.png", 0, 0);
-    botao_x       = new Button("x", 740, 20);
-    botao_play    = new Button("play", 740, 550);
-    level_marker    = new Button("level_marker", 250, 500);
+    tela_principal  = new GameTexture("assets/tela_principal.png", 0, 0, false, false);
+    modo_historia   = new GameTexture("assets/modo_historia.png", 0, 0, false, false);
+    selecao_nivel   = new GameTexture("assets/selecao_nivel.png", 0, 0, false, false);
+    botao_x         = new GameTexture("assets/buttons/x", 740, 20, true, false);
+    botao_play      = new GameTexture("assets/buttons/play", 740, 550, true, false);
+    level_marker    = new GameTexture("assets/buttons/level_marker", 250, 500, true, false);
     nrainhas        = new N_Queens();
-    parabens = new GameObject("assets/parabens.png", 210, 180);
-    botao_continuar = new Button("play", 380, 345);
-    overlay = new GameObject("assets/overlay.png", 0, 0);
+    parabens        = new GameTexture("assets/parabens.png", 210, 180, false, false);
+    botao_continuar = new GameTexture("assets/buttons/play", 380, 345, true, false);
+    overlay         = new GameTexture("assets/overlay.png", 0, 0, false, false);
 
 }
 

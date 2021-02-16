@@ -2,28 +2,31 @@
 
 N_Queens::N_Queens()
 {
-	background	  = new GameObject("assets/fundo_nrainhas.png", 0, 0);
-	board_texture = new GameObject("assets/tabuleiro.png", 360, 150);
-	queens[0]	  = new Sprite("assets/rainha.png", 70, 340);
-	queens[1]	  = new Sprite("assets/rainha.png", 190, 340);
-	queens[2]	  = new Sprite("assets/rainha.png", 70, 450);
-	queens[3]	  = new Sprite("assets/rainha.png", 190, 450);
-	help		  = new Button("help", 740, 540);
-	reset		  = new Button("reset", 15, 550);
+	background	  = new GameTexture("assets/fundo_nrainhas.png", 0, 0, false, false);
+	board_texture = new GameTexture("assets/tabuleiro.png", 360, 150, false, false);
+	queens[0]	  = new GameTexture("assets/rainha.png", 70, 340, false, true);
+	queens[1]	  = new GameTexture("assets/rainha.png", 190, 340, false, true);
+	queens[2]	  = new GameTexture("assets/rainha.png", 70, 450, false, true);
+	queens[3]	  = new GameTexture("assets/rainha.png", 190, 450, false, true);
+	help		  = new GameTexture("assets/buttons/help", 740, 540, true, false);
+	reset		  = new GameTexture("assets/buttons/reset", 15, 550, true, false);
 }
 
 N_Queens::~N_Queens()
 {
 }
 
-bool N_Queens::addQueenToBoard(TilePosition index, Sprite* queenPiece) {
+bool N_Queens::addQueenToBoard(TilePosition index, GameTexture* queenPiece) {
 	if (board[index.i][index.j] == false) // tile empty
 	{
 		board[index.i][index.j] = true;
 		int x, y;
+		SDL_Point currPos = board_texture->getCurrentPosition();
 
-		x = board_texture->getXpos() + index.i * (board_texture->getWidth()/4); // TODO - hardcoded
-		y = board_texture->getYpos() + index.j * (board_texture->getHeight() / 4);
+		//x = board_texture->getXpos() + index.i * (board_texture->getWidth()/4); // TODO - hardcoded
+		//y = board_texture->getYpos() + index.j * (board_texture->getHeight() / 4);
+		x = currPos.x + index.i * (board_texture->getWidth() / 4); // TODO - hardcoded
+		y = currPos.y + index.j * (board_texture->getHeight() / 4);
 
 		queenPiece->setPosition(x, y);
 		return true;
@@ -143,7 +146,7 @@ bool N_Queens::checkConflict(TilePosition* index_list)
 }
 
 
-void N_Queens::handleQueenPieceEvent(SDL_Event* e, Sprite* queenPiece)
+void N_Queens::handleQueenPieceEvent(SDL_Event* e, GameTexture* queenPiece)
 {
 	queenPiece->handleEvent(e);
 	if (queenPiece->dropped())
@@ -194,17 +197,18 @@ void N_Queens::handleEvent(SDL_Event* e)
 	}
 }
 
-TilePosition N_Queens::getBoardIndex(Sprite* queenPiece)
+TilePosition N_Queens::getBoardIndex(GameTexture* queenPiece)
 {	
 	TilePosition index;
+	SDL_Point boardPos = board_texture->getCurrentPosition();
 	int boardX, boardY, boardH, boardW;
 	int queenCenterX, queenCenterY;
 
 	queenCenterX = queenPiece->getCurrentPosition().x + (queenPiece->getWidth() / 2);
 	queenCenterY = queenPiece->getCurrentPosition().y + (queenPiece->getHeight() / 2);	
 
-	boardX = board_texture->getXpos();
-	boardY = board_texture->getYpos();
+	boardX = boardPos.x;//board_texture->getXpos();
+	boardY = boardPos.y;//board_texture->getYpos();
 
 	boardH = board_texture->getHeight();
 	boardW = board_texture->getWidth();
@@ -220,16 +224,17 @@ bool N_Queens::getGameState()
 	return gameWin;
 }
 
-bool N_Queens::insideBoard(Sprite* queenPiece)
+bool N_Queens::insideBoard(GameTexture* queenPiece)
 {
 	int queenCenterX, queenCenterY;
+	SDL_Point boardPos = board_texture->getCurrentPosition();
 	queenCenterX = queenPiece->getCurrentPosition().x + (queenPiece->getWidth() / 2);
 	queenCenterY = queenPiece->getCurrentPosition().y + (queenPiece->getHeight() / 2);
 
 	int boardX, boardY, boardH, boardW;
 
-	boardX = board_texture->getXpos();
-	boardY = board_texture->getYpos();
+	boardX = boardPos.x;//board_texture->getXpos();
+	boardY = boardPos.y;//board_texture->getYpos();
 
 	boardH = board_texture->getHeight();
 	boardW = board_texture->getWidth();
@@ -251,10 +256,10 @@ void N_Queens::update()
 	}
 	else // Only move queens if game is not won 
 	{ 
-		queens[0]->update();
-		queens[1]->update();
-		queens[2]->update();
-		queens[3]->update();
+		queens[0]->updatePosFromMouseState();
+		queens[1]->updatePosFromMouseState();
+		queens[2]->updatePosFromMouseState();
+		queens[3]->updatePosFromMouseState();
 	}	
 }
 

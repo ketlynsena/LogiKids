@@ -12,11 +12,11 @@ Button::Button(const char* textureSheet, int xpos, int ypos)
 
     currentSprite = BUTTON_SPRITE_MOUSE_OUT;
 
-    spriteClips[BUTTON_SPRITE_MOUSE_OUT] = TextureManager::loadTexture(appendFilenameToPath(textureSheet, "_0.png").c_str());// filename.c_str());
+    spriteClips[BUTTON_SPRITE_MOUSE_OUT]         = TextureManager::loadTexture(appendFilenameToPath(textureSheet, "_0.png").c_str());// filename.c_str());
     spriteClips[BUTTON_SPRITE_MOUSE_OVER_MOTION] = TextureManager::loadTexture(appendFilenameToPath(textureSheet, "_1.png").c_str());
-    spriteClips[BUTTON_SPRITE_MOUSE_DOWN] = TextureManager::loadTexture(appendFilenameToPath(textureSheet, "_2.png").c_str());
-    spriteClips[BUTTON_SPRITE_MOUSE_UP] = TextureManager::loadTexture(appendFilenameToPath(textureSheet, "_3.png").c_str());
-    spriteClips[BUTTON_SPRITE_TOTAL] = TextureManager::loadTexture(appendFilenameToPath(textureSheet, "_4.png").c_str());
+    spriteClips[BUTTON_SPRITE_MOUSE_DOWN]        = TextureManager::loadTexture(appendFilenameToPath(textureSheet, "_2.png").c_str());
+    spriteClips[BUTTON_SPRITE_MOUSE_UP]          = TextureManager::loadTexture(appendFilenameToPath(textureSheet, "_3.png").c_str());
+    spriteClips[BUTTON_SPRITE_TOTAL]             = TextureManager::loadTexture(appendFilenameToPath(textureSheet, "_4.png").c_str());
     
     SDL_QueryTexture(spriteClips[BUTTON_SPRITE_MOUSE_OUT], NULL, NULL, &srcRect.w, &srcRect.h);
 
@@ -103,13 +103,13 @@ bool Button::handleEvent(SDL_Event* e)
                 break;
 
             case SDL_MOUSEBUTTONDOWN:
-                printf("MOUSE BUTTON DOWN\n");
+                //printf("MOUSE BUTTON DOWN\n");
                 currentSprite = BUTTON_SPRITE_MOUSE_DOWN;
                 button_pressed = true;
                 break;
 
             case SDL_MOUSEBUTTONUP:
-                printf("MOUSE BUTTON UP\n");
+                //printf("MOUSE BUTTON UP\n");
                 currentSprite = BUTTON_SPRITE_MOUSE_UP;
                 button_pressed = false;
                 break;
