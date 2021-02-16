@@ -39,17 +39,18 @@ public:
 	bool grabbed();
 	void setGrabPosition(SDL_Point position);
 	bool handleEvent(SDL_Event* event);
+	SDL_Color getPixelColor(const int X, const int Y);
 
 private:
 	SDL_Texture* spriteTexture;
 	SDL_Texture* spriteClips[4];
-	SDL_Surface* spriteSurface;
+	SDL_Surface* spriteSurface = nullptr;
 	SDL_Rect	 srcRect, destRect;
 	SDL_Point	 originalPosition, grabPosition;
-	SDL_Color	 pixelColor = { 0, 0, 0, 0 };
 	sprite_state currentSprite = MOUSE_OUT;
 	int			 height, width;
 	bool		 grab = false, lastGrabState = false, lastDropState = true;
 	bool		 isMovable = false, hasClips = false;
+
 
 };

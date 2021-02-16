@@ -168,6 +168,7 @@ bool GameTexture::handleEvent(SDL_Event* event) {
 	if (event->type == SDL_MOUSEMOTION || event->type == SDL_MOUSEBUTTONDOWN || event->type == SDL_MOUSEBUTTONUP)
 	{
 		int x, y;
+		SDL_Color color = {0, 0, 0, 0};
 		SDL_GetMouseState(&x, &y);
 		bool inside = true;
 
@@ -187,16 +188,22 @@ bool GameTexture::handleEvent(SDL_Event* event) {
 		{
 			switch (event->type)
 			{
-				case SDL_MOUSEMOTION:
+			case SDL_MOUSEMOTION:
+				color = getPixelColor(x - destRect.x, y - destRect.y);				
+				if (color.a != 0)
 					currentSprite = MOUSE_OVER_MOTION;
-				    break;
+				else
+					currentSprite = MOUSE_OUT;
+				break;
 
-			case SDL_MOUSEBUTTONDOWN:
-				currentSprite = MOUSE_DOWN;
-				//pixelColor = TextureManager::getPixelColor(spriteSurface, x, y);
-				//printf("r:%i, g:%i, b:%i, a: %i\n", pixelColor.r, pixelColor.g, pixelColor.b, pixelColor.a);
-				spritePressed = true;
-				grab = true;
+			case SDL_MOUSEBUTTONDOWN:				
+				color = getPixelColor(x-destRect.x, y-destRect.y);
+				if (color.a != 0) // Grab sprite only where there is color (alpha != 0)
+				{
+					currentSprite = MOUSE_DOWN;
+					spritePressed = true;
+					grab = true;
+				}
 				break;
 
 			case SDL_MOUSEBUTTONUP:
@@ -208,5 +215,19 @@ bool GameTexture::handleEvent(SDL_Event* event) {
 		}
 	}
 	return spritePressed;
+}
+
+SDL_Color GameTexture::getPixelColor(const int X, const int Y)
+{
+	int Bpp = spriteSurface->format->BytesPerPixel;
+	Uint8* pPixel = (Uint8*)spriteSurface->pixels + Y * spriteSurface->pitch + X * Bpp;
+
+	Uint32 PixelColor = *(Uint32*)pPixel;
+
+	SDL_Color Color = { 0, 0, 0, 0 };
+
+	SDL_GetRGBA(PixelColor, spriteSurface->format, &Color.r, &Color.g, &Color.b, &Color.a);
+
+	return Color;
 }
 
