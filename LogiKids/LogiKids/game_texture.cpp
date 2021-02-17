@@ -89,6 +89,16 @@ void GameTexture::resetPosition() {
 	destRect.y = originalPosition.y;
 }
 
+void GameTexture::setColor(SDL_Color color)
+{
+	SDL_SetTextureColorMod(spriteTexture, color.r, color.g, color.b);
+}
+
+void GameTexture::resetColor()
+{
+	SDL_SetTextureColorMod(spriteTexture, 255, 255, 255);
+}
+
 void GameTexture::render()
 {
 	if(hasClips)
@@ -171,6 +181,8 @@ bool GameTexture::handleEvent(SDL_Event* event) {
 		SDL_Color color = {0, 0, 0, 0};
 		SDL_GetMouseState(&x, &y);
 		bool inside = true;
+		currentSprite = MOUSE_OUT;
+		withinBoudaries = true;
 
 		if (x < destRect.x)
 			inside = false;
@@ -181,8 +193,11 @@ bool GameTexture::handleEvent(SDL_Event* event) {
 		else if (y > destRect.y + height)
 			inside = false;
 
-		if (!inside)
-		    currentSprite = MOUSE_OUT;
+		if (!inside) {
+			currentSprite = MOUSE_OUT;
+			withinBoudaries = false;
+		}
+		    
 		//Mouse is inside area
 		else
 		{
@@ -190,17 +205,20 @@ bool GameTexture::handleEvent(SDL_Event* event) {
 			{
 			case SDL_MOUSEMOTION:
 				color = getPixelColor(x - destRect.x, y - destRect.y);				
-				if (color.a != 0)
+				if (color.a != 0) {
 					currentSprite = MOUSE_OVER_MOTION;
-				else
+				}
+				else {
 					currentSprite = MOUSE_OUT;
+					withinBoudaries = false;
+				}	
 				break;
 
 			case SDL_MOUSEBUTTONDOWN:				
 				color = getPixelColor(x-destRect.x, y-destRect.y);
 				if (color.a != 0) // Grab sprite only where there is color (alpha != 0)
 				{
-					currentSprite = MOUSE_DOWN;
+					currentSprite = MOUSE_DOWN;	
 					spritePressed = true;
 					grab = true;
 				}
@@ -229,5 +247,10 @@ SDL_Color GameTexture::getPixelColor(const int X, const int Y)
 	SDL_GetRGBA(PixelColor, spriteSurface->format, &Color.r, &Color.g, &Color.b, &Color.a);
 
 	return Color;
+}
+
+bool GameTexture::isWithinBoundaries()
+{
+	return withinBoudaries;
 }
 

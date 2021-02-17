@@ -28,6 +28,8 @@ public:
 	void updatePosFromMouseState();
 	void setPosition(int xpos, int ypos);
 	void resetPosition();
+	void setColor(SDL_Color color);
+	void resetColor();
 	void render();
 	int getWidth();
 	int getHeight();
@@ -40,6 +42,7 @@ public:
 	void setGrabPosition(SDL_Point position);
 	bool handleEvent(SDL_Event* event);
 	SDL_Color getPixelColor(const int X, const int Y);
+	bool isWithinBoundaries();
 
 private:
 	SDL_Texture* spriteTexture;
@@ -50,6 +53,7 @@ private:
 	sprite_state currentSprite = MOUSE_OUT;
 	int			 height, width;
 	bool		 grab = false, lastGrabState = false, lastDropState = true;
+	bool		 withinBoudaries = false;
 	bool		 isMovable = false, hasClips = false;
 
 

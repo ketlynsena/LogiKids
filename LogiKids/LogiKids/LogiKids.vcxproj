@@ -145,11 +145,13 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="game_texture.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="map_coloring.cpp" />
     <ClCompile Include="nqueens.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
     <ClInclude Include="game_texture.h" />
+    <ClInclude Include="map_coloring.h" />
     <ClInclude Include="nqueens.h" />
   </ItemGroup>
   <ItemGroup>

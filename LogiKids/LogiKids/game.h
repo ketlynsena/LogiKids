@@ -12,6 +12,7 @@
 
 #include "game_texture.h"
 #include "nqueens.h"
+#include "map_coloring.h"
 
 enum GameState {
     GAME_ACTIVE,
@@ -19,6 +20,7 @@ enum GameState {
     GAME_STORY,
     GAME_LEVELS,
     GAME_QUEENS,
+    GAME_MAP_COLORING,
     GAME_WIN,
     GAME_LOSE,
     GAME_PAUSE,
@@ -40,9 +42,12 @@ public:
     void handleStoryEvents  (SDL_Event* event);
     void handleNQueensEvents(SDL_Event* event);
     void handleLevelEvents  (SDL_Event* event);
+    void handleMapColoringEvents(SDL_Event* event);
 
     static SDL_Renderer* renderer;
     static TTF_Font* gFont;
+    static SDL_Cursor* cursor;
+    static SDL_Cursor* cursor_hand;
     GameState state = GAME_MENU;
 
 private:
@@ -58,6 +63,7 @@ private:
     GameTexture* botao_play;
     GameTexture* level_marker;
     GameTexture* botao_continuar;
+    
 };
 
 #endif // GAME_H_INCLUDED
