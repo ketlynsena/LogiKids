@@ -172,8 +172,14 @@ void GameTexture::setGrabPosition(SDL_Point position)
 	grabPosition.y = position.y;
 }
 
+bool GameTexture::isPressed()
+{
+	return spritePressed;
+}
+
 bool GameTexture::handleEvent(SDL_Event* event) {
-	bool spritePressed = false;
+	//bool spritePressed = false;
+	spritePressed = false;
 
 	if (event->type == SDL_MOUSEMOTION || event->type == SDL_MOUSEBUTTONDOWN || event->type == SDL_MOUSEBUTTONUP)
 	{
@@ -182,7 +188,7 @@ bool GameTexture::handleEvent(SDL_Event* event) {
 		SDL_GetMouseState(&x, &y);
 		bool inside = true;
 		currentSprite = MOUSE_OUT;
-		withinBoudaries = true;
+		//withinBoudaries = true;
 
 		if (x < destRect.x)
 			inside = false;
@@ -197,7 +203,6 @@ bool GameTexture::handleEvent(SDL_Event* event) {
 			currentSprite = MOUSE_OUT;
 			withinBoudaries = false;
 		}
-		    
 		//Mouse is inside area
 		else
 		{
@@ -207,6 +212,7 @@ bool GameTexture::handleEvent(SDL_Event* event) {
 				color = getPixelColor(x - destRect.x, y - destRect.y);				
 				if (color.a != 0) {
 					currentSprite = MOUSE_OVER_MOTION;
+					withinBoudaries = true;
 				}
 				else {
 					currentSprite = MOUSE_OUT;

@@ -130,6 +130,8 @@ void Game::handleMapColoringEvents(SDL_Event* event)
     if (botao_x->handleEvent(event)) {
         state = GAME_MENU;
     }
+
+    colorindo_bh->handleEvent(event);
 }
 
 void Game::handleEvents()
@@ -208,7 +210,7 @@ void Game::render()
 
     case GAME_MAP_COLORING:
         colorindo_bh->render();
-        botao_x->render();
+        botao_x     ->render();
 
     default:
         break;

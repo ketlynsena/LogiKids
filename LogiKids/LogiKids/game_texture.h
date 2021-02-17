@@ -40,6 +40,7 @@ public:
 	bool dropped();
 	bool grabbed();
 	void setGrabPosition(SDL_Point position);
+	bool isPressed();
 	bool handleEvent(SDL_Event* event);
 	SDL_Color getPixelColor(const int X, const int Y);
 	bool isWithinBoundaries();
@@ -53,7 +54,7 @@ private:
 	sprite_state currentSprite = MOUSE_OUT;
 	int			 height, width;
 	bool		 grab = false, lastGrabState = false, lastDropState = true;
-	bool		 withinBoudaries = false;
+	bool		 withinBoudaries = false, spritePressed = false;
 	bool		 isMovable = false, hasClips = false;
 
 
