@@ -28,6 +28,7 @@ Map_Coloring::Map_Coloring()
     addRegion(OESTE,      477, 335, "assets/map_coloring/oeste.png");
     addRegion(CENTRO_SUL, 559, 328, "assets/map_coloring/centro_sul.png");
     addRegion(BARREIRO,   420, 392, "assets/map_coloring/barreiro.png");
+
 }
 
 Map_Coloring::~Map_Coloring()
@@ -48,9 +49,32 @@ void Map_Coloring::resetMap()
     {
         regioes[i].mapa->setColor(branco);
         regioes[i].cor = { 204, 204, 204};//255, 255, 255 };
+        regioes[i].nome_cor = BRANCO;
+    }     
+}
+
+// Check if coloring is safe (no repeting colors between two edges)
+bool Map_Coloring::isSafe()
+{
+    for (int v = 0; v < N_REGIOES_BH; v++) // For each vertex
+    {
+        // For each adjacent node
+        for (int n = v; n < N_REGIOES_BH; n++)
+        {
+            if (v != n) // if is not node
+            {
+                if (mapa_bh[v][n] == true && regioes[v].nome_cor != BRANCO) // 
+                {
+                    printf("v:%d n:%d cor_v:%d cor_n:%d\n", v, n, regioes[v].nome_cor, regioes[n].nome_cor);
+                    if (regioes[v].nome_cor == regioes[n].nome_cor) {
+                        return false;
+                   }
+                }
+            }
+
+        }
     }
-        
-    
+    return true;
 }
 
 void Map_Coloring::handleEvent(SDL_Event* e)
@@ -87,7 +111,11 @@ void Map_Coloring::handleRegionEvent(SDL_Event* e, Regiao* regiao)
     if (regiao->mapa->isPressed()) {
         printf("Click na regiao\n");
         setRegionColor(regiao);
-        printf("Current color: r:%d g:%d b:%d\n", regiao->cor.r, regiao->cor.g, regiao->cor.b);
+        //printf("Current color: r:%d g:%d b:%d\n", regiao->cor.r, regiao->cor.g, regiao->cor.b);
+        if (isSafe())
+            printf("Move was safe.\n");
+        else
+            printf("Move was not safe.\n");
     }
     // Highlights current color on the region
     // the mouse hovers
@@ -149,6 +177,7 @@ void Map_Coloring::setRegionColor(Regiao* regiao)
     regiao->cor.g = color.g;
     regiao->cor.b = color.b;
     regiao->mapa->setColor(regiao->cor);
+    regiao->nome_cor = currentColor;
 }
 
 void Map_Coloring::render()
