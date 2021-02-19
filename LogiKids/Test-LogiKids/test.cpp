@@ -8,7 +8,7 @@ TEST(TestCaseName, TestName) {
   EXPECT_TRUE(true);
 }
 
-TEST(TestGameObject, TestGetXpos) {
+TEST(TestGameTexture, TestGetXpos) {
 
 	GameTexture* GameTest;
 
