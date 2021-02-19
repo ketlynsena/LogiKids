@@ -2,6 +2,7 @@
 
 N_Queens* nrainhas;
 Map_Coloring* colorindo_bh;
+Hanoi_Tower* bolo_hanoi;
 
 SDL_Renderer* Game::renderer    = nullptr;
 TTF_Font*     Game::gFont       = nullptr;
@@ -75,8 +76,11 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     botao_x         = new GameTexture("assets/buttons/x", 740, 20, true, false);
     botao_play      = new GameTexture("assets/buttons/play", 740, 550, true, false);
     level_marker    = new GameTexture("assets/buttons/level_marker", 250, 500, true, false);
+
     nrainhas        = new N_Queens();
     colorindo_bh    = new Map_Coloring();
+    bolo_hanoi      = new Hanoi_Tower();
+
     parabens        = new GameTexture("assets/parabens.png", 210, 180, false, false);
     botao_continuar = new GameTexture("assets/buttons/play", 380, 345, true, false);
     overlay         = new GameTexture("assets/overlay.png", 0, 0, false, false);
@@ -117,7 +121,7 @@ void Game::handleLevelEvents(SDL_Event* event)
 {
     if (level_marker->handleEvent(event))
     {
-        state = GAME_MAP_COLORING; //GAME_QUEENS; - Para debugar map coloring primeiro
+        state = GAME_HANOI;//GAME_MAP_COLORING; //GAME_QUEENS; - Para debugar map coloring primeiro
     }
 
     if (botao_x->handleEvent(event)) {
@@ -132,6 +136,14 @@ void Game::handleMapColoringEvents(SDL_Event* event)
     }
 
     colorindo_bh->handleEvent(event);
+}
+
+void Game::handleHanoiEvents(SDL_Event* event)
+{
+    if (botao_x->handleEvent(event)) {
+        state = GAME_MENU;
+    }
+    bolo_hanoi->handleEvent(event);
 }
 
 void Game::handleEvents()
@@ -164,6 +176,10 @@ void Game::handleEvents()
             handleMapColoringEvents(&event);
             break;
 
+        case GAME_HANOI:
+            handleHanoiEvents(&event);
+            break;
+
         default:
             break;
         }
@@ -175,6 +191,9 @@ void Game::update()
     switch (state) {
     case GAME_QUEENS:
         nrainhas->update();
+        break;
+    case GAME_HANOI:
+        bolo_hanoi->update();
     }    
 }
 
@@ -207,10 +226,17 @@ void Game::render()
             botao_continuar->render();
         }
         botao_x->render();
+        break;
 
     case GAME_MAP_COLORING:
         colorindo_bh->render();
         botao_x     ->render();
+        break;
+
+    case GAME_HANOI:
+        bolo_hanoi->render();
+        botao_x->render();
+        break;
 
     default:
         break;

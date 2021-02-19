@@ -5,7 +5,7 @@ Map_Coloring::Map_Coloring()
 	background = new GameTexture("assets/map_coloring/colorindo_bh.png", 0, 0, false, false);
 	help = new GameTexture("assets/buttons/help", 740, 540, true, false);
 	reset = new GameTexture("assets/buttons/reset", 15, 550, true, false);
-    bh_outline = new GameTexture("assets/map_coloring/bh_outline.png", 419, 122, false, false);
+    bh_outline = new GameTexture("assets/map_coloring/bh_outline_debug.png", 419, 122, false, false);
 
     balde[AZUL]           = new GameTexture("assets/map_coloring/balde_azul", 30, 425, true, false);
     //balde_virado[AZUL]    = new GameTexture("assets/map_coloring/balde_azul_2", 30, 425, false, false);
@@ -59,11 +59,11 @@ bool Map_Coloring::isSafe()
     for (int v = 0; v < N_REGIOES_BH; v++) // For each vertex
     {
         // For each adjacent node
-        for (int n = v; n < N_REGIOES_BH; n++)
+        for (int n = v+1; n < N_REGIOES_BH; n++)
         {
             if (v != n) // if is not node
             {
-                if (mapa_bh[v][n] == true && regioes[v].nome_cor != BRANCO) // 
+                if (mapa_bh[v][n] == true && regioes[v].nome_cor != BRANCO && regioes[n].nome_cor != BRANCO) // 
                 {
                     printf("v:%d n:%d cor_v:%d cor_n:%d\n", v, n, regioes[v].nome_cor, regioes[n].nome_cor);
                     if (regioes[v].nome_cor == regioes[n].nome_cor) {

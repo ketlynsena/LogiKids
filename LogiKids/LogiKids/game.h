@@ -13,6 +13,7 @@
 #include "game_texture.h"
 #include "nqueens.h"
 #include "map_coloring.h"
+#include "hanoi_tower.h"
 
 enum GameState {
     GAME_ACTIVE,
@@ -21,6 +22,7 @@ enum GameState {
     GAME_LEVELS,
     GAME_QUEENS,
     GAME_MAP_COLORING,
+    GAME_HANOI,
     GAME_WIN,
     GAME_LOSE,
     GAME_PAUSE,
@@ -43,6 +45,7 @@ public:
     void handleNQueensEvents(SDL_Event* event);
     void handleLevelEvents  (SDL_Event* event);
     void handleMapColoringEvents(SDL_Event* event);
+    void handleHanoiEvents(SDL_Event* event);
 
     static SDL_Renderer* renderer;
     static TTF_Font* gFont;
