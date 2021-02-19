@@ -5,7 +5,7 @@ Map_Coloring* colorindo_bh;
 Hanoi_Tower* bolo_hanoi;
 
 SDL_Renderer* Game::renderer    = nullptr;
-TTF_Font*     Game::gFont       = nullptr;
+//TTF_Font*     Game::gFont       = nullptr;
 SDL_Cursor*   Game::cursor      = nullptr;
 SDL_Cursor*   Game::cursor_hand = nullptr;
 
@@ -38,13 +38,13 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
         isRunning = true;
 
         //Initialize SDL_ttf
-        if (TTF_Init() == -1)
+       /* if (TTF_Init() == -1)
         {
             printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
             isRunning = false;
-        }
+        }*/
     }
-
+    /*
     gFont = TTF_OpenFont("assets/fonts/learners.ttf", 28);
     if (gFont == NULL)
     {
@@ -54,6 +54,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     SDL_Color textColor = { 0, 0, 0 };
     SDL_Texture* textTexture;
     //textTexture = TextureManager::loadFromRenderedText("The quick brown fox jumps over the lazy dog", textColor);
+    */
 
     SDL_Surface* cursorSurface = IMG_Load("assets/cursors/seta.png");
     SDL_Surface* handSurface   = IMG_Load("assets/cursors/mao.png");
@@ -246,12 +247,12 @@ void Game::render()
 
 void Game::clean()
 {
-    TTF_CloseFont(gFont);
-    gFont = NULL;
+    //TTF_CloseFont(gFont);
+    //gFont = NULL;
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     SDL_FreeCursor(cursor);
-    TTF_Quit();
+    //TTF_Quit();
     IMG_Quit();
     SDL_Quit();
     std::cout << "Game Cleaned" << std::endl;

@@ -4,7 +4,7 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
-#include <SDL_ttf.h>
+//#include <SDL_ttf.h>
 #include <stdio.h>
 #include <iostream>
 #include <string>
@@ -48,7 +48,7 @@ public:
     void handleHanoiEvents(SDL_Event* event);
 
     static SDL_Renderer* renderer;
-    static TTF_Font* gFont;
+   //static TTF_Font* gFont;
     static SDL_Cursor* cursor;
     static SDL_Cursor* cursor_hand;
     GameState state = GAME_MENU;
