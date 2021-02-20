@@ -15,6 +15,8 @@
 #include "map_coloring.h"
 #include "hanoi_tower.h"
 
+#define N_LEVELS 3
+
 enum GameState {
     GAME_ACTIVE,
     GAME_MENU,
@@ -64,8 +66,10 @@ private:
     //Buttons objects
     GameTexture* botao_x;
     GameTexture* botao_play;
-    GameTexture* level_marker;
+   // GameTexture* level_marker;
     GameTexture* botao_continuar;
+
+    GameTexture* level_marker[N_LEVELS];
     
 };
 

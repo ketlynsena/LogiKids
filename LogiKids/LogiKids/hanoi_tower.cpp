@@ -34,6 +34,11 @@ void Hanoi_Tower::render()
 
 	for (int i = 0; i < N_LAYERS; i++)
 		cake_layer[i]->render();
+
+	// Render selected layer on top
+	for (int i = 0; i < N_LAYERS; i++)
+		if (cake_layer[i]->isGrabbed())
+			cake_layer[i]->render();
 }
 
 void Hanoi_Tower::handleEvent(SDL_Event* e)
@@ -82,43 +87,153 @@ void Hanoi_Tower::resetLevel()
 		cake_layer[i]->resetPosition();
 		tower[i][0] = i + 1;
 	}
+	gameWin = false;
 
 }
 
 void Hanoi_Tower::update()
 {
-	for (int i = 0; i < N_LAYERS; i++)
-	{
-		cake_layer[i]->updatePosFromMouseState();
-		if (cake_layer[i]->dropped()) {
-			currentIndex = getTowerIndex(cake_layer[i]);
-			if (currentIndex.layer < 0)
-			{
-				cake_layer[i]->resetPosition();
-			}
-			else {
-				placeLayeronTower(cake_layer[i], currentIndex);
-				printf("Layer dropped at tower %d, layer %d.\n", currentIndex.n_tower, currentIndex.layer);
-			}	
-		}
-		if (cake_layer[i]->grabbed()) {
-			currentIndex = getTowerIndex(cake_layer[i]);
-			printf("Layer grabbed at tower %d, layer %d.\n", currentIndex.n_tower, currentIndex.layer);
-		}
+	if(!checkWin())
+		updateLayers();
+	else {
+		gameWin = true;
 	}
 }
 
-bool Hanoi_Tower::placeLayeronTower(GameTexture* layer, TowerIndex index) {
+bool Hanoi_Tower::gameWon()
+{
+	return gameWin;
+}
+
+bool Hanoi_Tower::checkWin()
+{
+	for (int i = 0; i < N_LAYERS; i++)
+	{
+		if (tower[i][N_TOWERS - 1] < 1)
+			return false;
+
+	}
+	return true;
+}
+
+void Hanoi_Tower::updateLayers()
+{
+	// Update each cake layer
+	for (int i = 0; i < N_LAYERS; i++)
+	{
+		// If layer was dropped
+		if (cake_layer[i]->dropped()) {
+			// Check where it was dropped
+			currentIndex = getTowerIndex(cake_layer[i]);
+
+			// If outside boundaries of towers, reset to last grab position
+			if (currentIndex.layer < 0)
+			{
+				placeLayeronTower(cake_layer[i], i, grabIndex);
+			}
+			else {
+				// If the layer index on tower is empty, place cake layer
+				
+				if (!placeLayeronTower(cake_layer[i], i, currentIndex))
+				{
+					placeLayeronTower(cake_layer[i], i, grabIndex);
+				}
+				
+			}
+			//printTower();
+		}
+		// If cake was grabbed, save index for drop updates
+		if (cake_layer[i]->grabbed()) {
+			grabIndex = getTowerIndex(cake_layer[i]);
+			tower[grabIndex.layer][grabIndex.n_tower] = 0; // Free layer index
+			//printf("Layer grabbed at tower %d, layer %d.\n", grabIndex.n_tower, grabIndex.layer);
+			freeLayer = noLayerOnTop(grabIndex);
+		}
+		// Grab and move cake layer
+		if (freeLayer){//isLayerOnTop(grabIndex)) {
+			cake_layer[i]->updatePosFromMouseState();
+		}			
+	}
+}
+
+bool Hanoi_Tower::noLayerOnTop(TowerIndex index)
+{
+	if (index.layer > 0) // If layer not on upper layer, has to check if there is no other layer on top
+	{
+		for (int i = index.layer; i >= 0; --i) {
+			if (tower[i][index.n_tower] > 0) {
+				//printf("Layer on top\n");
+				return false; // There is at least one layer on top of this one
+			}
+		}
+	}	
+	return true;
+}
+
+void Hanoi_Tower::printTower()
+{
+	for (int i = 0; i < N_LAYERS; i++)
+	{
+		for (int j = 0; j < N_TOWERS; j++)
+		{
+			printf("%d  ", tower[i][j]);
+		}
+		printf("\n");
+	}	
+}
+
+bool Hanoi_Tower::placeLayeronTower(GameTexture* layer, int layerSize, TowerIndex index) {
 
 	int x, y;
 	SDL_Point currPos = layer->getCurrentPosition();
+	TowerIndex currLayerIndex;
 
-	//x = currPos.x + index.n_tower * (TOWER_WIDTH / N_TOWERS);
-	//y = currPos.y + index.layer * (TOWER_HEIGHT / N_LAYERS);
+	currLayerIndex.n_tower = index.n_tower;
+
+	//printf("Placing layer with size %d\n", layerSize+1);
+
+	//printTower();
 	x = index.n_tower * (TOWER_WIDTH / N_TOWERS) + TOWER_X;
-	y = index.layer * (TOWER_HEIGHT / N_LAYERS) + TOWER_Y;
 
-	layer->setPosition(x, y);
+	for (int i = N_LAYERS-1; i >= 0; i--)
+	{
+		if (tower[i][index.n_tower] < 1) {
+			// Found an empty spot
+			// Check if layer below is larger than the layer
+			currLayerIndex.layer = i;
+			if (layerBelowIsLarger(layerSize + 1, currLayerIndex))
+			{
+				//printf("Free layer %d at tower %d\n", i, index.n_tower);
+				y = i * (TOWER_HEIGHT / N_LAYERS) + TOWER_Y;
+				tower[i][index.n_tower] = layerSize + 1;
+				layer->setPosition(x, y);
+				return true;
+			}
+			else {
+				return false;
+			}			
+		}
+	}	
+	return false;
+}
 
-	return true;
+bool Hanoi_Tower::layerBelowIsLarger(int layerSize, TowerIndex index)
+{
+	if (index.layer < N_LAYERS - 1) // If not last layer
+	{
+		//printf("Layer below is Size %d, Layer is size %d\n", tower[index.layer + 1][index.n_tower], layerSize);
+		if (layerSize < tower[index.layer + 1][index.n_tower])
+		{			
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	else // Returns true if tower is empty
+	{
+		//printf("Last layer, does not matter the size.\n");
+		return true;
+	}
+	
 }

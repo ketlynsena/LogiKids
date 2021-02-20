@@ -76,7 +76,10 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     selecao_nivel   = new GameTexture("assets/selecao_nivel.png", 0, 0, false, false);
     botao_x         = new GameTexture("assets/buttons/x", 740, 20, true, false);
     botao_play      = new GameTexture("assets/buttons/play", 740, 550, true, false);
-    level_marker    = new GameTexture("assets/buttons/level_marker", 250, 500, true, false);
+
+    level_marker[0] = new GameTexture("assets/buttons/level_marker", 250, 500, true, false);
+    level_marker[1] = new GameTexture("assets/buttons/level_marker", 374, 495, true, false);
+    level_marker[2] = new GameTexture("assets/buttons/level_marker", 368, 416, true, false);
 
     nrainhas        = new N_Queens();
     colorindo_bh    = new Map_Coloring();
@@ -106,7 +109,7 @@ void Game::handleStoryEvents(SDL_Event* event) {
 void Game::handleNQueensEvents(SDL_Event* event) {
     if (botao_x->handleEvent(event)) {
         nrainhas->resetLevel();
-        state = GAME_MENU;
+        state = GAME_LEVELS;
     }
     if (nrainhas->gameWon())
     {
@@ -120,9 +123,19 @@ void Game::handleNQueensEvents(SDL_Event* event) {
 
 void Game::handleLevelEvents(SDL_Event* event)
 {
-    if (level_marker->handleEvent(event))
+    if (level_marker[0]->handleEvent(event))
     {
-        state = GAME_HANOI;//GAME_MAP_COLORING; //GAME_QUEENS; - Para debugar map coloring primeiro
+        state = GAME_QUEENS;
+    }
+
+    if (level_marker[1]->handleEvent(event))
+    {
+        state = GAME_MAP_COLORING;
+    }
+
+    if (level_marker[2]->handleEvent(event))
+    {
+        state = GAME_HANOI;
     }
 
     if (botao_x->handleEvent(event)) {
@@ -133,7 +146,15 @@ void Game::handleLevelEvents(SDL_Event* event)
 void Game::handleMapColoringEvents(SDL_Event* event)
 {
     if (botao_x->handleEvent(event)) {
-        state = GAME_MENU;
+        state = GAME_LEVELS;
+    }
+
+    if (colorindo_bh->gameWon())
+    {
+        if (botao_continuar->handleEvent(event)) {
+            colorindo_bh->resetMap();
+            state = GAME_LEVELS;
+        }
     }
 
     colorindo_bh->handleEvent(event);
@@ -142,8 +163,17 @@ void Game::handleMapColoringEvents(SDL_Event* event)
 void Game::handleHanoiEvents(SDL_Event* event)
 {
     if (botao_x->handleEvent(event)) {
-        state = GAME_MENU;
+        state = GAME_LEVELS;
     }
+
+    if (bolo_hanoi->gameWon())
+    {
+        if (botao_continuar->handleEvent(event)) {
+            bolo_hanoi->resetLevel();
+            state = GAME_LEVELS;
+        }
+    }
+
     bolo_hanoi->handleEvent(event);
 }
 
@@ -216,7 +246,9 @@ void Game::render()
     case GAME_LEVELS:
         selecao_nivel->render();
         botao_x      ->render();
-        level_marker ->render();
+        level_marker[0]->render();
+        level_marker[1]->render();
+        level_marker[2]->render();
         break;
 
     case GAME_QUEENS:
@@ -231,11 +263,21 @@ void Game::render()
 
     case GAME_MAP_COLORING:
         colorindo_bh->render();
-        botao_x     ->render();
+        if (colorindo_bh->gameWon()) {
+            overlay->render();
+            parabens->render();
+            botao_continuar->render();
+        }
+        botao_x->render();
         break;
 
     case GAME_HANOI:
         bolo_hanoi->render();
+        if (bolo_hanoi->gameWon()) {
+            overlay->render();
+            parabens->render();
+            botao_continuar->render();
+        }
         botao_x->render();
         break;
 

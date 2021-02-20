@@ -48,7 +48,9 @@ public:
     void setToCurrentColor(Regiao* regiao);
     void setRegionColor(Regiao* regiao);
     SDL_Color getColorFromName(Cor color);
+    bool checkWin();
     bool isSafe();
+    bool gameWon();
 	~Map_Coloring();
     void render();
 

@@ -242,4 +242,9 @@ void N_Queens::render()
 
 	for (int i = 0; i < BOARD_SIZE; i++)
 		queens[i]->render();
+
+	// Render grabbed queen on top
+	for (int i = 0; i < BOARD_SIZE; i++)
+		if (queens[i]->isGrabbed())
+			queens[i]->render();
 }

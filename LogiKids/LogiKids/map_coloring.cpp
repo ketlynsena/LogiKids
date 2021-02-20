@@ -5,7 +5,7 @@ Map_Coloring::Map_Coloring()
 	background = new GameTexture("assets/map_coloring/colorindo_bh.png", 0, 0, false, false);
 	help = new GameTexture("assets/buttons/help", 740, 540, true, false);
 	reset = new GameTexture("assets/buttons/reset", 15, 550, true, false);
-    bh_outline = new GameTexture("assets/map_coloring/bh_outline_debug.png", 419, 122, false, false);
+    bh_outline = new GameTexture("assets/map_coloring/bh_outline.png", 419, 122, false, false);
 
     balde[AZUL]           = new GameTexture("assets/map_coloring/balde_azul", 30, 425, true, false);
     //balde_virado[AZUL]    = new GameTexture("assets/map_coloring/balde_azul_2", 30, 425, false, false);
@@ -50,7 +50,30 @@ void Map_Coloring::resetMap()
         regioes[i].mapa->setColor(branco);
         regioes[i].cor = { 204, 204, 204};//255, 255, 255 };
         regioes[i].nome_cor = BRANCO;
-    }     
+    } 
+
+    gameWin = false;
+}
+
+bool Map_Coloring::checkWin()
+{
+    int coloredRegions = 0;
+    for (int i = 0; i < N_REGIOES_BH; i++)
+    {
+        if (regioes[i].nome_cor != BRANCO)
+        {
+            coloredRegions++;
+        }
+        else // If any region is not colored, then the game is not complete yet 
+        {
+            return false;
+        }
+    }
+    // If all regions are colored and they don't repeat at borders
+    if (coloredRegions == N_REGIOES_BH && isSafe())
+        return true;
+    else
+        return false;
 }
 
 // Check if coloring is safe (no repeting colors between two edges)
@@ -65,7 +88,7 @@ bool Map_Coloring::isSafe()
             {
                 if (mapa_bh[v][n] == true && regioes[v].nome_cor != BRANCO && regioes[n].nome_cor != BRANCO) // 
                 {
-                    printf("v:%d n:%d cor_v:%d cor_n:%d\n", v, n, regioes[v].nome_cor, regioes[n].nome_cor);
+                    //printf("v:%d n:%d cor_v:%d cor_n:%d\n", v, n, regioes[v].nome_cor, regioes[n].nome_cor);
                     if (regioes[v].nome_cor == regioes[n].nome_cor) {
                         return false;
                    }
@@ -79,7 +102,7 @@ bool Map_Coloring::isSafe()
 
 void Map_Coloring::handleEvent(SDL_Event* e)
 {
-    if (!gameWin) {
+    if (!checkWin()) {
         help->handleEvent(e);
 
         for (int i = 0; i < N_REGIOES_BH; i++)
@@ -91,6 +114,14 @@ void Map_Coloring::handleEvent(SDL_Event* e)
         if (reset->handleEvent(e))
             resetMap();
     }
+    else {
+        gameWin = true;
+    }
+}
+
+bool Map_Coloring::gameWon()
+{
+    return gameWin;
 }
 
 void Map_Coloring::handleBucketEvent(SDL_Event* e, GameTexture* bucket, Cor color)
@@ -111,11 +142,10 @@ void Map_Coloring::handleRegionEvent(SDL_Event* e, Regiao* regiao)
     if (regiao->mapa->isPressed()) {
         printf("Click na regiao\n");
         setRegionColor(regiao);
-        //printf("Current color: r:%d g:%d b:%d\n", regiao->cor.r, regiao->cor.g, regiao->cor.b);
-        if (isSafe())
-            printf("Move was safe.\n");
-        else
-            printf("Move was not safe.\n");
+        //if (isSafe())
+        //    printf("Move was safe.\n");
+        //else
+        //    printf("Move was not safe.\n");
     }
     // Highlights current color on the region
     // the mouse hovers
