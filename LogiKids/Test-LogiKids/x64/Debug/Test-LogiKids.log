@@ -1,5 +1,4 @@
-﻿  pch.cpp
-  test.cpp
+﻿  test.cpp
 C:\Users\scarl\Documents\PDS-LogiKids\LogiKids\LogiKids\nqueens.h(14,2): warning C4091: 'typedef ': ignorado à esquerda de 'TilePosition' quando nenhuma variável é declarada
 C:\Users\scarl\Documents\PDS-LogiKids\LogiKids\LogiKids\nqueens.h(19,2): warning C4091: 'typedef ': ignorado à esquerda de 'QueenPiece' quando nenhuma variável é declarada
 C:\Users\scarl\Documents\PDS-LogiKids\LogiKids\LogiKids\map_coloring.h(22,2): warning C4091: 'typedef ': ignorado à esquerda de 'Nome' quando nenhuma variável é declarada

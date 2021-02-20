@@ -71,6 +71,10 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
     SDL_SetCursor(cursor);
 
+    SDL_Surface* icon = IMG_Load("assets/puzzle_icon.png");
+    SDL_SetWindowIcon(window, icon);
+    SDL_FreeSurface(icon);
+
     tela_principal  = new GameTexture("assets/tela_principal.png", 0, 0, false, false);
     modo_historia   = new GameTexture("assets/modo_historia.png", 0, 0, false, false);
     selecao_nivel   = new GameTexture("assets/selecao_nivel.png", 0, 0, false, false);
