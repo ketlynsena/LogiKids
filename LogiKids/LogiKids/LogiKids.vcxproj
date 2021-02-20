@@ -124,6 +124,11 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PreLinkEvent>
+      <Command>@ECHO ON
+@ECHO "$(VC_ExecutablePath_x86)\lib.exe" /out:"$(OutDir)$(ProjectName).lib" "$(IntermediateOutputPath)*.obj"
+"$(VC_ExecutablePath_x86)\lib.exe" /out:"$(OutDir)$(ProjectName).lib" "$(IntermediateOutputPath)*.obj"</Command>
+    </PreLinkEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -144,6 +149,7 @@
   <ItemGroup>
     <ClCompile Include="game.cpp" />
     <ClCompile Include="game_texture.cpp" />
+    <ClCompile Include="hanoi_tower.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map_coloring.cpp" />
     <ClCompile Include="nqueens.cpp" />
@@ -151,6 +157,7 @@
   <ItemGroup>
     <ClInclude Include="game.h" />
     <ClInclude Include="game_texture.h" />
+    <ClInclude Include="hanoi_tower.h" />
     <ClInclude Include="map_coloring.h" />
     <ClInclude Include="nqueens.h" />
   </ItemGroup>

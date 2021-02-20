@@ -34,7 +34,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>C:\vclib\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\vclib\lib\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Users\scarl\Documents\PDS-LogiKids\LogiKids\LogiKids\x64\Debug;C:\vclib\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -85,12 +85,12 @@
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>GameObject.lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>LogiKids.lib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
-      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2_image.lib;SDL2_ttf.lib;LogiKids.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

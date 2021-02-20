@@ -2,60 +2,60 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Users\Ketlyn\source\repos\ketlynsena\LogiKids\LogiKids\LogiKids\x64\Debug\LogiKids.exe</FullPath>
+      <FullPath>C:\Users\scarl\Documents\PDS-LogiKids\LogiKids\LogiKids\x64\Debug\LogiKids.exe</FullPath>
     </ProjectOutput>
     <ProjectOutput>
-      <FullPath>C:\Users\Ketlyn\source\repos\ketlynsena\LogiKids\LogiKids\LogiKids\x64\Debug\Test-LogiKids.exe</FullPath>
+      <FullPath>C:\Users\scarl\Documents\PDS-LogiKids\LogiKids\LogiKids\x64\Debug\Test-LogiKids.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles>
     <ContentFile>
-      <FullPath>C:\Users\Ketlyn\source\repos\ketlynsena\LogiKids\LogiKids\LogiKids\assets\botao_play.png</FullPath>
+      <FullPath>C:\Users\scarl\Documents\PDS-LogiKids\LogiKids\LogiKids\assets\botao_play.png</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\Ketlyn\source\repos\ketlynsena\LogiKids\LogiKids\LogiKids\assets\botao_play_escuro.png</FullPath>
+      <FullPath>C:\Users\scarl\Documents\PDS-LogiKids\LogiKids\LogiKids\assets\botao_play_escuro.png</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\Ketlyn\source\repos\ketlynsena\LogiKids\LogiKids\LogiKids\assets\botao_x.png</FullPath>
+      <FullPath>C:\Users\scarl\Documents\PDS-LogiKids\LogiKids\LogiKids\assets\botao_x.png</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\Ketlyn\source\repos\ketlynsena\LogiKids\LogiKids\LogiKids\assets\botao_x_escuro.png</FullPath>
+      <FullPath>C:\Users\scarl\Documents\PDS-LogiKids\LogiKids\LogiKids\assets\botao_x_escuro.png</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\Ketlyn\source\repos\ketlynsena\LogiKids\LogiKids\LogiKids\assets\dica.png</FullPath>
+      <FullPath>C:\Users\scarl\Documents\PDS-LogiKids\LogiKids\LogiKids\assets\dica.png</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\Ketlyn\source\repos\ketlynsena\LogiKids\LogiKids\LogiKids\assets\dragon.png</FullPath>
+      <FullPath>C:\Users\scarl\Documents\PDS-LogiKids\LogiKids\LogiKids\assets\dragon.png</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\Ketlyn\source\repos\ketlynsena\LogiKids\LogiKids\LogiKids\assets\fundo_nrainhas.png</FullPath>
+      <FullPath>C:\Users\scarl\Documents\PDS-LogiKids\LogiKids\LogiKids\assets\fundo_nrainhas.png</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\Ketlyn\source\repos\ketlynsena\LogiKids\LogiKids\LogiKids\assets\logo.png</FullPath>
+      <FullPath>C:\Users\scarl\Documents\PDS-LogiKids\LogiKids\LogiKids\assets\logo.png</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\Ketlyn\source\repos\ketlynsena\LogiKids\LogiKids\LogiKids\assets\modo_historia.png</FullPath>
+      <FullPath>C:\Users\scarl\Documents\PDS-LogiKids\LogiKids\LogiKids\assets\modo_historia.png</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\Ketlyn\source\repos\ketlynsena\LogiKids\LogiKids\LogiKids\assets\nrainhas.png</FullPath>
+      <FullPath>C:\Users\scarl\Documents\PDS-LogiKids\LogiKids\LogiKids\assets\nrainhas.png</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\Ketlyn\source\repos\ketlynsena\LogiKids\LogiKids\LogiKids\assets\parabens.png</FullPath>
+      <FullPath>C:\Users\scarl\Documents\PDS-LogiKids\LogiKids\LogiKids\assets\parabens.png</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\Ketlyn\source\repos\ketlynsena\LogiKids\LogiKids\LogiKids\assets\rainha.png</FullPath>
+      <FullPath>C:\Users\scarl\Documents\PDS-LogiKids\LogiKids\LogiKids\assets\rainha.png</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\Ketlyn\source\repos\ketlynsena\LogiKids\LogiKids\LogiKids\assets\selecao_nivel.png</FullPath>
+      <FullPath>C:\Users\scarl\Documents\PDS-LogiKids\LogiKids\LogiKids\assets\selecao_nivel.png</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\Ketlyn\source\repos\ketlynsena\LogiKids\LogiKids\LogiKids\assets\tabuleiro.png</FullPath>
+      <FullPath>C:\Users\scarl\Documents\PDS-LogiKids\LogiKids\LogiKids\assets\tabuleiro.png</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\Ketlyn\source\repos\ketlynsena\LogiKids\LogiKids\LogiKids\assets\tela_principal.png</FullPath>
+      <FullPath>C:\Users\scarl\Documents\PDS-LogiKids\LogiKids\LogiKids\assets\tela_principal.png</FullPath>
     </ContentFile>
     <ContentFile>
-      <FullPath>C:\Users\Ketlyn\source\repos\ketlynsena\LogiKids\LogiKids\LogiKids\assets\tela_principal_fundo.png</FullPath>
+      <FullPath>C:\Users\scarl\Documents\PDS-LogiKids\LogiKids\LogiKids\assets\tela_principal_fundo.png</FullPath>
     </ContentFile>
   </ContentFiles>
   <SatelliteDlls />

@@ -2,9 +2,10 @@
 
 N_Queens* nrainhas;
 Map_Coloring* colorindo_bh;
+Hanoi_Tower* bolo_hanoi;
 
 SDL_Renderer* Game::renderer    = nullptr;
-TTF_Font*     Game::gFont       = nullptr;
+//TTF_Font*     Game::gFont       = nullptr;
 SDL_Cursor*   Game::cursor      = nullptr;
 SDL_Cursor*   Game::cursor_hand = nullptr;
 
@@ -37,13 +38,13 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
         isRunning = true;
 
         //Initialize SDL_ttf
-        if (TTF_Init() == -1)
+       /* if (TTF_Init() == -1)
         {
             printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
             isRunning = false;
-        }
+        }*/
     }
-
+    /*
     gFont = TTF_OpenFont("assets/fonts/learners.ttf", 28);
     if (gFont == NULL)
     {
@@ -53,6 +54,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     SDL_Color textColor = { 0, 0, 0 };
     SDL_Texture* textTexture;
     //textTexture = TextureManager::loadFromRenderedText("The quick brown fox jumps over the lazy dog", textColor);
+    */
 
     SDL_Surface* cursorSurface = IMG_Load("assets/cursors/seta.png");
     SDL_Surface* handSurface   = IMG_Load("assets/cursors/mao.png");
@@ -74,9 +76,15 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     selecao_nivel   = new GameTexture("assets/selecao_nivel.png", 0, 0, false, false);
     botao_x         = new GameTexture("assets/buttons/x", 740, 20, true, false);
     botao_play      = new GameTexture("assets/buttons/play", 740, 550, true, false);
-    level_marker    = new GameTexture("assets/buttons/level_marker", 250, 500, true, false);
+
+    level_marker[0] = new GameTexture("assets/buttons/level_marker", 250, 500, true, false);
+    level_marker[1] = new GameTexture("assets/buttons/level_marker", 374, 495, true, false);
+    level_marker[2] = new GameTexture("assets/buttons/level_marker", 368, 416, true, false);
+
     nrainhas        = new N_Queens();
     colorindo_bh    = new Map_Coloring();
+    bolo_hanoi      = new Hanoi_Tower();
+
     parabens        = new GameTexture("assets/parabens.png", 210, 180, false, false);
     botao_continuar = new GameTexture("assets/buttons/play", 380, 345, true, false);
     overlay         = new GameTexture("assets/overlay.png", 0, 0, false, false);
@@ -101,7 +109,7 @@ void Game::handleStoryEvents(SDL_Event* event) {
 void Game::handleNQueensEvents(SDL_Event* event) {
     if (botao_x->handleEvent(event)) {
         nrainhas->resetLevel();
-        state = GAME_MENU;
+        state = GAME_LEVELS;
     }
     if (nrainhas->gameWon())
     {
@@ -115,9 +123,19 @@ void Game::handleNQueensEvents(SDL_Event* event) {
 
 void Game::handleLevelEvents(SDL_Event* event)
 {
-    if (level_marker->handleEvent(event))
+    if (level_marker[0]->handleEvent(event))
     {
-        state = GAME_MAP_COLORING; //GAME_QUEENS; - Para debugar map coloring primeiro
+        state = GAME_QUEENS;
+    }
+
+    if (level_marker[1]->handleEvent(event))
+    {
+        state = GAME_MAP_COLORING;
+    }
+
+    if (level_marker[2]->handleEvent(event))
+    {
+        state = GAME_HANOI;
     }
 
     if (botao_x->handleEvent(event)) {
@@ -128,10 +146,35 @@ void Game::handleLevelEvents(SDL_Event* event)
 void Game::handleMapColoringEvents(SDL_Event* event)
 {
     if (botao_x->handleEvent(event)) {
-        state = GAME_MENU;
+        state = GAME_LEVELS;
+    }
+
+    if (colorindo_bh->gameWon())
+    {
+        if (botao_continuar->handleEvent(event)) {
+            colorindo_bh->resetMap();
+            state = GAME_LEVELS;
+        }
     }
 
     colorindo_bh->handleEvent(event);
+}
+
+void Game::handleHanoiEvents(SDL_Event* event)
+{
+    if (botao_x->handleEvent(event)) {
+        state = GAME_LEVELS;
+    }
+
+    if (bolo_hanoi->gameWon())
+    {
+        if (botao_continuar->handleEvent(event)) {
+            bolo_hanoi->resetLevel();
+            state = GAME_LEVELS;
+        }
+    }
+
+    bolo_hanoi->handleEvent(event);
 }
 
 void Game::handleEvents()
@@ -164,6 +207,10 @@ void Game::handleEvents()
             handleMapColoringEvents(&event);
             break;
 
+        case GAME_HANOI:
+            handleHanoiEvents(&event);
+            break;
+
         default:
             break;
         }
@@ -175,6 +222,9 @@ void Game::update()
     switch (state) {
     case GAME_QUEENS:
         nrainhas->update();
+        break;
+    case GAME_HANOI:
+        bolo_hanoi->update();
     }    
 }
 
@@ -196,7 +246,9 @@ void Game::render()
     case GAME_LEVELS:
         selecao_nivel->render();
         botao_x      ->render();
-        level_marker ->render();
+        level_marker[0]->render();
+        level_marker[1]->render();
+        level_marker[2]->render();
         break;
 
     case GAME_QUEENS:
@@ -207,10 +259,27 @@ void Game::render()
             botao_continuar->render();
         }
         botao_x->render();
+        break;
 
     case GAME_MAP_COLORING:
         colorindo_bh->render();
-        botao_x     ->render();
+        if (colorindo_bh->gameWon()) {
+            overlay->render();
+            parabens->render();
+            botao_continuar->render();
+        }
+        botao_x->render();
+        break;
+
+    case GAME_HANOI:
+        bolo_hanoi->render();
+        if (bolo_hanoi->gameWon()) {
+            overlay->render();
+            parabens->render();
+            botao_continuar->render();
+        }
+        botao_x->render();
+        break;
 
     default:
         break;
@@ -220,12 +289,12 @@ void Game::render()
 
 void Game::clean()
 {
-    TTF_CloseFont(gFont);
-    gFont = NULL;
+    //TTF_CloseFont(gFont);
+    //gFont = NULL;
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     SDL_FreeCursor(cursor);
-    TTF_Quit();
+    //TTF_Quit();
     IMG_Quit();
     SDL_Quit();
     std::cout << "Game Cleaned" << std::endl;

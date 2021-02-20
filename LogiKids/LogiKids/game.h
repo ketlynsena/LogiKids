@@ -4,7 +4,7 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
-#include <SDL_ttf.h>
+//#include <SDL_ttf.h>
 #include <stdio.h>
 #include <iostream>
 #include <string>
@@ -13,6 +13,9 @@
 #include "game_texture.h"
 #include "nqueens.h"
 #include "map_coloring.h"
+#include "hanoi_tower.h"
+
+#define N_LEVELS 3
 
 enum GameState {
     GAME_ACTIVE,
@@ -21,6 +24,7 @@ enum GameState {
     GAME_LEVELS,
     GAME_QUEENS,
     GAME_MAP_COLORING,
+    GAME_HANOI,
     GAME_WIN,
     GAME_LOSE,
     GAME_PAUSE,
@@ -43,9 +47,10 @@ public:
     void handleNQueensEvents(SDL_Event* event);
     void handleLevelEvents  (SDL_Event* event);
     void handleMapColoringEvents(SDL_Event* event);
+    void handleHanoiEvents(SDL_Event* event);
 
     static SDL_Renderer* renderer;
-    static TTF_Font* gFont;
+   //static TTF_Font* gFont;
     static SDL_Cursor* cursor;
     static SDL_Cursor* cursor_hand;
     GameState state = GAME_MENU;
@@ -61,8 +66,10 @@ private:
     //Buttons objects
     GameTexture* botao_x;
     GameTexture* botao_play;
-    GameTexture* level_marker;
+   // GameTexture* level_marker;
     GameTexture* botao_continuar;
+
+    GameTexture* level_marker[N_LEVELS];
     
 };
 
