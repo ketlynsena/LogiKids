@@ -66,11 +66,9 @@ private:
     //Buttons objects
     GameTexture* botao_x;
     GameTexture* botao_play;
-   // GameTexture* level_marker;
     GameTexture* botao_continuar;
-
     GameTexture* level_marker[N_LEVELS];
-    
+ 
 };
 
 #endif // GAME_H_INCLUDED
