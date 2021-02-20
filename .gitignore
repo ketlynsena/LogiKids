@@ -1,8 +1,7 @@
 ﻿################################################################################
 # Este arquivo .gitignore foi criado automaticamente pelo Microsoft(R) Visual Studio.
 ################################################################################
-
 /LogiKids/x64/Debug
 /LogiKids/LogiKids/x64/Debug
-/LogiKids/LogiKids/.vs/LogiKids/v16/TestStore/0
 /LogiKids/LogiKids/.vs/LogiKids/v16
+/LogiKids/Test-LogiKids/x64/Debug/Test-LogiKids.tlog
