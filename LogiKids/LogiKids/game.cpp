@@ -22,7 +22,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
     {
         std::cout << "Subsystems Initialized" << std::endl;
-        window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
+        window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);// | SDL_WINDOW_BORDERLESS);
 
         if (window)
             std::cout << "Window created" << std::endl;
@@ -81,23 +81,23 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     botao_x         = new GameTexture("assets/buttons/x", 740, 20, true, false);
     botao_play      = new GameTexture("assets/buttons/play", 740, 550, true, false);
 
-    level_marker[0] = new GameTexture("assets/buttons/level_marker", 250, 500, true, false);
-    level_marker[1] = new GameTexture("assets/buttons/level_marker", 374, 495, true, false);
-    level_marker[2] = new GameTexture("assets/buttons/level_marker", 368, 416, true, false);
+    level_marker[0] = new GameTexture("assets/buttons/level_marker_yellow", 252, 512, true, false);
+    level_marker[1] = new GameTexture("assets/buttons/level_marker_pink", 376, 507, true, false);
+    level_marker[2] = new GameTexture("assets/buttons/level_marker_blue", 370, 429, true, false);
 
     nrainhas        = new N_Queens();
     colorindo_bh    = new Map_Coloring();
     bolo_hanoi      = new Hanoi_Tower();
 
-    parabens        = new GameTexture("assets/parabens.png", 210, 180, false, false);
-    botao_continuar = new GameTexture("assets/buttons/play", 380, 345, true, false);
+    parabens        = new GameTexture("assets/parabens.png", 210, 150, false, false);
+    botao_continuar = new GameTexture("assets/buttons/play", 380, 376, true, false);
     overlay         = new GameTexture("assets/overlay.png", 0, 0, false, false);
 
 }
 
 void Game::handleMenuEvents(SDL_Event* event) {
     if (event->type == SDL_KEYDOWN || event->type == SDL_MOUSEBUTTONDOWN) {
-        state = GAME_STORY;
+        state = GAME_LEVELS;//STORY;
     }
 }
 

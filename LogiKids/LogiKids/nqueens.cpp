@@ -2,14 +2,20 @@
 
 N_Queens::N_Queens()
 {
-	background	  = new GameTexture("assets/fundo_nrainhas.png",   0, 0,   false, false);
+	background	  = new GameTexture("assets/fundo_nrainhas.png",   0,   0,   false, false);
 	board_texture = new GameTexture("assets/tabuleiro.png",		 360, 150, false, false);
 	queens[0]	  = new GameTexture("assets/rainha.png",		  70, 340, false, true);
 	queens[1]	  = new GameTexture("assets/rainha.png",		 190, 340, false, true);
 	queens[2]	  = new GameTexture("assets/rainha.png",		  70, 450, false, true);
 	queens[3]	  = new GameTexture("assets/rainha.png",		 190, 450, false, true);
+
+	queen_shadows[0] = new GameTexture("assets/rainha_sombra.png", 70, 340, false, false);
+	queen_shadows[1] = new GameTexture("assets/rainha_sombra.png", 190, 340, false, false);
+	queen_shadows[2] = new GameTexture("assets/rainha_sombra.png", 70, 450, false, false);
+	queen_shadows[3] = new GameTexture("assets/rainha_sombra.png", 190, 450, false, false);
+
 	help		  = new GameTexture("assets/buttons/help",		 740, 540,  true, false);
-	reset		  = new GameTexture("assets/buttons/reset",		  15, 550,  true, false);
+	reset		  = new GameTexture("assets/buttons/reset",		  15, 540,  true, false);
 }
 
 N_Queens::~N_Queens()
@@ -240,8 +246,11 @@ void N_Queens::render()
 	help		 ->render();
 	reset		 ->render();
 
-	for (int i = 0; i < BOARD_SIZE; i++)
-		queens[i]->render();
+	for (int i = 0; i < BOARD_SIZE; i++) {
+		queen_shadows[i]->render();
+		queens[i]->render();		
+	}
+		
 
 	// Render grabbed queen on top
 	for (int i = 0; i < BOARD_SIZE; i++)

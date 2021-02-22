@@ -4,7 +4,7 @@ Hanoi_Tower::Hanoi_Tower()
 {
 	background = new GameTexture("assets/hanoi/bolo_de_hanoi.png", 0, 0, false, false);
 	help = new GameTexture("assets/buttons/help", 740, 540, true, false);
-	reset = new GameTexture("assets/buttons/reset", 15, 550, true, false);
+	reset = new GameTexture("assets/buttons/reset", 15, 540, true, false);
 
 	candle[0] = new GameTexture("assets/hanoi/vela_azul.png", 158, 233, false, false);
 	candle[1] = new GameTexture("assets/hanoi/vela_roxa.png", 395, 233, false, false);
@@ -16,7 +16,7 @@ Hanoi_Tower::Hanoi_Tower()
 	cake_layer[3] = new GameTexture("assets/hanoi/bolo_4.png", 45, 454, false, true);//45, 454, false, true);	
 	
 	for (int i = 0; i < N_LAYERS; i++)
-		tower[i][0] = i + 1;
+		tower[i][0] = i + 1;	
 }
 
 Hanoi_Tower::~Hanoi_Tower()

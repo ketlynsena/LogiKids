@@ -43,6 +43,7 @@ private:
 	GameTexture* background;
 	GameTexture* board_texture;
 	GameTexture* queens[BOARD_SIZE];
+	GameTexture* queen_shadows[BOARD_SIZE];
 	GameTexture* help;
 	GameTexture* reset;
 	bool gameWin = false;

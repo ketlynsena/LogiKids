@@ -62,6 +62,7 @@ private:
 	GameTexture* map;
 
     GameTexture* balde[N_CORES];
+    GameTexture* balde_selecionado[N_CORES];
 
     Regiao regioes[N_REGIOES_BH];
     Cor currentColor = BRANCO;

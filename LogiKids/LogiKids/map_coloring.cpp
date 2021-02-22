@@ -4,20 +4,20 @@ Map_Coloring::Map_Coloring()
 {
 	background = new GameTexture("assets/map_coloring/colorindo_bh.png", 0, 0, false, false);
 	help = new GameTexture("assets/buttons/help", 740, 540, true, false);
-	reset = new GameTexture("assets/buttons/reset", 15, 550, true, false);
+	reset = new GameTexture("assets/buttons/reset", 15, 540, true, false);
     bh_outline = new GameTexture("assets/map_coloring/bh_outline.png", 419, 122, false, false);
 
     balde[AZUL]           = new GameTexture("assets/map_coloring/balde_azul", 30, 425, true, false);
-    //balde_virado[AZUL]    = new GameTexture("assets/map_coloring/balde_azul_2", 30, 425, false, false);
+    balde_selecionado[AZUL]    = new GameTexture("assets/map_coloring/balde_azul_2.png", 30, 425, false, false);
 
     balde[ROXO]           = new GameTexture("assets/map_coloring/balde_roxo", 122, 425, true, false);
-    //balde_virado[ROXO]    = new GameTexture("assets/map_coloring/balde_roxo_2", 122, 425, false, false);
+    balde_selecionado[ROXO]    = new GameTexture("assets/map_coloring/balde_roxo_2.png", 122, 425, false, false);
 
     balde[AMARELO]        = new GameTexture("assets/map_coloring/balde_amarelo", 214, 425, true, false);
-    //balde_virado[AMARELO] = new GameTexture("assets/map_coloring/balde_amarelo_2", 214, 425, false, false);
+    balde_selecionado[AMARELO] = new GameTexture("assets/map_coloring/balde_amarelo_2.png", 214, 425, false, false);
 
     balde[ROSA]           = new GameTexture("assets/map_coloring/balde_rosa", 306, 425, true, false);
-    //balde_virado[ROSA]    = new GameTexture("assets/map_coloring/balde_rosa_2", 306, 425, false, false);
+    balde_selecionado[ROSA]    = new GameTexture("assets/map_coloring/balde_rosa_2.png", 306, 425, false, false);
 
     addRegion(VENDA_NOVA, 496, 124, "assets/map_coloring/venda_nova.png");
     addRegion(NORTE,      567, 124, "assets/map_coloring/norte.png");
@@ -222,5 +222,13 @@ void Map_Coloring::render()
     bh_outline->render();
 
     for (int i = 0; i < N_CORES; i++)
-        balde[i]->render();
+    {
+        if (i == currentColor)
+        {
+            balde_selecionado[i]->render();
+        }
+        else {
+            balde[i]->render();
+        }
+    }        
 }
