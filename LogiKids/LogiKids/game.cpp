@@ -81,9 +81,9 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     botao_x         = new GameTexture("assets/buttons/x", 740, 20, true, false);
     botao_play      = new GameTexture("assets/buttons/play", 740, 550, true, false);
 
-    level_marker[0] = new GameTexture("assets/buttons/level_marker_yellow", 252, 512, true, false);
-    level_marker[1] = new GameTexture("assets/buttons/level_marker_pink", 376, 507, true, false);
-    level_marker[2] = new GameTexture("assets/buttons/level_marker_blue", 370, 429, true, false);
+    level_marker[0] = new GameTexture("assets/buttons/level_marker_yellow", 249, 509, true, false);
+    level_marker[1] = new GameTexture("assets/buttons/level_marker_pink", 373, 504, true, false);
+    level_marker[2] = new GameTexture("assets/buttons/level_marker_blue", 368, 425, true, false);
 
     nrainhas        = new N_Queens();
     colorindo_bh    = new Map_Coloring();
