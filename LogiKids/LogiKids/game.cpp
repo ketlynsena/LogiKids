@@ -150,6 +150,7 @@ void Game::handleLevelEvents(SDL_Event* event)
 void Game::handleMapColoringEvents(SDL_Event* event)
 {
     if (botao_x->handleEvent(event)) {
+        colorindo_bh->resetMap();
         state = GAME_LEVELS;
     }
 
@@ -167,6 +168,7 @@ void Game::handleMapColoringEvents(SDL_Event* event)
 void Game::handleHanoiEvents(SDL_Event* event)
 {
     if (botao_x->handleEvent(event)) {
+        bolo_hanoi->resetLevel();
         state = GAME_LEVELS;
     }
 

@@ -52,6 +52,7 @@ void Map_Coloring::resetMap()
         regioes[i].nome_cor = BRANCO;
     } 
 
+    currentColor = BRANCO;
     gameWin = false;
 }
 
