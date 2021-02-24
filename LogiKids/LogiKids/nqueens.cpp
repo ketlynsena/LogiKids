@@ -208,7 +208,7 @@ TilePosition N_Queens::getBoardIndex(GameTexture* queenPiece)
 }
 
 GameTexture* N_Queens::getQueen(int id) {
-	if (id <= 0 && id >= BOARD_SIZE)
+	if (id >= 0 && id < BOARD_SIZE)
 		return queens[id];
 	return NULL;
 }
