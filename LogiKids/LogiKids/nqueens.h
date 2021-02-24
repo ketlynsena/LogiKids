@@ -35,6 +35,7 @@ public:
 	void render();
 	bool insideBoard(GameTexture* queenPiece); 
 	TilePosition getBoardIndex(GameTexture* queenPiece);
+	GameTexture* getQueen(int id);
 	bool gameWon();
 
 private:

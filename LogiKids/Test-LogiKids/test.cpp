@@ -2,11 +2,7 @@
 #include "../LogiKids/game.h"
 #include "../LogiKids/game_texture.h"
 
-
-TEST(TestCaseName, TestName) {
-  EXPECT_EQ(1, 1);
-  EXPECT_TRUE(true);
-}
+//Game Texture
 
 TEST(TestGameTexture, TestInitPosition) {
 
@@ -52,3 +48,50 @@ TEST(TestGameTexture, TestResetPosition) {
 	EXPECT_EQ(ypos, currentPosition.y);
 
 }
+
+TEST(TestGameTexture, TestLoadTexture) {
+
+	GameTexture* GameTest;
+	SDL_Texture* Texture;
+	
+	GameTest = new GameTexture("assets/cursors/seta.png", 0, 0, false, false);
+	Texture = GameTest->loadTexture("assets/cursors/seta.png");
+	int w = GameTest->getWidth();
+	printf("Width: %d\n", w);
+
+	EXPECT_EQ(true, false);
+
+}
+
+//N-Queens
+
+TEST(TestNQueens, TestInsideBoardIndex) {
+
+	N_Queens* nrainhas;
+	nrainhas = new N_Queens();
+
+	GameTexture* queen = nrainhas->getQueen(1);
+	bool inside = nrainhas->insideBoard(queen);
+	
+	EXPECT_EQ(inside, false);
+}
+
+TEST(TestNQueens, TestGetBoardIndex) {
+}
+
+TEST(TestNQueens, TestAddQueenToBoard) {
+}
+
+TEST(TestNQueens, TestRemoveQueenToBoard) {
+}
+
+TEST(TestNQueens, TestCheckConflict) {
+}
+
+TEST(TestNQueens, TestCheckWin) {
+}
+
+TEST(TestNQueens, TestResetBoard) {
+}
+
+
