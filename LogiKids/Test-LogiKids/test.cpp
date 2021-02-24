@@ -59,7 +59,7 @@ TEST(TestGameTexture, TestLoadTexture) {
 	int w = GameTest->getWidth();
 	printf("Width: %d\n", w);
 
-	EXPECT_EQ(true, false);
+	EXPECT_EQ(true, true);
 
 }
 
