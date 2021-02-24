@@ -79,6 +79,15 @@ void GameTexture::updatePosFromMouseState()
 	}
 }
 
+SDL_Point GameTexture::getMouseState(SDL_MouseButtonEvent* mouseEvent)
+{
+	SDL_Point position;
+	position.x = mouseEvent->x;
+	position.y = mouseEvent->y;
+
+	return position;
+}
+
 void GameTexture::setPosition(int xpos, int ypos) {
 	destRect.x = xpos;
 	destRect.y = ypos;
@@ -148,6 +157,7 @@ bool GameTexture::dropped()
 			return true;
 		}
 	}
+	return false;
 }
 
 bool GameTexture::grabbed()
@@ -164,6 +174,26 @@ bool GameTexture::grabbed()
 			return true;
 		}
 	}
+}
+
+void GameTexture::setDropState(bool state)
+{
+	lastDropState = state;
+}
+
+void GameTexture::setGrabState(bool state)
+{
+	lastGrabState = state;
+}
+
+void GameTexture::setGrab(bool state)
+{
+	grab = state;
+}
+
+sprite_state GameTexture::getSpriteState()
+{
+	return currentSprite;
 }
 
 void GameTexture::setGrabPosition(SDL_Point position)
@@ -185,7 +215,10 @@ bool GameTexture::handleEvent(SDL_Event* event) {
 	{
 		int x, y;
 		SDL_Color color = {0, 0, 0, 0};
-		SDL_GetMouseState(&x, &y);
+		//SDL_GetMouseState(&x, &y);
+		x = event->button.x;
+		y = event->button.y; 
+
 		bool inside = true;
 		currentSprite = MOUSE_OUT;
 		//withinBoudaries = true;

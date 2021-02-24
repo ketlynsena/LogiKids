@@ -26,6 +26,7 @@ public:
 	std::string appendFilenameToPath(const char* textureSheet, const char* path);
 	~GameTexture();
 	void updatePosFromMouseState();
+	SDL_Point getMouseState(SDL_MouseButtonEvent* mouseEvent);
 	void setPosition(int xpos, int ypos);
 	void resetPosition();
 	void setColor(SDL_Color color);
@@ -44,6 +45,10 @@ public:
 	bool handleEvent(SDL_Event* event);
 	SDL_Color getPixelColor(const int X, const int Y);
 	bool isWithinBoundaries();
+	void setDropState(bool state);
+	void setGrabState(bool state);
+	void setGrab(bool state);
+	sprite_state getSpriteState();
 
 private:
 	SDL_Texture* spriteTexture;
