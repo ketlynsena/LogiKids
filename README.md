@@ -4,7 +4,7 @@
 LogiKids é um jogo educativo para auxiliar crianças no desenvolvimento lógico. Utiliza diversos problemas comuns da Computação de maneira lúdica para estimular o raciocínio e familiarizar o público infantil com problemas lógicos. Possui puzzles variados como o problema das N-Rainhas, Caixeiro Viajante e a Torre de Hanói.
 
 ## Grupo
-- Ketlyn Caroline de Sena Castro
+- Ketlyn Caroline Sena de Castro
 - Scarlet Gianasi Viana
 
 ## Escopo Funcional
@@ -38,10 +38,10 @@ LogiKids é um jogo educativo para auxiliar crianças no desenvolvimento lógico
   - Geração de Assets - Scarlet
 
 ### Retrospectiva:
-- **O que deu certo no Sprint?**
+- **O que deu certo na Sprint 1?**
   Foi possível implementar o framework básico para a criação dos próximos componentes do jogo. A divisão de tarefas foi feita com muito diálogo entre os membros da equipe, o que permitiu um desenvolvimento síncrono. O primeiro sprint também teve como objetivo pensar primeiramente no design tanto do jogo como das interfaces, e, com isso, será possível avançar mais na implementação propriamente dita nos próximos sprints.
   
-- **O que deu errado no Sprint?**
+- **O que deu errado na Sprint 1?**
  Foi necessário mudar a ferramenta escolhida inicialmente (Godot) porque não permitia o cálculo da cobertura de testes, o que atrasou o desenvolvimento das tarefas. Com isso, não foi possível implementar os testes de unidade.
  Nos próximos sprints esses problemas iniciais já foram resolvidos, então a equipe espera atingir todos os objetivos e realizar mais testes de unidade.
  
@@ -67,8 +67,8 @@ LogiKids é um jogo educativo para auxiliar crianças no desenvolvimento lógico
  
 
 ### Retrospectiva:
-- **O que deu certo no Sprint?**
+- **O que deu certo na Sprint 2?**
   Nessa sprint foi possivel terminar a implementação de três puzzles, N-Rainhas, coloração de mapas e da torre de Hanoi, como estava previsto. Além disso a interfase grafica do jogo foi refinada e agora apresenta a versão final das telas implementadas. Também criamos o projeto de para testes e implementamos testes unitarios para algumas classes do jogo.
   
-- **O que deu errado no Sprint?**
+- **O que deu errado na Sprint 2?**
   Não conseguimos fazer testes para todas as classes dentro da sprint e alcançar a cobertura de testes desejada.
