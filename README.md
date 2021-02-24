@@ -44,3 +44,31 @@ LogiKids é um jogo educativo para auxiliar crianças no desenvolvimento lógico
 - **O que deu errado no Sprint?**
  Foi necessário mudar a ferramenta escolhida inicialmente (Godot) porque não permitia o cálculo da cobertura de testes, o que atrasou o desenvolvimento das tarefas. Com isso, não foi possível implementar os testes de unidade.
  Nos próximos sprints esses problemas iniciais já foram resolvidos, então a equipe espera atingir todos os objetivos e realizar mais testes de unidade.
+ 
+ ## SPRINT 2
+ 
+ **Histórias e Tarefas:**
+- Puzzle N-Rainhas
+  - Lógica N-Rainhas 
+  - Assets Puzzle N-Rainhas 
+  - Classe de Nível N-Rainhas
+  - Testes Unitarios N-Rainhas
+  - Teste Unitarios da Classe GameObject
+- Puzzle Coloração de Mapas
+  - Lógica Coloração de Mapas 
+  - Assets Puzzle Coloração de Mapas 
+  - Classe de Nível Coloração de Mapas
+  - Testes Unitarios Coloração de Mapas 
+- Puzzle Torre de Hanoi
+  - Lógica Torre de Hanoi 
+  - Assets Puzzle Torre de Hanoi 
+  - Classe de Nível Torre de Hanoi
+  - Testes Unitarios Torre de Hanoi
+ 
+
+### Retrospectiva:
+- **O que deu certo no Sprint?**
+  Nessa sprint foi possivel terminar a implementação de três puzzles, N-Rainhas, coloração de mapas e da torre de Hanoi, como estava previsto. Além disso a interfase grafica do jogo foi refinada e agora apresenta a versão final das telas implementadas. Também criamos o projeto de para testes e implementamos testes unitarios para as principais classes do jogo.
+  
+- **O que deu errado no Sprint?**
+
