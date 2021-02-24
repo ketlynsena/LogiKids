@@ -49,26 +49,26 @@ LogiKids é um jogo educativo para auxiliar crianças no desenvolvimento lógico
  
  **Histórias e Tarefas:**
 - Puzzle N-Rainhas
-  - Lógica N-Rainhas 
-  - Assets Puzzle N-Rainhas 
-  - Classe de Nível N-Rainhas
-  - Testes Unitarios N-Rainhas
-  - Teste Unitarios da Classe GameObject
+  - Lógica N-Rainhas -Scarlet
+  - Assets Puzzle N-Rainhas - Scarlet
+  - Classe de Nível N-Rainhas - Scarlet
+  - Testes Unitarios N-Rainhas - Ketlyn
+  - Teste Unitarios da Classe GameObject -Ketlyn
 - Puzzle Coloração de Mapas
-  - Lógica Coloração de Mapas 
-  - Assets Puzzle Coloração de Mapas 
-  - Classe de Nível Coloração de Mapas
-  - Testes Unitarios Coloração de Mapas 
+  - Lógica Coloração de Mapas - Ketlyn
+  - Assets Puzzle Coloração de Mapas - Scarlet
+  - Classe de Nível Coloração de Mapas - Scarlet
+  - Testes Unitarios Coloração de Mapas - Ketlyn
 - Puzzle Torre de Hanoi
-  - Lógica Torre de Hanoi 
-  - Assets Puzzle Torre de Hanoi 
-  - Classe de Nível Torre de Hanoi
-  - Testes Unitarios Torre de Hanoi
+  - Lógica Torre de Hanoi - Ketlyn
+  - Assets Puzzle Torre de Hanoi - Scarlet
+  - Classe de Nível Torre de Hanoi - Scarlet
+  - Testes Unitarios Torre de Hanoi - Ketlyn
  
 
 ### Retrospectiva:
 - **O que deu certo no Sprint?**
-  Nessa sprint foi possivel terminar a implementação de três puzzles, N-Rainhas, coloração de mapas e da torre de Hanoi, como estava previsto. Além disso a interfase grafica do jogo foi refinada e agora apresenta a versão final das telas implementadas. Também criamos o projeto de para testes e implementamos testes unitarios para as principais classes do jogo.
+  Nessa sprint foi possivel terminar a implementação de três puzzles, N-Rainhas, coloração de mapas e da torre de Hanoi, como estava previsto. Além disso a interfase grafica do jogo foi refinada e agora apresenta a versão final das telas implementadas. Também criamos o projeto de para testes e implementamos testes unitarios para algumas classes do jogo.
   
 - **O que deu errado no Sprint?**
-
+  Não conseguimos fazer testes para todas as classes dentro da sprint e alcançar a cobertura de testes desejada.
