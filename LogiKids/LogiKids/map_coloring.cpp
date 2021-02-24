@@ -43,6 +43,11 @@ void Map_Coloring::addRegion(Nome name, int xpos, int ypos, const char* textureP
     regioes[name].mapa = new GameTexture(texturePath, xpos, ypos, false, false);
 }
 
+Regiao Map_Coloring::getRegion(Nome name)
+{
+    return regioes[name];
+}
+
 void Map_Coloring::resetMap()
 {
     for (int i = 0; i < N_REGIOES_BH; i++)
@@ -76,6 +81,12 @@ bool Map_Coloring::checkWin()
     else
         return false;
 }
+
+void Map_Coloring::setRegionColorByIndex(int i, Cor color)
+{
+    regioes[i].nome_cor = color;
+}
+
 
 // Check if coloring is safe (no repeting colors between two edges)
 bool Map_Coloring::isSafe()
@@ -123,6 +134,11 @@ void Map_Coloring::handleEvent(SDL_Event* e)
 bool Map_Coloring::gameWon()
 {
     return gameWin;
+}
+
+void Map_Coloring::setCurrentColor(Cor color)
+{
+    currentColor = color;
 }
 
 void Map_Coloring::handleBucketEvent(SDL_Event* e, GameTexture* bucket, Cor color)
@@ -209,6 +225,12 @@ void Map_Coloring::setRegionColor(Regiao* regiao)
     regiao->cor.b = color.b;
     regiao->mapa->setColor(regiao->cor);
     regiao->nome_cor = currentColor;
+}
+
+SDL_Color Map_Coloring::getCurrentColor()
+{
+    SDL_Color color = getColorFromName(currentColor);
+    return color;
 }
 
 void Map_Coloring::render()

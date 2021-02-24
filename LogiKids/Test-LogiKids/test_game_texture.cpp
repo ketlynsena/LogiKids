@@ -227,3 +227,11 @@ TEST(TestGameTexture, TestResetColor)
 	EXPECT_EQ(currColor.b, 0);
 	EXPECT_EQ(currColor.a, 0);
 }
+
+TEST(TestGameTexture, TestSpriteNotPressed)
+{
+	GameTexture* texture = new GameTexture("assets/map_coloring/venda_nova.png", 0, 0, false, false);
+	SDL_Event event;
+
+	EXPECT_FALSE(texture->handleEvent(&event));
+}

@@ -48,11 +48,15 @@ public:
     void setToCurrentColor(Regiao* regiao);
     void setRegionColor(Regiao* regiao);
     SDL_Color getColorFromName(Cor color);
+    SDL_Color getCurrentColor();
+    Regiao getRegion(Nome name);
+    void setCurrentColor(Cor color);
     bool checkWin();
     bool isSafe();
     bool gameWon();
 	~Map_Coloring();
     void render();
+    void setRegionColorByIndex(int i, Cor color);
 
 private:
 	GameTexture* background;
