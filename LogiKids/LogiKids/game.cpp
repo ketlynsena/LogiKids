@@ -3,6 +3,7 @@
 N_Queens* nrainhas;
 Map_Coloring* colorindo_bh;
 Hanoi_Tower* bolo_hanoi;
+Knapsack* mochila;
 
 SDL_Renderer* Game::renderer    = nullptr;
 //TTF_Font*     Game::gFont       = nullptr;
@@ -84,10 +85,12 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     level_marker[0] = new GameTexture("assets/buttons/level_marker_yellow", 249, 509, true, false);
     level_marker[1] = new GameTexture("assets/buttons/level_marker_pink", 373, 504, true, false);
     level_marker[2] = new GameTexture("assets/buttons/level_marker_blue", 368, 425, true, false);
+    level_marker[3] = new GameTexture("assets/buttons/level_marker_yellow", 488, 447, true, false);
 
     nrainhas        = new N_Queens();
     colorindo_bh    = new Map_Coloring();
     bolo_hanoi      = new Hanoi_Tower();
+    mochila         = new Knapsack();
 
     parabens        = new GameTexture("assets/parabens.png", 210, 150, false, false);
     botao_continuar = new GameTexture("assets/buttons/play", 380, 376, true, false);
@@ -142,6 +145,11 @@ void Game::handleLevelEvents(SDL_Event* event)
         state = GAME_HANOI;
     }
 
+    if (level_marker[3]->handleEvent(event))
+    {
+        state = GAME_KNAPSACK;
+    }
+
     if (botao_x->handleEvent(event)) {
         state = GAME_MENU;
     }
@@ -183,6 +191,15 @@ void Game::handleHanoiEvents(SDL_Event* event)
     bolo_hanoi->handleEvent(event);
 }
 
+void Game::handleKnapsackEvents(SDL_Event* event)
+{
+    if (botao_x->handleEvent(event)) {
+        mochila->resetLevel();
+        state = GAME_LEVELS;
+    }
+    mochila->handleEvent(event);
+}
+
 void Game::handleEvents()
 {
     SDL_Event event;
@@ -217,6 +234,10 @@ void Game::handleEvents()
             handleHanoiEvents(&event);
             break;
 
+        case GAME_KNAPSACK:
+            handleKnapsackEvents(&event);
+            break;
+
         default:
             break;
         }
@@ -231,7 +252,13 @@ void Game::update()
         break;
     case GAME_HANOI:
         bolo_hanoi->update();
-    }    
+        break;
+    case GAME_KNAPSACK:
+        mochila->update();
+        break;
+    default:
+        break;
+    }  
 }
 
 void Game::render()
@@ -252,9 +279,11 @@ void Game::render()
     case GAME_LEVELS:
         selecao_nivel->render();
         botao_x      ->render();
-        level_marker[0]->render();
-        level_marker[1]->render();
-        level_marker[2]->render();
+        for (int i = 0; i < N_LEVELS; i++)
+        {
+            if(level_marker[i])
+                level_marker[i]->render();
+        }
         break;
 
     case GAME_QUEENS:
@@ -284,6 +313,17 @@ void Game::render()
             parabens->render();
             botao_continuar->render();
         }
+        botao_x->render();
+        break;
+
+    case GAME_KNAPSACK:
+        mochila->render();
+        /*if (mochila->gameWon()) {
+            overlay->render();
+            parabens->render();
+            botao_continuar->render();
+        }
+        */
         botao_x->render();
         break;
 

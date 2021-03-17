@@ -150,6 +150,7 @@
     <ClCompile Include="game.cpp" />
     <ClCompile Include="game_texture.cpp" />
     <ClCompile Include="hanoi_tower.cpp" />
+    <ClCompile Include="knapsack.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map_coloring.cpp" />
     <ClCompile Include="nqueens.cpp" />
@@ -158,6 +159,7 @@
     <ClInclude Include="game.h" />
     <ClInclude Include="game_texture.h" />
     <ClInclude Include="hanoi_tower.h" />
+    <ClInclude Include="knapsack.h" />
     <ClInclude Include="map_coloring.h" />
     <ClInclude Include="nqueens.h" />
   </ItemGroup>

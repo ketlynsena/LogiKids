@@ -39,7 +39,10 @@ public:
 	bool gameWon();
 
 private:
-	bool board[BOARD_SIZE][BOARD_SIZE]; 
+	bool board[BOARD_SIZE][BOARD_SIZE] = { {0, 0, 0, 0},
+										   {0, 0, 0, 0},
+										   {0, 0, 0, 0},
+										   {0, 0, 0, 0} };
 	TilePosition currentIndex; // variavel auxiliar
 	GameTexture* background;
 	GameTexture* board_texture;
