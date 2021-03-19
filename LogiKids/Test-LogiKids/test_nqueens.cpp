@@ -14,12 +14,22 @@ TEST(TestNQueens, TestInsideBoardIndex) {
 }
 
 TEST(TestNQueens, TestGetBoardIndex) {
+
 }
 
 TEST(TestNQueens, TestAddQueenToBoard) {
+	N_Queens* nrainhas = new N_Queens();
+	GameTexture* queen = new GameTexture("assets/rainha.png", 70, 340, false, true);
+	TilePosition idx;
+	idx.i = 0;
+	idx.j = 1;
+
+	EXPECT_TRUE(nrainhas->addQueenToBoard(idx, queen));
+
+	EXPECT_FALSE(nrainhas->addQueenToBoard(idx, queen));
 }
 
-TEST(TestNQueens, TestRemoveQueenToBoard) {
+TEST(TestNQueens, TestRemoveQueenFromBoard) {
 }
 
 TEST(TestNQueens, TestCheckConflict) {

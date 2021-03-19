@@ -4,7 +4,7 @@
 
 #include <SDL.h>
 #include <SDL_image.h>
-//#include <SDL_ttf.h>
+#include <SDL_ttf.h>
 #include <stdio.h>
 #include <iostream>
 #include <string>
@@ -56,6 +56,7 @@ public:
    //static TTF_Font* gFont;
     static SDL_Cursor* cursor;
     static SDL_Cursor* cursor_hand;
+    static TTF_Font* consolas;
     GameState state = GAME_MENU;
 
 private:

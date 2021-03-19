@@ -6,7 +6,7 @@ Hanoi_Tower* bolo_hanoi;
 Knapsack* mochila;
 
 SDL_Renderer* Game::renderer    = nullptr;
-//TTF_Font*     Game::gFont       = nullptr;
+TTF_Font*     Game::consolas       = nullptr;
 SDL_Cursor*   Game::cursor      = nullptr;
 SDL_Cursor*   Game::cursor_hand = nullptr;
 
@@ -39,23 +39,24 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
         isRunning = true;
 
         //Initialize SDL_ttf
-       /* if (TTF_Init() == -1)
+        if (TTF_Init() == -1)
         {
             printf("SDL_ttf could not initialize! SDL_ttf Error: %s\n", TTF_GetError());
             isRunning = false;
-        }*/
+        }
     }
-    /*
-    gFont = TTF_OpenFont("assets/fonts/learners.ttf", 28);
-    if (gFont == NULL)
+    consolas = TTF_OpenFont("assets/fonts/consola.ttf", 30);
+    if (consolas == NULL)
     {
         printf("Failed to load font! SDL_ttf Error: %s\n", TTF_GetError());
         isRunning = false;
     }
-    SDL_Color textColor = { 0, 0, 0 };
-    SDL_Texture* textTexture;
+    
+    
+    //SDL_Color textColor = { 255, 255, 255 };
+    //SDL_Texture* textTexture;
     //textTexture = TextureManager::loadFromRenderedText("The quick brown fox jumps over the lazy dog", textColor);
-    */
+    
 
     SDL_Surface* cursorSurface = IMG_Load("assets/cursors/seta.png");
     SDL_Surface* handSurface   = IMG_Load("assets/cursors/mao.png");
@@ -187,8 +188,9 @@ void Game::handleHanoiEvents(SDL_Event* event)
             state = GAME_LEVELS;
         }
     }
-
-    bolo_hanoi->handleEvent(event);
+    else {
+        bolo_hanoi->handleEvent(event);
+    }
 }
 
 void Game::handleKnapsackEvents(SDL_Event* event)
@@ -197,7 +199,17 @@ void Game::handleKnapsackEvents(SDL_Event* event)
         mochila->resetLevel();
         state = GAME_LEVELS;
     }
-    mochila->handleEvent(event);
+    if (mochila->gameWon())
+    {
+        if (botao_continuar->handleEvent(event)) {
+            mochila->resetLevel();
+            state = GAME_LEVELS;
+        }
+    }
+    else {
+        mochila->handleEvent(event);
+    }
+    
 }
 
 void Game::handleEvents()
@@ -318,12 +330,11 @@ void Game::render()
 
     case GAME_KNAPSACK:
         mochila->render();
-        /*if (mochila->gameWon()) {
+        if (mochila->gameWon()) {
             overlay->render();
             parabens->render();
             botao_continuar->render();
         }
-        */
         botao_x->render();
         break;
 
