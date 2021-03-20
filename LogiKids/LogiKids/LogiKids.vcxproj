@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="balance_scale.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="game_texture.cpp" />
     <ClCompile Include="hanoi_tower.cpp" />
@@ -157,6 +158,7 @@
     <ClCompile Include="text_texture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="balance_scale.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="game_texture.h" />
     <ClInclude Include="hanoi_tower.h" />

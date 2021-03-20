@@ -15,6 +15,7 @@
 #include "map_coloring.h"
 #include "hanoi_tower.h"
 #include "knapsack.h"
+#include "balance_scale.h"
 
 #define N_LEVELS 6
 
@@ -27,6 +28,7 @@ enum GameState {
     GAME_MAP_COLORING,
     GAME_HANOI,
     GAME_KNAPSACK,
+    GAME_SCALE,
     GAME_WIN,
     GAME_LOSE,
     GAME_PAUSE,
@@ -51,6 +53,7 @@ public:
     void handleMapColoringEvents(SDL_Event* event);
     void handleHanoiEvents(SDL_Event* event);
     void handleKnapsackEvents(SDL_Event* event);
+    void handleScaleEvents(SDL_Event* event);
 
     static SDL_Renderer* renderer;
    //static TTF_Font* gFont;

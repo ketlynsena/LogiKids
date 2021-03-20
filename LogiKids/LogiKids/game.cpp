@@ -4,6 +4,7 @@ N_Queens* nrainhas;
 Map_Coloring* colorindo_bh;
 Hanoi_Tower* bolo_hanoi;
 Knapsack* mochila;
+BalanceScale* balanca;
 
 SDL_Renderer* Game::renderer    = nullptr;
 TTF_Font*     Game::consolas       = nullptr;
@@ -87,11 +88,13 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     level_marker[1] = new GameTexture("assets/buttons/level_marker_pink", 373, 504, true, false);
     level_marker[2] = new GameTexture("assets/buttons/level_marker_blue", 368, 425, true, false);
     level_marker[3] = new GameTexture("assets/buttons/level_marker_yellow", 488, 447, true, false);
+    level_marker[4] = new GameTexture("assets/buttons/level_marker_pink", 614, 472, true, false);
 
     nrainhas        = new N_Queens();
     colorindo_bh    = new Map_Coloring();
     bolo_hanoi      = new Hanoi_Tower();
     mochila         = new Knapsack();
+    balanca         = new BalanceScale();
 
     parabens        = new GameTexture("assets/parabens.png", 210, 150, false, false);
     botao_continuar = new GameTexture("assets/buttons/play", 380, 376, true, false);
@@ -149,6 +152,11 @@ void Game::handleLevelEvents(SDL_Event* event)
     if (level_marker[3]->handleEvent(event))
     {
         state = GAME_KNAPSACK;
+    }
+
+    if (level_marker[4]->handleEvent(event))
+    {
+        state = GAME_SCALE;
     }
 
     if (botao_x->handleEvent(event)) {
@@ -212,6 +220,25 @@ void Game::handleKnapsackEvents(SDL_Event* event)
     
 }
 
+void Game::handleScaleEvents(SDL_Event* event)
+{
+    if (botao_x->handleEvent(event)) {
+        balanca->resetLevel();
+        state = GAME_LEVELS;
+    }
+
+    if (balanca->gameWon())
+    {
+        if (botao_continuar->handleEvent(event)) {
+            balanca->resetLevel();
+            state = GAME_LEVELS;
+        }
+    }
+    else {
+        balanca->handleEvent(event);
+    }
+}
+
 void Game::handleEvents()
 {
     SDL_Event event;
@@ -250,6 +277,10 @@ void Game::handleEvents()
             handleKnapsackEvents(&event);
             break;
 
+        case GAME_SCALE:
+            handleScaleEvents(&event);
+            break;
+
         default:
             break;
         }
@@ -267,6 +298,9 @@ void Game::update()
         break;
     case GAME_KNAPSACK:
         mochila->update();
+        break;
+    case GAME_SCALE:
+        balanca->update();
         break;
     default:
         break;
@@ -338,6 +372,16 @@ void Game::render()
         botao_x->render();
         break;
 
+    case GAME_SCALE:
+        balanca->render();
+        if (balanca->gameWon()) {
+            overlay->render();
+            parabens->render();
+            botao_continuar->render();
+        }
+        botao_x->render();
+        break;
+
     default:
         break;
     }
@@ -346,12 +390,12 @@ void Game::render()
 
 void Game::clean()
 {
-    //TTF_CloseFont(gFont);
-    //gFont = NULL;
+    TTF_CloseFont(consolas);
+    consolas = NULL;
     SDL_DestroyWindow(window);
     SDL_DestroyRenderer(renderer);
     SDL_FreeCursor(cursor);
-    //TTF_Quit();
+    TTF_Quit();
     IMG_Quit();
     SDL_Quit();
     std::cout << "Game Cleaned" << std::endl;
