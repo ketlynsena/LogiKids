@@ -156,6 +156,7 @@
     <ClCompile Include="map_coloring.cpp" />
     <ClCompile Include="nqueens.cpp" />
     <ClCompile Include="text_texture.cpp" />
+    <ClCompile Include="traveling_salesman.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="balance_scale.h" />
@@ -166,6 +167,7 @@
     <ClInclude Include="map_coloring.h" />
     <ClInclude Include="nqueens.h" />
     <ClInclude Include="text_texture.h" />
+    <ClInclude Include="traveling_salesman.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\botao_play.png">
