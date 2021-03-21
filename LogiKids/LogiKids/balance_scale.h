@@ -44,13 +44,15 @@ public:
 	void weigh();
 	void handleEvent(SDL_Event* e);
 	void update();
+	void addWeightToSolutionArea(GameTexture* w);
+	bool checkIfWithinSolutionArea(GameTexture* w);
 	void updateWeights();
 	void removeWeightFromScale(int i);
 	bool addWeightToScale(GameTexture* w, Index idx, int weight_number);
 	int getScaleState();
 	void setScaleState(int state);
 	void resetLevel();
-	bool checkWin();
+	bool checkWin(int i);
 	bool gameWon();
 	Index getPlateIndex(GameTexture* w);
 
@@ -70,6 +72,7 @@ private:
 												{-1, -1, -1, -1}};
 	int scale_state = LEVEL;
 	bool gameWin = false;
+	bool wrong_answer = false;
 	int n_weighs = 0; // Pesagem inicial em 0
 	int lighter_weight = 0;
 };

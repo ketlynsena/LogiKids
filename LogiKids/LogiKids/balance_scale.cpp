@@ -22,10 +22,14 @@ BalanceScale::BalanceScale()
 	solution_area = new GameTexture("assets/scale_weights/peso_sombra.png", 582, 190, false, false);
 
 	// Texturas dos pesos
-	for (int i = 0; i < N_WEIGHTS; i++)
-	{
-		weight[i] = new GameTexture("assets/scale_weights/sprites/peso", 192 + (i * 55), 505, true, true);
-	}
+	weight[0] = new GameTexture("assets/scale_weights/sprites/weight1", 192, 505, true, true);
+	weight[1] = new GameTexture("assets/scale_weights/sprites/weight2", 192 + (1 * 55), 505, true, true);
+	weight[2] = new GameTexture("assets/scale_weights/sprites/weight3", 192 + (2 * 55), 505, true, true);
+	weight[3] = new GameTexture("assets/scale_weights/sprites/weight4", 192 + (3 * 55), 505, true, true);
+	weight[4] = new GameTexture("assets/scale_weights/sprites/weight5", 192 + (4 * 55), 505, true, true);
+	weight[5] = new GameTexture("assets/scale_weights/sprites/weight6", 192 + (5 * 55), 505, true, true);
+	weight[6] = new GameTexture("assets/scale_weights/sprites/weight7", 192 + (6 * 55), 505, true, true);
+	weight[7] = new GameTexture("assets/scale_weights/sprites/weight8", 192 + (7 * 55), 505, true, true);
 }
 
 BalanceScale::~BalanceScale()
@@ -57,7 +61,6 @@ void BalanceScale::render()
 	reset->render();
 	solution_area->render();
 
-	//scale[scale_state]->render();
 	renderScale();
 
 	button->render();
@@ -98,7 +101,8 @@ void BalanceScale::handleEvent(SDL_Event* e)
 {
 	help->handleEvent(e);
 	if (button->handleEvent(e))
-		weigh();
+		if(n_weighs < MAX_WEIGHS)
+			weigh();
 
 	if (reset->handleEvent(e))
 		resetLevel();
@@ -141,11 +145,29 @@ Index BalanceScale::getPlateIndex(GameTexture* w)
 
 void BalanceScale::update()
 {
-	if (!checkWin())
+	if (!gameWon())
 		updateWeights();
-	else {
-		gameWin = true;
-	}
+	
+}
+
+void BalanceScale::addWeightToSolutionArea(GameTexture* w)
+{
+	SDL_Point areaPos = solution_area->getCurrentPosition();
+	w->setPosition(areaPos.x, areaPos.y);
+}
+
+bool BalanceScale::checkIfWithinSolutionArea(GameTexture* w)
+{
+	SDL_Point solArea = solution_area->getCurrentPosition();
+	SDL_Point weightPos = w->getCurrentPosition();
+
+	int weightCenterX = weightPos.x + (w->getWidth() / 2),
+		weightCenterY = weightPos.y + (w->getHeight() / 2);
+
+	if ((weightCenterX >= solArea.x) && (weightCenterX < solArea.x + solution_area->getWidth()))
+		if ((weightCenterY >= solArea.y) && (weightCenterY < solArea.y + solution_area->getHeight()))
+			return true;
+	return false;
 }
 
 void BalanceScale::updateWeights() {
@@ -157,7 +179,15 @@ void BalanceScale::updateWeights() {
 			printf("Weight dropped at plate %d, n %d.\n", index.plate, index.n);
 			if (index.plate < 0)
 			{
-				weight[i]->resetPosition();
+				if (checkIfWithinSolutionArea(weight[i])) // Dropped in solution area
+				{
+					printf("Weight dropped within solutiona area boundaries.\n");
+					addWeightToSolutionArea(weight[i]);
+					checkWin(i);
+				}
+				else {
+					weight[i]->resetPosition();
+				}				
 			}
 			else {
 				if (!addWeightToScale(weight[i], index, i)) {
@@ -256,12 +286,23 @@ void BalanceScale::resetLevel()
 
 	setScaleState(LEVEL);
 	n_weighs = 0;
+	wrong_answer = false;
+	gameWin = false;
 	// Randomizar peso mais leve
 }
 
-bool BalanceScale::checkWin()
+bool BalanceScale::checkWin(int i)
 {
-	return false;
+	if (i == lighter_weight)
+	{
+		gameWin = true;
+		return true;
+	}		
+	else
+	{
+		wrong_answer = true;
+		return false;
+	}		
 }
 
 bool BalanceScale::gameWon()
