@@ -15,9 +15,9 @@ BalanceScale::BalanceScale()
 	scale_left  = new GameTexture("assets/scale_weights/balanca_esquerda.png", 202, 338, false, false);
 	scale_right = new GameTexture("assets/scale_weights/balanca_direita.png", 202, 338, false, false);
 
-	weighs[0] = new GameTexture("assets/scale_weights/zero.png", 393, 441, false, false);
+	weighs[0] = new GameTexture("assets/scale_weights/dois.png", 393, 441, false, false);
 	weighs[1] = new GameTexture("assets/scale_weights/um.png", 393, 441, false, false);
-	weighs[2] = new GameTexture("assets/scale_weights/dois.png", 393, 441, false, false);
+	weighs[2] = new GameTexture("assets/scale_weights/zero.png", 393, 441, false, false);
 
 	solution_area = new GameTexture("assets/scale_weights/peso_sombra.png", 582, 190, false, false);
 
@@ -176,12 +176,12 @@ void BalanceScale::updateWeights() {
 		if (weight[i]->dropped())
 		{
 			index = getPlateIndex(weight[i]);
-			printf("Weight dropped at plate %d, n %d.\n", index.plate, index.n);
+			//printf("Weight dropped at plate %d, n %d.\n", index.plate, index.n);
 			if (index.plate < 0)
 			{
 				if (checkIfWithinSolutionArea(weight[i])) // Dropped in solution area
 				{
-					printf("Weight dropped within solutiona area boundaries.\n");
+					//printf("Weight dropped within solutiona area boundaries.\n");
 					addWeightToSolutionArea(weight[i]);
 					checkWin(i);
 				}
@@ -309,5 +309,3 @@ bool BalanceScale::gameWon()
 {
 	return gameWin;
 }
-
-

@@ -5,6 +5,7 @@ Map_Coloring* colorindo_bh;
 Hanoi_Tower* bolo_hanoi;
 Knapsack* mochila;
 BalanceScale* balanca;
+TravelingSalesman* mineiro_viajante;
 
 SDL_Renderer* Game::renderer    = nullptr;
 TTF_Font*     Game::consolas       = nullptr;
@@ -89,12 +90,14 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     level_marker[2] = new GameTexture("assets/buttons/level_marker_blue", 368, 425, true, false);
     level_marker[3] = new GameTexture("assets/buttons/level_marker_yellow", 488, 447, true, false);
     level_marker[4] = new GameTexture("assets/buttons/level_marker_pink", 614, 472, true, false);
+    level_marker[5] = new GameTexture("assets/buttons/level_marker_blue", 687, 401, true, false);
 
-    nrainhas        = new N_Queens();
-    colorindo_bh    = new Map_Coloring();
-    bolo_hanoi      = new Hanoi_Tower();
-    mochila         = new Knapsack();
-    balanca         = new BalanceScale();
+    nrainhas         = new N_Queens();
+    colorindo_bh     = new Map_Coloring();
+    bolo_hanoi       = new Hanoi_Tower();
+    mochila          = new Knapsack();
+    balanca          = new BalanceScale();
+    mineiro_viajante = new TravelingSalesman();
 
     parabens        = new GameTexture("assets/parabens.png", 210, 150, false, false);
     botao_continuar = new GameTexture("assets/buttons/play", 380, 376, true, false);
@@ -157,6 +160,11 @@ void Game::handleLevelEvents(SDL_Event* event)
     if (level_marker[4]->handleEvent(event))
     {
         state = GAME_SCALE;
+    }
+
+    if (level_marker[5]->handleEvent(event))
+    {
+        state = GAME_TSP;
     }
 
     if (botao_x->handleEvent(event)) {
@@ -239,6 +247,24 @@ void Game::handleScaleEvents(SDL_Event* event)
     }
 }
 
+void Game::handleTSPEvents(SDL_Event* event)
+{
+    if (botao_x->handleEvent(event)) {
+        mineiro_viajante->resetLevel();
+        state = GAME_LEVELS;
+    }
+    if (mineiro_viajante->gameWon())
+    {
+        if (botao_continuar->handleEvent(event)) {
+            mineiro_viajante->resetLevel();
+            state = GAME_LEVELS;
+        }
+    }
+    else {
+        mineiro_viajante->handleEvent(event);
+    }
+}
+
 void Game::handleEvents()
 {
     SDL_Event event;
@@ -280,6 +306,8 @@ void Game::handleEvents()
         case GAME_SCALE:
             handleScaleEvents(&event);
             break;
+        case GAME_TSP:
+            handleTSPEvents(&event);
 
         default:
             break;
@@ -302,6 +330,8 @@ void Game::update()
     case GAME_SCALE:
         balanca->update();
         break;
+    case GAME_TSP:
+        mineiro_viajante->update();
     default:
         break;
     }  
@@ -375,6 +405,15 @@ void Game::render()
     case GAME_SCALE:
         balanca->render();
         if (balanca->gameWon()) {
+            overlay->render();
+            parabens->render();
+            botao_continuar->render();
+        }
+        botao_x->render();
+        break;
+    case GAME_TSP:
+        mineiro_viajante->render();
+        if (mineiro_viajante->gameWon()) {
             overlay->render();
             parabens->render();
             botao_continuar->render();
