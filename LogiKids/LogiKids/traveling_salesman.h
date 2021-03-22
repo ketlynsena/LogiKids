@@ -49,9 +49,10 @@ private:
 	GameTexture* help;
 	GameTexture* reset;
 	GameTexture* distancesTexture;
-	GameTexture* undoButton;
-	GameTexture* redoButton;
+
 	GameTexture* pin[N_CITIES];
+	TextTexture* distance_text;
+	SDL_Color branco = { 255, 255, 255 };
 	bool gameWin = false;
 	Edge map[N_CITIES][N_CITIES];
 	Move lastMove;
@@ -59,4 +60,5 @@ private:
 	int shortest_path[N_CITIES] = { 4, 6, 10, 9, 0, 1, 2, 3, 5, 8, 11, START };
 	int currCity = START;
 	int n_cities_visited = 0;
+	int path_distance = 0;
 };

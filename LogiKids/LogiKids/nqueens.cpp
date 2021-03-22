@@ -238,6 +238,7 @@ void N_Queens::render()
 		queen_shadows[i]->render();
 		queens[i]->render();		
 	}
+	Game::renderGameScore();
 		
 
 	// Render grabbed queen on top

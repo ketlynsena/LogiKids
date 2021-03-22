@@ -11,6 +11,7 @@
 #include <cmath>
 
 #include "game_texture.h"
+#include "text_texture.h"
 #include "nqueens.h"
 #include "map_coloring.h"
 #include "hanoi_tower.h"
@@ -57,8 +58,13 @@ public:
     void handleKnapsackEvents(SDL_Event* event);
     void handleScaleEvents(SDL_Event* event);
     void handleTSPEvents(SDL_Event* event);
+    static void renderGameScore();
 
+    static TextTexture* pontuacao;
+    static TextTexture* tempo;
     static SDL_Renderer* renderer;
+    static GameTexture* cerebro;
+    static GameTexture* ampulheta;
    //static TTF_Font* gFont;
     static SDL_Cursor* cursor;
     static SDL_Cursor* cursor_hand;
@@ -73,11 +79,14 @@ private:
     GameTexture* selecao_nivel;
     GameTexture* parabens;
     GameTexture* overlay;
+    SDL_Color branco = { 255, 255, 255 };
     //Buttons objects
     GameTexture* botao_x;
     GameTexture* botao_play;
     GameTexture* botao_continuar;
     GameTexture* level_marker[N_LEVELS];
+    
+    int pontos = 0;
  
 };
 

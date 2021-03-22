@@ -6,9 +6,8 @@ TravelingSalesman::TravelingSalesman()
 	background = new GameTexture("assets/traveling_salesman/mineiro_viajante.png", 0, 0, false, false);
 	help = new GameTexture("assets/buttons/help", 740, 540, true, false);
 	reset = new GameTexture("assets/buttons/reset", 15, 540, true, false);
-	undoButton = new GameTexture("assets/buttons/undo", 150, 540, true, false);
-	redoButton = new GameTexture("assets/buttons/redo", 280, 540, true, false);
 	distancesTexture = new GameTexture("assets/traveling_salesman/distancias.png", 420, 231, false, false);
+	distance_text = new TextTexture("0", branco, Game::consolas, 30, 164, 428);
 
 	loadCityPins();
 	loadEdges();
@@ -164,8 +163,6 @@ void TravelingSalesman::render()
 	background->render();
 	help->render();
 	reset->render();
-	undoButton->render();
-	redoButton->render();
 
 	for (int i = 0; i < N_CITIES; i++)
 	{
@@ -185,6 +182,8 @@ void TravelingSalesman::render()
 	}
 
 	distancesTexture->render();
+	distance_text->render();
+	Game::renderGameScore();
 }
 
 void TravelingSalesman::update()
@@ -198,12 +197,6 @@ void TravelingSalesman::update()
 void TravelingSalesman::handleEvent(SDL_Event* e)
 {
 	help->handleEvent(e);
-
-	if (undoButton->handleEvent(e))
-		undo();
-
-	if (redoButton->handleEvent(e))
-		redo();
 
 	if (reset->handleEvent(e))
 		resetLevel();
@@ -255,11 +248,18 @@ bool TravelingSalesman::cityNotVisited(int city)
 
 void TravelingSalesman::addCityToPath(int city)
 {
-	map[getCurrentCity()][city].visible = true;
-	map[city][getCurrentCity()].visible = true;
-	setCurrentCity(city);
+	map[currCity][city].visible = true;
+	map[city][currCity].visible = true;
+
+	path_distance += map[currCity][city].distance;
+
+	printf("Curr distance: %d\n", path_distance);
+	distance_text->loadText(std::to_string(path_distance), branco, Game::consolas, 30);
+
 	path[n_cities_visited] = city;
 	n_cities_visited++;
+
+	setCurrentCity(city);
 }
 
 int TravelingSalesman::getCurrentCity()
@@ -277,6 +277,7 @@ void TravelingSalesman::resetLevel()
 	gameWin = false;
 	n_cities_visited = 0;
 	currCity = START;
+	path_distance = 0;
 
 	for (int i = 0; i < N_CITIES; i++)
 	{
@@ -287,19 +288,7 @@ void TravelingSalesman::resetLevel()
 		}
 		path[i] = -1; // Unvisited
 	}
-}
-
-void TravelingSalesman::undo()
-{
-	map[lastMove.i][lastMove.j].visible = false;
-	map[lastMove.j][lastMove.i].visible = false;
-	path[n_cities_visited] = -1;
-	n_cities_visited--;
-	setCurrentCity(lastMove.last_city); // Last city	
-}
-
-void TravelingSalesman::redo()
-{
+	distance_text->loadText(std::to_string(path_distance), branco, Game::consolas, 30);
 }
 
 void TravelingSalesman::recordMove(int i, int j, int last_city)

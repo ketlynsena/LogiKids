@@ -54,6 +54,7 @@ void Knapsack::render()
 	maxW->render();
 	currW->render();
 	totVal->render();
+	Game::renderGameScore();
 }
 
 void Knapsack::handleEvent(SDL_Event* e)
@@ -141,6 +142,7 @@ void Knapsack::resetLevel()
 	currW->loadText(std::to_string(currWeight), branco, Game::consolas, 30);
 	totValue = 0;
 	totVal->loadText(std::to_string(totValue), branco, Game::consolas, 30);
+	gameWin = false;
 }
 
 bool Knapsack::unpackItem(Item* item)

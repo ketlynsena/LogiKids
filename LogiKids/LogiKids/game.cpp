@@ -8,9 +8,13 @@ BalanceScale* balanca;
 TravelingSalesman* mineiro_viajante;
 
 SDL_Renderer* Game::renderer    = nullptr;
-TTF_Font*     Game::consolas       = nullptr;
+TTF_Font*     Game::consolas    = nullptr;
 SDL_Cursor*   Game::cursor      = nullptr;
 SDL_Cursor*   Game::cursor_hand = nullptr;
+TextTexture*  Game::pontuacao   = nullptr;
+TextTexture*  Game::tempo       = nullptr;
+GameTexture*  Game::cerebro     = nullptr;
+GameTexture*  Game::ampulheta   = nullptr;
 
 Game::Game()  {}
 Game::~Game() {}
@@ -47,18 +51,12 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
             isRunning = false;
         }
     }
-    consolas = TTF_OpenFont("assets/fonts/consola.ttf", 30);
+    consolas = TTF_OpenFont("assets/fonts/consola.ttf", 35);
     if (consolas == NULL)
     {
         printf("Failed to load font! SDL_ttf Error: %s\n", TTF_GetError());
         isRunning = false;
     }
-    
-    
-    //SDL_Color textColor = { 255, 255, 255 };
-    //SDL_Texture* textTexture;
-    //textTexture = TextureManager::loadFromRenderedText("The quick brown fox jumps over the lazy dog", textColor);
-    
 
     SDL_Surface* cursorSurface = IMG_Load("assets/cursors/seta.png");
     SDL_Surface* handSurface   = IMG_Load("assets/cursors/mao.png");
@@ -102,6 +100,11 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     parabens        = new GameTexture("assets/parabens.png", 210, 150, false, false);
     botao_continuar = new GameTexture("assets/buttons/play", 380, 376, true, false);
     overlay         = new GameTexture("assets/overlay.png", 0, 0, false, false);
+    cerebro         = new GameTexture("assets/brain.png", 647, 28, false, false);
+    ampulheta       = new GameTexture("assets/ampulheta.png", 514, 25, false, false);
+
+    pontuacao = new TextTexture("0", branco, consolas, 40, 696, 28);
+    tempo = new TextTexture("0:0", branco, consolas, 40, 546, 28);
 
 }
 
@@ -239,6 +242,8 @@ void Game::handleScaleEvents(SDL_Event* event)
     {
         if (botao_continuar->handleEvent(event)) {
             balanca->resetLevel();
+            pontos += 1;
+            pontuacao->loadText(std::to_string(pontos), branco, consolas, 40);
             state = GAME_LEVELS;
         }
     }
@@ -337,6 +342,13 @@ void Game::update()
     }  
 }
 
+void Game::renderGameScore() {
+    pontuacao->render();
+    cerebro->render();
+    tempo->render();
+    ampulheta->render();
+}
+
 void Game::render()
 {
     SDL_RenderClear(renderer);
@@ -360,6 +372,8 @@ void Game::render()
             if(level_marker[i])
                 level_marker[i]->render();
         }
+        pontuacao->render();
+        cerebro->render();
         break;
 
     case GAME_QUEENS:
@@ -398,6 +412,8 @@ void Game::render()
             overlay->render();
             parabens->render();
             botao_continuar->render();
+            //pontos += 1;
+            //pontuacao->loadText(std::to_string(pontos), branco, consolas, 40);
         }
         botao_x->render();
         break;
