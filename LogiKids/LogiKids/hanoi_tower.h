@@ -35,7 +35,7 @@ public:
 	bool gameWon();
 	bool checkWin();
 
-private:
+//private:
 	GameTexture* background;
 	GameTexture* help;
 	GameTexture* reset;
