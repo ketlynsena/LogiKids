@@ -9,9 +9,11 @@
 #include <iostream>
 #include <string>
 #include <cmath>
+#include <sstream>
 
 #include "game_texture.h"
 #include "text_texture.h"
+#include "timer.h"
 #include "nqueens.h"
 #include "map_coloring.h"
 #include "hanoi_tower.h"
@@ -69,6 +71,7 @@ public:
     static SDL_Cursor* cursor;
     static SDL_Cursor* cursor_hand;
     static TTF_Font* consolas;
+    static Timer* timer;
     GameState state = GAME_MENU;
 
 private:
@@ -87,6 +90,7 @@ private:
     GameTexture* level_marker[N_LEVELS];
     
     int pontos = 0;
+    std::string timeText;
  
 };
 

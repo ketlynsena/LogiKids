@@ -7,6 +7,7 @@ Knapsack* mochila;
 BalanceScale* balanca;
 TravelingSalesman* mineiro_viajante;
 
+Timer*        Game::timer = nullptr;
 SDL_Renderer* Game::renderer    = nullptr;
 TTF_Font*     Game::consolas    = nullptr;
 SDL_Cursor*   Game::cursor      = nullptr;
@@ -96,6 +97,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     mochila          = new Knapsack();
     balanca          = new BalanceScale();
     mineiro_viajante = new TravelingSalesman();
+    timer            = new Timer();
 
     parabens        = new GameTexture("assets/parabens_garota.png", 204, 134, false, false);
     botao_continuar = new GameTexture("assets/buttons/play", 381, 468, true, false);
@@ -105,6 +107,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
     pontuacao = new TextTexture("0", branco, consolas, 40, 696, 28);
     tempo = new TextTexture("0:0", branco, consolas, 40, 546, 28);
+
+    timer->start();
 
 }
 
@@ -332,6 +336,9 @@ void Game::handleEvents()
 
 void Game::update()
 {
+    timeText = timer->toMinutesAndSeconds(timer->getTicks());
+    tempo->loadText(timeText, branco, consolas, 40);
+
     switch (state) {
     case GAME_QUEENS:
         nrainhas->update();
@@ -347,12 +354,13 @@ void Game::update()
         break;
     case GAME_TSP:
         mineiro_viajante->update();
+        break;
     default:
         break;
     }  
 }
 
-void Game::renderGameScore() {
+void Game::renderGameScore() {    
     pontuacao->render();
     cerebro->render();
     tempo->render();
@@ -422,8 +430,6 @@ void Game::render()
             overlay->render();
             parabens->render();
             botao_continuar->render();
-            //pontos += 1;
-            //pontuacao->loadText(std::to_string(pontos), branco, consolas, 40);
         }
         botao_x->render();
         break;

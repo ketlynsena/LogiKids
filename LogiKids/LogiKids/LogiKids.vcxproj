@@ -156,6 +156,7 @@
     <ClCompile Include="map_coloring.cpp" />
     <ClCompile Include="nqueens.cpp" />
     <ClCompile Include="text_texture.cpp" />
+    <ClCompile Include="timer.cpp" />
     <ClCompile Include="traveling_salesman.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -167,6 +168,7 @@
     <ClInclude Include="map_coloring.h" />
     <ClInclude Include="nqueens.h" />
     <ClInclude Include="text_texture.h" />
+    <ClInclude Include="timer.h" />
     <ClInclude Include="traveling_salesman.h" />
   </ItemGroup>
   <ItemGroup>
