@@ -49,6 +49,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="test_game_texture.cpp" />
+    <ClCompile Include="test_traveling_salesman.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\LogiKids\LogiKids.vcxproj">

@@ -30,8 +30,6 @@ public:
 	void update();
 	void handleEvent(SDL_Event* e);
 	void resetLevel();
-	void undo();
-	void redo();
 	bool checkWin();
 	bool gameWon();
 	void loadCityPins();
