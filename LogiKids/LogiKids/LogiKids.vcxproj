@@ -147,19 +147,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="balance_scale.cpp" />
     <ClCompile Include="game.cpp" />
     <ClCompile Include="game_texture.cpp" />
     <ClCompile Include="hanoi_tower.cpp" />
+    <ClCompile Include="knapsack.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="map_coloring.cpp" />
     <ClCompile Include="nqueens.cpp" />
+    <ClCompile Include="text_texture.cpp" />
+    <ClCompile Include="timer.cpp" />
+    <ClCompile Include="traveling_salesman.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="balance_scale.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="game_texture.h" />
     <ClInclude Include="hanoi_tower.h" />
+    <ClInclude Include="knapsack.h" />
     <ClInclude Include="map_coloring.h" />
     <ClInclude Include="nqueens.h" />
+    <ClInclude Include="text_texture.h" />
+    <ClInclude Include="timer.h" />
+    <ClInclude Include="traveling_salesman.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\botao_play.png">

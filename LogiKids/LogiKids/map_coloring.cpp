@@ -253,5 +253,6 @@ void Map_Coloring::render()
         else {
             balde[i]->render();
         }
-    }        
+    }  
+    Game::renderGameScore();
 }

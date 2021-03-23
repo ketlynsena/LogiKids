@@ -1,4 +1,5 @@
 #include "hanoi_tower.h"
+#include "game.h"
 
 Hanoi_Tower::Hanoi_Tower()
 {
@@ -34,6 +35,8 @@ void Hanoi_Tower::render()
 
 	for (int i = 0; i < N_LAYERS; i++)
 		cake_layer[i]->render();
+	
+	Game::renderGameScore();
 
 	// Render selected layer on top
 	for (int i = 0; i < N_LAYERS; i++)

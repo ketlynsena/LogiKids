@@ -56,7 +56,7 @@ void N_Queens::resetBoard()
 {
 	int i, j;
 
-	for(i = 0; i < BOARD_SIZE; i++) // TODO - remover hardcoded board size
+	for(i = 0; i < BOARD_SIZE; i++) 
 		for (j = 0; j < BOARD_SIZE; j++)
 			board[i][j] = false;
 }
@@ -111,24 +111,6 @@ bool N_Queens::checkWin()
 
 bool N_Queens::checkConflict(TilePosition* index_list)
 {
-	/*
-	printf("Reverse diagonal:\n");
-
-	int maxSum = 4 + 4 - 2;
-
-	for (int sum = 0; sum <= maxSum; sum++) {
-		for (int i = 0; i < 4; i++) {
-			for (int j = 0; j < 4; j++) {
-				if (i + j - sum == 0) {
-					printf("%d ", board[i][j]);
-				}
-			}
-		}
-		printf("\n");
-	}
-	printf("\n");
-	*/
-
 	// Test for slash diagonal
 	if ((board[1][0] + board[0][1] < 2) &&
 		(board[2][0] + board[1][1] + board[0][2] < 2) &&
@@ -256,6 +238,7 @@ void N_Queens::render()
 		queen_shadows[i]->render();
 		queens[i]->render();		
 	}
+	Game::renderGameScore();
 		
 
 	// Render grabbed queen on top
