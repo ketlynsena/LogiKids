@@ -56,7 +56,7 @@ public:
 	bool gameWon();
 	Index getPlateIndex(GameTexture* w);
 
-private:
+
 	GameTexture* background;
 	GameTexture* help;
 	GameTexture* reset;
@@ -74,6 +74,7 @@ private:
 	bool gameWin = false;
 	bool wrong_answer = false;
 	int n_weighs = 0; // Pesagem inicial em 0
+private:
 	int lighter_weight = 0;
 };
 

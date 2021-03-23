@@ -1,6 +1,6 @@
 #include "pch.h"
-#include "../LogiKids/game.h"
-#include "../LogiKids/game_texture.h"
+//#include "../LogiKids/game.h"
+#include "../LogiKids/map_coloring.h"
 
 TEST(TestMapColoring, TestInit)
 {

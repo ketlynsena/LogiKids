@@ -40,7 +40,6 @@ public:
 	int getCurrentCity();
 	bool cityNotVisited(int city);
 	void printPath();
-	void recordMove(int i, int j, int city);
 
 private:
 	GameTexture* background;

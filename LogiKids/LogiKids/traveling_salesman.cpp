@@ -292,13 +292,6 @@ void TravelingSalesman::resetLevel()
 	distance_text->loadText(std::to_string(path_distance), branco, Game::consolas, 30);
 }
 
-void TravelingSalesman::recordMove(int i, int j, int last_city)
-{
-	lastMove.i = i;
-	lastMove.j = j;
-	lastMove.last_city = last_city;
-}
-
 bool TravelingSalesman::checkWin()
 {
 	if (n_cities_visited < 12)

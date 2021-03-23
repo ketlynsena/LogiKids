@@ -1,6 +1,6 @@
 #include "pch.h"
-#include "../LogiKids/game.h"
-#include "../LogiKids/game_texture.h"
+//#include "../LogiKids/game.h"
+#include "../LogiKids/nqueens.h"
 
 TEST(TestNQueens, TestInsideBoardIndex) {
 
