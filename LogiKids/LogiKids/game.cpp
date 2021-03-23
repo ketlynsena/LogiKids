@@ -134,6 +134,9 @@ void Game::handleNQueensEvents(SDL_Event* event) {
     }
     if (nrainhas->gameWon())
     {
+        if (timer->isStarted())
+            timer->stop();
+
         if (botao_continuar->handleEvent(event)) {
             nrainhas->resetLevel();
             pontos += 1;
@@ -149,31 +152,37 @@ void Game::handleLevelEvents(SDL_Event* event)
     if (level_marker[0]->handleEvent(event))
     {
         state = GAME_QUEENS;
+        timer->start();
     }
 
     if (level_marker[1]->handleEvent(event))
     {
         state = GAME_MAP_COLORING;
+        timer->start();
     }
 
     if (level_marker[2]->handleEvent(event))
     {
         state = GAME_HANOI;
+        timer->start();
     }
 
     if (level_marker[3]->handleEvent(event))
     {
         state = GAME_KNAPSACK;
+        timer->start();
     }
 
     if (level_marker[4]->handleEvent(event))
     {
         state = GAME_SCALE;
+        timer->start();
     }
 
     if (level_marker[5]->handleEvent(event))
     {
         state = GAME_TSP;
+        timer->start();
     }
 
     if (botao_x->handleEvent(event)) {
@@ -190,6 +199,9 @@ void Game::handleMapColoringEvents(SDL_Event* event)
 
     if (colorindo_bh->gameWon())
     {
+        if (timer->isStarted())
+            timer->stop();
+
         if (botao_continuar->handleEvent(event)) {
             colorindo_bh->resetMap();
             pontos += 1;
@@ -210,6 +222,9 @@ void Game::handleHanoiEvents(SDL_Event* event)
 
     if (bolo_hanoi->gameWon())
     {
+        if (timer->isStarted())
+            timer->stop();
+
         if (botao_continuar->handleEvent(event)) {
             bolo_hanoi->resetLevel();
             pontos += 1;
@@ -230,6 +245,8 @@ void Game::handleKnapsackEvents(SDL_Event* event)
     }
     if (mochila->gameWon())
     {
+        if (timer->isStarted())
+            timer->stop();
         if (botao_continuar->handleEvent(event)) {
             mochila->resetLevel();
             pontos += 1;
@@ -252,6 +269,8 @@ void Game::handleScaleEvents(SDL_Event* event)
 
     if (balanca->gameWon())
     {
+        if (timer->isStarted())
+            timer->stop();
         if (botao_continuar->handleEvent(event)) {
             balanca->resetLevel();
             pontos += 1;
@@ -272,6 +291,8 @@ void Game::handleTSPEvents(SDL_Event* event)
     }
     if (mineiro_viajante->gameWon())
     {
+        if (timer->isStarted())
+            timer->stop();
         if (botao_continuar->handleEvent(event)) {
             mineiro_viajante->resetLevel();
             pontos += 1;
@@ -303,6 +324,8 @@ void Game::handleEvents()
             break;
 
         case GAME_LEVELS:
+            if (timer->isStarted())
+                timer->pause();
             handleLevelEvents(&event);
             break;
 
@@ -327,7 +350,6 @@ void Game::handleEvents()
             break;
         case GAME_TSP:
             handleTSPEvents(&event);
-
         default:
             break;
         }
@@ -336,8 +358,11 @@ void Game::handleEvents()
 
 void Game::update()
 {
-    //timeText = timer->toMinutesAndSeconds(timer->getTicks());
-    //tempo->loadText(timeText, branco, consolas, 40);
+    if (timer->isStarted())
+    {
+        timeText = timer->toMinutesAndSeconds(timer->getTicks());
+        tempo->loadText(timeText, branco, consolas, 40);
+    }    
 
     switch (state) {
     case GAME_QUEENS:
