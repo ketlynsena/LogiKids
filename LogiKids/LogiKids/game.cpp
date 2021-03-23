@@ -86,9 +86,9 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     level_marker[0] = new GameTexture("assets/buttons/level_marker_yellow", 249, 509, true, false);
     level_marker[1] = new GameTexture("assets/buttons/level_marker_pink", 373, 504, true, false);
     level_marker[2] = new GameTexture("assets/buttons/level_marker_blue", 368, 425, true, false);
-    level_marker[3] = new GameTexture("assets/buttons/level_marker_yellow", 488, 447, true, false);
-    level_marker[4] = new GameTexture("assets/buttons/level_marker_pink", 614, 472, true, false);
-    level_marker[5] = new GameTexture("assets/buttons/level_marker_blue", 687, 401, true, false);
+    level_marker[3] = new GameTexture("assets/buttons/level_marker_green", 488, 447, true, false);
+    level_marker[4] = new GameTexture("assets/buttons/level_marker_orange", 614, 472, true, false);
+    level_marker[5] = new GameTexture("assets/buttons/level_marker_sky_blue", 687, 401, true, false);
 
     nrainhas         = new N_Queens();
     colorindo_bh     = new Map_Coloring();
@@ -97,8 +97,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     balanca          = new BalanceScale();
     mineiro_viajante = new TravelingSalesman();
 
-    parabens        = new GameTexture("assets/parabens.png", 210, 150, false, false);
-    botao_continuar = new GameTexture("assets/buttons/play", 380, 376, true, false);
+    parabens        = new GameTexture("assets/parabens_garota.png", 204, 134, false, false);
+    botao_continuar = new GameTexture("assets/buttons/play", 381, 468, true, false);
     overlay         = new GameTexture("assets/overlay.png", 0, 0, false, false);
     cerebro         = new GameTexture("assets/brain.png", 647, 28, false, false);
     ampulheta       = new GameTexture("assets/ampulheta.png", 514, 25, false, false);
@@ -132,6 +132,8 @@ void Game::handleNQueensEvents(SDL_Event* event) {
     {
         if (botao_continuar->handleEvent(event)) {
             nrainhas->resetLevel();
+            pontos += 1;
+            pontuacao->loadText(std::to_string(pontos), branco, consolas, 40);
             state = GAME_LEVELS;
         }
     }
@@ -186,6 +188,8 @@ void Game::handleMapColoringEvents(SDL_Event* event)
     {
         if (botao_continuar->handleEvent(event)) {
             colorindo_bh->resetMap();
+            pontos += 1;
+            pontuacao->loadText(std::to_string(pontos), branco, consolas, 40);
             state = GAME_LEVELS;
         }
     }
@@ -204,6 +208,8 @@ void Game::handleHanoiEvents(SDL_Event* event)
     {
         if (botao_continuar->handleEvent(event)) {
             bolo_hanoi->resetLevel();
+            pontos += 1;
+            pontuacao->loadText(std::to_string(pontos), branco, consolas, 40);
             state = GAME_LEVELS;
         }
     }
@@ -222,6 +228,8 @@ void Game::handleKnapsackEvents(SDL_Event* event)
     {
         if (botao_continuar->handleEvent(event)) {
             mochila->resetLevel();
+            pontos += 1;
+            pontuacao->loadText(std::to_string(pontos), branco, consolas, 40);
             state = GAME_LEVELS;
         }
     }
@@ -262,6 +270,8 @@ void Game::handleTSPEvents(SDL_Event* event)
     {
         if (botao_continuar->handleEvent(event)) {
             mineiro_viajante->resetLevel();
+            pontos += 1;
+            pontuacao->loadText(std::to_string(pontos), branco, consolas, 40);
             state = GAME_LEVELS;
         }
     }
