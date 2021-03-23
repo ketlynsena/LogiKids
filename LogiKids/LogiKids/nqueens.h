@@ -38,7 +38,7 @@ public:
 	GameTexture* getQueen(int id);
 	bool gameWon();
 
-private:
+
 	bool board[BOARD_SIZE][BOARD_SIZE] = { {0, 0, 0, 0},
 										   {0, 0, 0, 0},
 										   {0, 0, 0, 0},
@@ -50,6 +50,7 @@ private:
 	GameTexture* queen_shadows[BOARD_SIZE];
 	GameTexture* help;
 	GameTexture* reset;
+private:
 	bool gameWin = false;
 };
 
