@@ -38,7 +38,7 @@ public:
 	bool unpackItem(Item* item);
 	void createItem(Item* item, const char* textureFile, int x, int y, int weight, int value);
 
-private:
+
 	GameTexture* background;
 	GameTexture* help;
 	GameTexture* reset;
@@ -52,6 +52,8 @@ private:
 	int maxWeight = KNAPSACK_LIMIT;
 	int currWeight = 0;
 	int totValue = 0;
+
+private:
 	bool gameWin = false;
 
 };
