@@ -71,6 +71,8 @@ void BalanceScale::render()
 	{
 		weight[i]->render();
 	}
+
+	Game::renderGameScore();
 }
 
 void BalanceScale::weigh()

@@ -108,7 +108,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     pontuacao = new TextTexture("0", branco, consolas, 40, 696, 28);
     tempo = new TextTexture("0:0", branco, consolas, 40, 546, 28);
 
-    timer->start();
+    //timer->start();
 
 }
 
@@ -336,8 +336,8 @@ void Game::handleEvents()
 
 void Game::update()
 {
-    timeText = timer->toMinutesAndSeconds(timer->getTicks());
-    tempo->loadText(timeText, branco, consolas, 40);
+    //timeText = timer->toMinutesAndSeconds(timer->getTicks());
+    //tempo->loadText(timeText, branco, consolas, 40);
 
     switch (state) {
     case GAME_QUEENS:

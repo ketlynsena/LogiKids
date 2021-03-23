@@ -183,6 +183,7 @@ void TravelingSalesman::render()
 
 	distancesTexture->render();
 	distance_text->render();
+
 	Game::renderGameScore();
 }
 
