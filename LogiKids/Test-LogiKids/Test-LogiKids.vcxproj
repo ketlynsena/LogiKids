@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="test_balance_scale.cpp" />
+    <ClCompile Include="test_game.cpp" />
     <ClCompile Include="test_hanoi_tower.cpp" />
     <ClCompile Include="test_knapsack.cpp" />
     <ClCompile Include="test_map_coloring.cpp" />

@@ -29,20 +29,8 @@ void TextTexture::loadText(std::string text, SDL_Color textColor, TTF_Font* font
 
     SDL_QueryTexture(texture, NULL, NULL, &srcRect.w, &srcRect.h);
 
-    // Setup for Source and Destination Rectangles for rendering
-    //destRect.x = xpos;
-    //destRect.y = ypos;
     destRect.w = srcRect.w;
     destRect.h = srcRect.h;
-
-    //srcRect.x = 0;
-    //srcRect.y = 0;
-
-    //width = destRect.w;
-    //height = destRect.h;
-
-    //Return success
-    //return mTexture != NULL;
 }
 
 TextTexture::TextTexture(std::string text, SDL_Color textColor, TTF_Font* font, int font_size, int xpos, int ypos)
