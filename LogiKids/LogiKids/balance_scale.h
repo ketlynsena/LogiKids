@@ -67,6 +67,9 @@ public:
 	GameTexture* solution_area;
 	GameTexture* weighs[MAX_WEIGHS+1]; // +1 para 0
 	GameTexture* button;
+	GameTexture* tip;
+	GameTexture* play;
+	bool showTip = false;
 	Index index; // Auxiliary 
 	int scale_plates[2][MAX_WEIGHS_ON_PLATE] = {{-1, -1, -1, -1},
 												{-1, -1, -1, -1}};

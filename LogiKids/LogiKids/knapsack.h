@@ -52,6 +52,9 @@ public:
 	int maxWeight = KNAPSACK_LIMIT;
 	int currWeight = 0;
 	int totValue = 0;
+	GameTexture* tip;
+	GameTexture* play;
+	bool showTip = false;
 
 private:
 	bool gameWin = false;

@@ -50,6 +50,9 @@ private:
 	GameTexture* pin[N_CITIES];
 	TextTexture* distance_text;
 	SDL_Color branco = { 255, 255, 255 };
+	GameTexture* tip;
+	GameTexture* play;
+	bool showTip = false;
 	bool gameWin = false;
 	Edge map[N_CITIES][N_CITIES];
 	Move lastMove;

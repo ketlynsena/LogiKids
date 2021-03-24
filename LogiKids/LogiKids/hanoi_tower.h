@@ -46,5 +46,8 @@ public:
 	TowerIndex grabIndex; // index on Tower where the layer was grabbed before being dropped
 	bool freeLayer = false;
 	bool gameWin = false;
+	GameTexture* tip;
+	GameTexture* play;
+	bool showTip = false;
 };
 

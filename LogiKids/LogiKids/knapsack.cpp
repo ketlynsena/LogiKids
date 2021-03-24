@@ -7,6 +7,8 @@ Knapsack::Knapsack()
 	help = new GameTexture("assets/buttons/help", 740, 540, true, false);
 	reset = new GameTexture("assets/buttons/reset", 15, 540, true, false);
 	knapsack = new GameTexture("assets/buttons/mochila", 196, 318, true, false);
+	tip = new GameTexture("assets/knapsack/dica_problema_mochila.png", 48, 72, false, false);
+	play = new GameTexture("assets/buttons/play", 670, 458, true, false);
 
 	createItem(&knapsackItem[CADERNO], "assets/knapsack/caderno.png", 450, 360, 12, 2);
 	createItem(&knapsackItem[LAPIS], "assets/knapsack/lapis.png", 656, 167, 1, 2);
@@ -55,21 +57,37 @@ void Knapsack::render()
 	currW->render();
 	totVal->render();
 	Game::renderGameScore();
+
+	if (showTip) {
+		tip->render();
+		play->render();
+	}
 }
 
 void Knapsack::handleEvent(SDL_Event* e)
 {
-	help->handleEvent(e);
-	knapsack->handleEvent(e);
 
-	if (reset->handleEvent(e))
-		resetLevel();
-
-	for (int i = 0; i < N_ITEMS; i++)
-	{
-		if(!knapsackItem[i].inside)
-			knapsackItem[i].itemTexture->handleEvent(e);
+	if (help->handleEvent(e)) {
+		showTip = true;
 	}
+	if (!showTip) {
+		knapsack->handleEvent(e);
+
+		if (reset->handleEvent(e))
+			resetLevel();
+
+		for (int i = 0; i < N_ITEMS; i++)
+		{
+			if (!knapsackItem[i].inside)
+				knapsackItem[i].itemTexture->handleEvent(e);
+		}
+	}
+	else {
+		if (play->handleEvent(e)) {
+			showTip = false;
+		}
+	}
+	
 }
 
 void Knapsack::update()

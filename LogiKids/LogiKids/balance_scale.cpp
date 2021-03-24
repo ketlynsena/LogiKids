@@ -30,6 +30,9 @@ BalanceScale::BalanceScale()
 	weight[5] = new GameTexture("assets/scale_weights/sprites/weight6", 192 + (5 * 55), 505, true, true);
 	weight[6] = new GameTexture("assets/scale_weights/sprites/weight7", 192 + (6 * 55), 505, true, true);
 	weight[7] = new GameTexture("assets/scale_weights/sprites/weight8", 192 + (7 * 55), 505, true, true);
+
+	tip = new GameTexture("assets/scale_weights/dica_peso_misterioso.png", 48, 72, false, false);
+	play = new GameTexture("assets/buttons/play", 670, 458, true, false);
 }
 
 BalanceScale::~BalanceScale()
@@ -73,6 +76,11 @@ void BalanceScale::render()
 	}
 
 	Game::renderGameScore();
+
+	if (showTip) {
+		tip->render();
+		play->render();
+	}
 }
 
 void BalanceScale::weigh()
@@ -101,18 +109,28 @@ void BalanceScale::weigh()
 
 void BalanceScale::handleEvent(SDL_Event* e)
 {
-	help->handleEvent(e);
-	if (button->handleEvent(e))
-		if(n_weighs < MAX_WEIGHS)
-			weigh();
-
-	if (reset->handleEvent(e))
-		resetLevel();
-
-	for (int i = 0; i < N_WEIGHTS; i++)
-	{
-		weight[i]->handleEvent(e);
+	if (help->handleEvent(e)) {
+		showTip = true;
 	}
+	if (!showTip) {
+		if (button->handleEvent(e))
+			if (n_weighs < MAX_WEIGHS)
+				weigh();
+
+		if (reset->handleEvent(e))
+			resetLevel();
+
+		for (int i = 0; i < N_WEIGHTS; i++)
+		{
+			weight[i]->handleEvent(e);
+		}
+	}
+	else {
+		if (play->handleEvent(e)) {
+			showTip = false;
+		}
+	}
+	
 }
 
 Index BalanceScale::getPlateIndex(GameTexture* w)

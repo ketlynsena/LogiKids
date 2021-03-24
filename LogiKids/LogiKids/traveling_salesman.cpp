@@ -8,6 +8,8 @@ TravelingSalesman::TravelingSalesman()
 	reset = new GameTexture("assets/buttons/reset", 15, 540, true, false);
 	distancesTexture = new GameTexture("assets/traveling_salesman/distancias.png", 420, 231, false, false);
 	distance_text = new TextTexture("0", branco, Game::consolas, 30, 164, 428);
+	tip = new GameTexture("assets/traveling_salesman/dica_mineiro_viajante.png", 48, 72, false, false);
+	play = new GameTexture("assets/buttons/play", 670, 458, true, false);
 
 	loadCityPins();
 	loadEdges();
@@ -185,6 +187,11 @@ void TravelingSalesman::render()
 	distance_text->render();
 
 	Game::renderGameScore();
+
+	if (showTip) {
+		tip->render();
+		play->render();
+	}
 }
 
 void TravelingSalesman::update()
@@ -197,12 +204,22 @@ void TravelingSalesman::update()
 
 void TravelingSalesman::handleEvent(SDL_Event* e)
 {
-	help->handleEvent(e);
+	if (help->handleEvent(e)) {
+		showTip = true;
+	}
+	if (!showTip) {
+		if (reset->handleEvent(e))
+			resetLevel();
 
-	if (reset->handleEvent(e))
-		resetLevel();
+		handlePinEvents(e);
+	}
+	else {
+		if (play->handleEvent(e)) {
+			showTip = false;
+		}
+	}
 
-	handlePinEvents(e);
+	
 	
 }
 

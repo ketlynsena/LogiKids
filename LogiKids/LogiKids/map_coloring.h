@@ -64,6 +64,9 @@ private:
 	GameTexture* help;
 	GameTexture* reset;
 	GameTexture* map;
+    GameTexture* tip;
+    GameTexture* play;
+    bool showTip = false;
 
     GameTexture* balde[N_CORES];
     GameTexture* balde_selecionado[N_CORES];

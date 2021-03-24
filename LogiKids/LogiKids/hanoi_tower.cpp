@@ -14,7 +14,10 @@ Hanoi_Tower::Hanoi_Tower()
 	cake_layer[0] = new GameTexture("assets/hanoi/bolo_1.png", 45, 277, false, true);//124, 277, false, true);
 	cake_layer[1] = new GameTexture("assets/hanoi/bolo_2.png", 45, 336, false, true);//93, 336, false, true);
 	cake_layer[2] = new GameTexture("assets/hanoi/bolo_3.png", 45, 395, false, true);//67, 395, false, true);
-	cake_layer[3] = new GameTexture("assets/hanoi/bolo_4.png", 45, 454, false, true);//45, 454, false, true);	
+	cake_layer[3] = new GameTexture("assets/hanoi/bolo_4.png", 45, 454, false, true);//45, 454, false, true);
+
+	tip = new GameTexture("assets/hanoi/dica_bolo_de_hanoi.png", 48, 72, false, false);
+	play = new GameTexture("assets/buttons/play", 670, 458, true, false);
 	
 	for (int i = 0; i < N_LAYERS; i++)
 		tower[i][0] = i + 1;	
@@ -38,6 +41,11 @@ void Hanoi_Tower::render()
 	
 	Game::renderGameScore();
 
+	if (showTip) {
+		tip->render();
+		play->render();
+	}
+
 	// Render selected layer on top
 	for (int i = 0; i < N_LAYERS; i++)
 		if (cake_layer[i]->isGrabbed())
@@ -46,15 +54,25 @@ void Hanoi_Tower::render()
 
 void Hanoi_Tower::handleEvent(SDL_Event* e)
 {
-	help->handleEvent(e);
+	if (!showTip) {
+		if (help->handleEvent(e)) {
+			showTip = true;
+		}
+		if (reset->handleEvent(e))
+			resetLevel();
 
-	if (reset->handleEvent(e))
-		resetLevel();
-
-	for (int i = 0; i < N_LAYERS; i++)
-	{
-		cake_layer[i]->handleEvent(e);
+		for (int i = 0; i < N_LAYERS; i++)
+		{
+			cake_layer[i]->handleEvent(e);
+		}
 	}
+	else {
+		if (play->handleEvent(e)) {
+			showTip = false;
+		}
+	}
+
+	
 }
 
 TowerIndex Hanoi_Tower::getTowerIndex(GameTexture* layer)

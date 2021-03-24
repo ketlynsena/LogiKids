@@ -16,6 +16,8 @@ N_Queens::N_Queens()
 
 	help		  = new GameTexture("assets/buttons/help",		 740, 540,  true, false);
 	reset		  = new GameTexture("assets/buttons/reset",		  15, 540,  true, false);
+	tip			  = new GameTexture("assets/dica_nrainhas.png",   48, 72, false, false);
+	play		  = new GameTexture("assets/buttons/play",		 670, 458, true, false);
 }
 
 N_Queens::~N_Queens()
@@ -85,21 +87,6 @@ bool N_Queens::checkWin()
 			return false;
 	}
 
-	/*for (int k = 0; k < 4 * 2; k++) {
-		diag_count = 0;
-		for (int j = 0; j <= k; j++) {
-			int i = k - j;
-			if (i < 4 && j < 4) {
-				if (board[i][j]) {
-					diag_count++;
-				}					
-			}
-		}
-		if (diag_count > 1)
-			return false;
-	}*/
-
-	
 	if (pieces == BOARD_SIZE) // If all queens are on board
 	{
 		return checkConflict(queen_index);
@@ -163,13 +150,20 @@ void N_Queens::handleQueenPieceEvent(SDL_Event* e, GameTexture* queenPiece)
 void N_Queens::handleEvent(SDL_Event* e) 
 {
 	if (!gameWin) {
-		for (int i = 0; i < BOARD_SIZE; i++)
-			handleQueenPieceEvent(e, queens[i]);
+		if (!showTip) {
+			for (int i = 0; i < BOARD_SIZE; i++)
+				handleQueenPieceEvent(e, queens[i]);
 
-		help->handleEvent(e);
+			if (help->handleEvent(e)) {
+				showTip = true;
+			}
 
-		if (reset->handleEvent(e))
-			resetLevel();
+			if (reset->handleEvent(e))
+				resetLevel();
+		}
+		if (play->handleEvent(e)) {
+			showTip = false;
+		}
 	}
 }
 
@@ -239,6 +233,11 @@ void N_Queens::render()
 		queens[i]->render();		
 	}
 	Game::renderGameScore();
+
+	if (showTip) {
+		tip->render();
+		play->render();
+	}
 		
 
 	// Render grabbed queen on top

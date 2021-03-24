@@ -50,6 +50,9 @@ public:
 	GameTexture* queen_shadows[BOARD_SIZE];
 	GameTexture* help;
 	GameTexture* reset;
+	GameTexture* tip;
+	GameTexture* play;
+	bool showTip = false;
 private:
 	bool gameWin = false;
 };

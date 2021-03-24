@@ -6,6 +6,8 @@ Map_Coloring::Map_Coloring()
 	help = new GameTexture("assets/buttons/help", 740, 540, true, false);
 	reset = new GameTexture("assets/buttons/reset", 15, 540, true, false);
     bh_outline = new GameTexture("assets/map_coloring/bh_outline.png", 419, 122, false, false);
+    tip = new GameTexture("assets/map_coloring/dica_colorindo_bh.png", 48, 72, false, false);
+    play = new GameTexture("assets/buttons/play", 670, 458, true, false);
 
     balde[AZUL]           = new GameTexture("assets/map_coloring/balde_azul", 30, 425, true, false);
     balde_selecionado[AZUL]    = new GameTexture("assets/map_coloring/balde_azul_2.png", 30, 425, false, false);
@@ -115,16 +117,25 @@ bool Map_Coloring::isSafe()
 void Map_Coloring::handleEvent(SDL_Event* e)
 {
     if (!checkWin()) {
-        help->handleEvent(e);
 
-        for (int i = 0; i < N_REGIOES_BH; i++)
-            handleRegionEvent(e, &regioes[i]);
-        
-        for (int i = 0; i < N_CORES; i++)
-            handleBucketEvent(e, balde[i], cores[i]);
+        if (help->handleEvent(e)) {
+            showTip = true;
+        }
+        if (!showTip)
+        {
+            for (int i = 0; i < N_REGIOES_BH; i++)
+                handleRegionEvent(e, &regioes[i]);
 
-        if (reset->handleEvent(e))
-            resetMap();
+            for (int i = 0; i < N_CORES; i++)
+                handleBucketEvent(e, balde[i], cores[i]);
+
+            if (reset->handleEvent(e))
+                resetMap();
+        }
+        else {
+            if (play->handleEvent(e))
+                showTip = false;
+        }        
     }
     else {
         gameWin = true;
@@ -255,4 +266,10 @@ void Map_Coloring::render()
         }
     }  
     Game::renderGameScore();
+
+    if (showTip)
+    {
+        tip->render();
+        play->render();
+    }
 }
