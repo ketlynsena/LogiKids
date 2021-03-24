@@ -24,8 +24,8 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 {
     int flags = 0;
 
-    if (fullscreen)
-        flags = SDL_WINDOW_FULLSCREEN;
+    //if (fullscreen)
+        //flags = SDL_WINDOW_FULLSCREEN;
 
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
     {
@@ -62,15 +62,15 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
     SDL_Surface* cursorSurface = IMG_Load("assets/cursors/seta.png");
     SDL_Surface* handSurface   = IMG_Load("assets/cursors/mao.png");
 
-    if (!cursorSurface || !handSurface) {
-        isRunning = false;
-    }
+    //if (!cursorSurface || !handSurface) {
+    //    isRunning = false;
+    //}
     cursor = SDL_CreateColorCursor(cursorSurface, 0, 0);
     cursor_hand = SDL_CreateColorCursor(handSurface, 0, 0);
 
-    if (!cursor || !cursor_hand) {
-        isRunning = false;
-    }
+    //if (!cursor || !cursor_hand) {
+    //    isRunning = false;
+    //}
 
     SDL_SetCursor(cursor);
 
@@ -107,8 +107,6 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
     pontuacao = new TextTexture("0", branco, consolas, 40, 696, 28);
     tempo = new TextTexture("0:0", branco, consolas, 40, 546, 28);
-
-    //timer->start();
 
 }
 
