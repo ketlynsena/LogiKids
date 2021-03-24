@@ -123,3 +123,28 @@
   
 - **O que deu errado na Sprint 2?**
   Não conseguimos fazer testes para todas as classes dentro da sprint e alcançar a cobertura de testes desejada.
+  
+ ## SPRINT 3
+ 
+ **Histórias e Tarefas:**
+- Problema da Mochila
+  - Lógica do problema da Mochila -Scarlet
+  - Assets do problema da Mochila - Scarlet
+  - Classe de Nível do problema da Mochila - Scarlet
+  - Testes Unitarios do problema da Mochila - Ketlyn
+- Puzzle Pesos das Balanças
+  - Lógica Pesos das Balanças - Ketlyn
+  - Assets Puzzle Pesos das Balanças - Scarlet
+  - Classe de Nível Pesos das Balanças - Scarlet
+  - Testes Unitarios Pesos das Balanças - Ketlyn
+- Puzzle Caixeiro Viajante
+  - Lógica Caixeiro Viajante - Ketlyn
+  - Assets Puzzle Caixeiro Viajante - Scarlet
+  - Classe de Nível Caixeiro Viajante - Scarlet
+  - Testes Unitarios Torre de Hanoi - Ketlyn
+- Dicas - Scarlet
+ 
+
+### Retrospectiva:
+  Nessa sprint foi possivel terminar a implementação dos três puzzles que faltavam, problema da mochila, caixeiro viajante e pesos das balanças, como estava previsto. Além disso foi criada parte de dicas e implementamos testes unitarios para as classes restante alcançando uma boa corbertura.
+
