@@ -34,7 +34,14 @@ TEST(TestHanoiTower, TestCheckwin)
 TEST(TestHanoiTower, TestGetTowerIndex)
 {
 	TowerIndex ind = torre->getTowerIndex(torre->cake_layer[0]);
-	//EXPECT_TRUE(ind);
+	EXPECT_EQ(ind.n_tower,0);
+	EXPECT_EQ(ind.layer, 0);
+	torre->cake_layer[0]->setPosition(0, 0);
+	ind = torre->getTowerIndex(torre->cake_layer[0]);
+	EXPECT_EQ(ind.layer, -1);
+	EXPECT_EQ(ind.n_tower, -1);
+	torre->cake_layer[0]->resetPosition();
+
 }
 
 TEST(TestHanoiTower, TestHandleEvent)
@@ -45,10 +52,10 @@ TEST(TestHanoiTower, TestHandleEvent)
 TEST(TestHanoiTower, TestLayerBelowIsLarger)
 {
 	TowerIndex idx;
-	idx.layer = 3;
+	idx.layer = 2;
 	idx.n_tower = 0;
 	EXPECT_TRUE(torre->layerBelowIsLarger(2, idx));
-
+	EXPECT_FALSE(torre->layerBelowIsLarger(5, idx));
 }
 
 TEST(TestHanoiTower, TestNoLayerOnTop)
@@ -67,11 +74,12 @@ TEST(TestHanoiTower, TestPlaceLayerOnTower)
 	idx.layer = 3;
 	idx.n_tower = 1;
 	EXPECT_TRUE(torre->placeLayeronTower(torre->cake_layer[3], 3, idx));
+	EXPECT_FALSE(torre->placeLayeronTower(torre->cake_layer[2], 5, idx));
 }
 
 TEST(TestHanoiTower, TestPrintTower)
 {
-
+	torre->printTower();
 }
 
 TEST(TestHanoiTower, TestRender)

@@ -87,6 +87,7 @@ TEST(TestGame, TestNQueensEvents)
 {
 	Game* game = new Game();
 	game->init("LogiKids", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
+	game->timer->start();
 	MEvent event;
 	event.type = SDL_MOUSEBUTTONDOWN;
 	event.x = 760; // X button placement
@@ -100,6 +101,7 @@ TEST(TestGame, TestMapColoringEvents)
 {
 	Game* game = new Game();
 	game->init("LogiKids", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
+	game->timer->start();
 	MEvent event;
 	event.type = SDL_MOUSEBUTTONDOWN;
 	event.x = 760; // X button placement
@@ -113,6 +115,7 @@ TEST(TestGame, TestHanoiEvents)
 {
 	Game* game = new Game();
 	game->init("LogiKids", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
+	game->timer->start();
 	MEvent event;
 	event.type = SDL_MOUSEBUTTONDOWN;
 	event.x = 760; // X button placement
@@ -126,6 +129,7 @@ TEST(TestGame, TestKnapsackEvents)
 {
 	Game* game = new Game();
 	game->init("LogiKids", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
+	game->timer->start();
 	MEvent event;
 	event.type = SDL_MOUSEBUTTONDOWN;
 	event.x = 760; // X button placement
@@ -139,6 +143,7 @@ TEST(TestGame, TestScaleEvents)
 {
 	Game* game = new Game();
 	game->init("LogiKids", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
+	game->timer->start();
 	MEvent event;
 	event.type = SDL_MOUSEBUTTONDOWN;
 	event.x = 760; // X button placement
@@ -152,6 +157,7 @@ TEST(TestGame, TestTSPEvents)
 {
 	Game* game = new Game();
 	game->init("LogiKids", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
+	game->timer->start();
 	MEvent event;
 	event.type = SDL_MOUSEBUTTONDOWN;
 	event.x = 760; // X button placement
@@ -174,20 +180,42 @@ TEST(TestGame, TestHandleEvents)
 	EXPECT_FALSE(game->running());
 
 	event.type = SDL_MOUSEBUTTONDOWN;
+	game->state = GAME_MENU;
+	game->handleEvents(event);
+	game->render();
+
+	game->state = GAME_STORY;
+	game->handleEvents(event);
+	game->render();
+
 	game->state = GAME_QUEENS;
 	game->handleEvents(event);
+	game->render();
+
 	game->state = GAME_MAP_COLORING;
 	game->handleEvents(event);
+	game->render();
+
 	game->state = GAME_HANOI;
 	game->handleEvents(event);
+	game->render();
+
 	game->state = GAME_KNAPSACK;
 	game->handleEvents(event);
+	game->render();
+
 	game->state = GAME_SCALE;
 	game->handleEvents(event);
+	game->render();
+
 	game->state = GAME_TSP;
 	game->handleEvents(event);
+	game->render();
+
 	game->state = GAME_LEVELS;
 	game->handleEvents(event);
+	game->render();
+
 	EXPECT_FALSE(game->timer->isPaused());
 }
 
@@ -260,3 +288,9 @@ TEST(TestGame, TestTimerUpdate)
 	EXPECT_TRUE(game->timer->isStarted());
 }
 
+TEST(TestGame, TestPollEvent)
+{
+	Game* game = new Game();
+	game->init("LogiKids", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, false);
+	game->pollEvent();
+}
