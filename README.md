@@ -1,4 +1,6 @@
-![LogiKidsLogo](https://github.com/ketlynsena/LogiKids/blob/main/LogiKids/sample_images/logo.png)
+<p align="center">
+<img src="https://github.com/ketlynsena/LogiKids/blob/main/LogiKids/sample_images/logo.png">
+</p>
 
 ## Introdução
 **LogiKids** é um jogo educativo para auxiliar crianças no desenvolvimento lógico. Utiliza diversos problemas comuns da Computação de maneira lúdica para estimular o raciocínio e familiarizar o público infantil com problemas lógicos. 
@@ -6,33 +8,51 @@
 ## Puzzles
 
 ### O problema das N-Rainhas 
+<p align="center">
 <img src="https://github.com/ketlynsena/LogiKids/blob/main/LogiKids/sample_images/nqueens.png" width="400">
+</p>
 
 ### Coloração de Mapas
+<p align="center">
 <img src="https://github.com/ketlynsena/LogiKids/blob/main/LogiKids/sample_images/mapcoloring.png" width="400">
+</p>
 
 ### A Torre de Hanói
+<p align="center">
 <img src="https://github.com/ketlynsena/LogiKids/blob/main/LogiKids/sample_images/hanoi.png" width="400">
+</p>
 
 ### O Problema da Mochila
+<p align="center">
 <img src="https://github.com/ketlynsena/LogiKids/blob/main/LogiKids/sample_images/knapsack.png" width="400">
+</p>
 
 ### Os Pesos da Balança
+<p align="center">
 <img src="https://github.com/ketlynsena/LogiKids/blob/main/LogiKids/sample_images/scale.png" width="400">
+</p>
 
 ### O problema do Caixeiro Viajante
+<p align="center">
 <img src="https://github.com/ketlynsena/LogiKids/blob/main/LogiKids/sample_images/tsp.png" width="400">
+</p>
 
 ## Outras Features
 
 ### Seleção de Nível
+<p align="center">
 <img src="https://github.com/ketlynsena/LogiKids/blob/main/LogiKids/sample_images/levels.png" width="400">
+</p>
 
 ### Dicas
+<p align="center">
 <img src="https://github.com/ketlynsena/LogiKids/blob/main/LogiKids/sample_images/tip.png" width="400">
+</p>
 
 ### Pontuação
+<p align="center">
 <img src="https://github.com/ketlynsena/LogiKids/blob/main/LogiKids/sample_images/win.png" width="400">
+</p>
 
 ## Grupo
 - Ketlyn Caroline Sena de Castro
