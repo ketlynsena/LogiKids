@@ -29,8 +29,8 @@ public:
 	void resetBoard();
 	bool checkWin();
 	bool checkConflict(TilePosition* index_list);
-	void handleQueenPieceEvent(SDL_Event* e, GameTexture* queenPiece);
-	void handleEvent(SDL_Event* e);
+	void handleQueenPieceEvent(MEvent* e, GameTexture* queenPiece);//(SDL_Event* e, GameTexture* queenPiece);
+	void handleEvent(MEvent* e);//(SDL_Event* e);
 	void update();
 	void render();
 	bool insideBoard(GameTexture* queenPiece); 

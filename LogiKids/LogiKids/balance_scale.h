@@ -42,7 +42,7 @@ public:
 	void renderScale();
 	void render();
 	void weigh();
-	void handleEvent(SDL_Event* e);
+	void handleEvent(MEvent* e); //(SDL_Event* e);
 	void update();
 	void addWeightToSolutionArea(GameTexture* w);
 	bool checkIfWithinSolutionArea(GameTexture* w);

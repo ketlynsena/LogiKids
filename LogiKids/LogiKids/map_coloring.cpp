@@ -114,7 +114,7 @@ bool Map_Coloring::isSafe()
     return true;
 }
 
-void Map_Coloring::handleEvent(SDL_Event* e)
+void Map_Coloring::handleEvent(MEvent* e)// (SDL_Event* e)
 {
     if (!checkWin()) {
 
@@ -152,7 +152,7 @@ void Map_Coloring::setCurrentColor(Cor color)
     currentColor = color;
 }
 
-void Map_Coloring::handleBucketEvent(SDL_Event* e, GameTexture* bucket, Cor color)
+void Map_Coloring::handleBucketEvent(MEvent* e, GameTexture* bucket, Cor color)//(SDL_Event* e, GameTexture* bucket, Cor color)
 {
     bucket->handleEvent(e);
     if (bucket->isPressed()) {
@@ -162,7 +162,7 @@ void Map_Coloring::handleBucketEvent(SDL_Event* e, GameTexture* bucket, Cor colo
     }
 }
 
-void Map_Coloring::handleRegionEvent(SDL_Event* e, Regiao* regiao)
+void Map_Coloring::handleRegionEvent(MEvent* e, Regiao* regiao)//(SDL_Event* e, Regiao* regiao)
 {
     regiao->mapa->handleEvent(e);
 

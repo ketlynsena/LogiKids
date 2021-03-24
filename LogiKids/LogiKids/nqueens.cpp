@@ -116,7 +116,7 @@ bool N_Queens::checkConflict(TilePosition* index_list)
 }
 
 
-void N_Queens::handleQueenPieceEvent(SDL_Event* e, GameTexture* queenPiece)
+void N_Queens::handleQueenPieceEvent(MEvent* e, GameTexture* queenPiece)//(SDL_Event* e, GameTexture* queenPiece)
 {
 	queenPiece->handleEvent(e);
 	if (queenPiece->dropped())
@@ -147,7 +147,7 @@ void N_Queens::handleQueenPieceEvent(SDL_Event* e, GameTexture* queenPiece)
 	}
 }
 
-void N_Queens::handleEvent(SDL_Event* e) 
+void N_Queens::handleEvent(MEvent* e)//(SDL_Event* e) 
 {
 	if (!gameWin) {
 		if (!showTip) {

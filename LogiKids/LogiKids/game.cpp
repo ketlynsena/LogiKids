@@ -112,13 +112,15 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 }
 
-void Game::handleMenuEvents(SDL_Event* event) {
+void Game::handleMenuEvents(MEvent* event)//(SDL_Event* event)
+{
     if (event->type == SDL_KEYDOWN || event->type == SDL_MOUSEBUTTONDOWN) {
         state = GAME_LEVELS;//STORY;
     }
 }
 
-void Game::handleStoryEvents(SDL_Event* event) {
+void Game::handleStoryEvents(MEvent* event)//(SDL_Event* event) 
+{
     if (botao_x->handleEvent(event)) {
         state = GAME_MENU;
     }
@@ -127,7 +129,8 @@ void Game::handleStoryEvents(SDL_Event* event) {
     }
 }
 
-void Game::handleNQueensEvents(SDL_Event* event) {
+void Game::handleNQueensEvents(MEvent* event)//(SDL_Event* event) 
+{
     if (botao_x->handleEvent(event)) {
         nrainhas->resetLevel();
         state = GAME_LEVELS;
@@ -147,7 +150,7 @@ void Game::handleNQueensEvents(SDL_Event* event) {
     nrainhas->handleEvent(event);
 }
 
-void Game::handleLevelEvents(SDL_Event* event)
+void Game::handleLevelEvents(MEvent* event)//(SDL_Event* event)
 {
     if (level_marker[0]->handleEvent(event))
     {
@@ -190,7 +193,7 @@ void Game::handleLevelEvents(SDL_Event* event)
     }
 }
 
-void Game::handleMapColoringEvents(SDL_Event* event)
+void Game::handleMapColoringEvents(MEvent* event)//(SDL_Event* event)
 {
     if (botao_x->handleEvent(event)) {
         colorindo_bh->resetMap();
@@ -213,7 +216,7 @@ void Game::handleMapColoringEvents(SDL_Event* event)
     colorindo_bh->handleEvent(event);
 }
 
-void Game::handleHanoiEvents(SDL_Event* event)
+void Game::handleHanoiEvents(MEvent* event)//(SDL_Event* event)
 {
     if (botao_x->handleEvent(event)) {
         bolo_hanoi->resetLevel();
@@ -237,7 +240,7 @@ void Game::handleHanoiEvents(SDL_Event* event)
     }
 }
 
-void Game::handleKnapsackEvents(SDL_Event* event)
+void Game::handleKnapsackEvents(MEvent* event)//(SDL_Event* event)
 {
     if (botao_x->handleEvent(event)) {
         mochila->resetLevel();
@@ -260,7 +263,7 @@ void Game::handleKnapsackEvents(SDL_Event* event)
     
 }
 
-void Game::handleScaleEvents(SDL_Event* event)
+void Game::handleScaleEvents(MEvent* event)//(SDL_Event* event)
 {
     if (botao_x->handleEvent(event)) {
         balanca->resetLevel();
@@ -283,7 +286,7 @@ void Game::handleScaleEvents(SDL_Event* event)
     }
 }
 
-void Game::handleTSPEvents(SDL_Event* event)
+void Game::handleTSPEvents(MEvent* event)//(SDL_Event* event)
 {
     if (botao_x->handleEvent(event)) {
         mineiro_viajante->resetLevel();
@@ -305,10 +308,22 @@ void Game::handleTSPEvents(SDL_Event* event)
     }
 }
 
-void Game::handleEvents()
-{
+MEvent Game::pollEvent() {
     SDL_Event event;
     SDL_PollEvent(&event);
+
+    MEvent mouseEvent;
+    mouseEvent.type = event.type;
+    mouseEvent.x = event.button.x;
+    mouseEvent.y = event.button.y;
+
+    return mouseEvent;
+}
+
+void Game::handleEvents(MEvent event)
+{
+    //SDL_Event event;
+    //SDL_PollEvent(&event);
 
     if (event.type == SDL_QUIT) {
         isRunning = false;

@@ -202,7 +202,7 @@ void TravelingSalesman::update()
 	}
 }
 
-void TravelingSalesman::handleEvent(SDL_Event* e)
+void TravelingSalesman::handleEvent(MEvent* e)//(SDL_Event* e)
 {
 	if (help->handleEvent(e)) {
 		showTip = true;
@@ -223,7 +223,7 @@ void TravelingSalesman::handleEvent(SDL_Event* e)
 	
 }
 
-void TravelingSalesman::handlePinEvents(SDL_Event* e)
+void TravelingSalesman::handlePinEvents(MEvent* e)//(SDL_Event* e)
 {
 	int currentPin = getCurrentCity();
 	//printf("Neighbours of %d: ", currentPin);

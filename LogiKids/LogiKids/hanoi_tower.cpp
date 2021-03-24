@@ -52,7 +52,7 @@ void Hanoi_Tower::render()
 			cake_layer[i]->render();
 }
 
-void Hanoi_Tower::handleEvent(SDL_Event* e)
+void Hanoi_Tower::handleEvent(MEvent* e)
 {
 	if (!showTip) {
 		if (help->handleEvent(e)) {

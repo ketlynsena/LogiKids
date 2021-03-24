@@ -28,13 +28,13 @@ public:
 	~TravelingSalesman();
 	void render();
 	void update();
-	void handleEvent(SDL_Event* e);
+	void handleEvent(MEvent* e);//(SDL_Event* e);
 	void resetLevel();
 	bool checkWin();
 	bool gameWon();
 	void loadCityPins();
 	void loadEdges();
-	void handlePinEvents(SDL_Event* e);
+	void handlePinEvents(MEvent* e);//(SDL_Event* e);
 	void addCityToPath(int city);
 	void setCurrentCity(int city);
 	int getCurrentCity();

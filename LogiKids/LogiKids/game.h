@@ -46,21 +46,22 @@ public:
     Game();
     ~Game();
     void init(const char* title, int xpos, int ypos, int width, int height, bool fullscreen);
-    void handleEvents();
+    void handleEvents(MEvent event);
     void render();
     void update();
     void clean();
     bool running() { return isRunning; }
-    void handleMenuEvents   (SDL_Event* event);
-    void handleStoryEvents  (SDL_Event* event);
-    void handleNQueensEvents(SDL_Event* event);
-    void handleLevelEvents  (SDL_Event* event);
-    void handleMapColoringEvents(SDL_Event* event);
-    void handleHanoiEvents(SDL_Event* event);
-    void handleKnapsackEvents(SDL_Event* event);
-    void handleScaleEvents(SDL_Event* event);
-    void handleTSPEvents(SDL_Event* event);
+    void handleMenuEvents(MEvent* event);//SDL_Event* event);
+    void handleStoryEvents(MEvent* event); //(SDL_Event* event);
+    void handleNQueensEvents(MEvent* event);//(SDL_Event* event);
+    void handleLevelEvents(MEvent* event); //(SDL_Event* event);
+    void handleMapColoringEvents(MEvent* event);//(SDL_Event* event);
+    void handleHanoiEvents(MEvent* event); //(SDL_Event* event);
+    void handleKnapsackEvents(MEvent* event); //(SDL_Event* event);
+    void handleScaleEvents(MEvent* event); //(SDL_Event* event);
+    void handleTSPEvents(MEvent* event); //(SDL_Event* event);
     static void renderGameScore();
+    MEvent pollEvent();
 
     static TextTexture* pontuacao;
     static TextTexture* tempo;

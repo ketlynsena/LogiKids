@@ -207,7 +207,8 @@ bool GameTexture::isPressed()
 	return spritePressed;
 }
 
-bool GameTexture::handleEvent(SDL_Event* event) {
+bool GameTexture::handleEvent(MEvent* event)   //SDL_Event* event) 
+{
 	//bool spritePressed = false;
 	spritePressed = false;
 
@@ -216,8 +217,8 @@ bool GameTexture::handleEvent(SDL_Event* event) {
 		int x, y;
 		SDL_Color color = {0, 0, 0, 0};
 		//SDL_GetMouseState(&x, &y);
-		x = event->button.x;
-		y = event->button.y; 
+		x = event->x;//button.x;
+		y = event->y;//button.y; 
 
 		bool inside = true;
 		currentSprite = MOUSE_OUT;

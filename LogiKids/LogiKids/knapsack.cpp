@@ -64,7 +64,7 @@ void Knapsack::render()
 	}
 }
 
-void Knapsack::handleEvent(SDL_Event* e)
+void Knapsack::handleEvent(MEvent* e)//(SDL_Event* e)
 {
 
 	if (help->handleEvent(e)) {

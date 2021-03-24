@@ -42,9 +42,9 @@ public:
 	Map_Coloring();
     void addRegion(Nome name, int xpos, int ypos, const char* texturePath);
     void resetMap();
-    void handleEvent(SDL_Event* e);
-    void handleRegionEvent(SDL_Event* e, Regiao* regiao);
-    void handleBucketEvent(SDL_Event* e, GameTexture* bucket, Cor color);
+    void handleEvent(MEvent* e);//(SDL_Event* e);
+    void handleRegionEvent(MEvent* e, Regiao* regiao);//(SDL_Event* e, Regiao* regiao);
+    void handleBucketEvent(MEvent* e, GameTexture* bucket, Cor color);//(SDL_Event* e, GameTexture* bucket, Cor color);
     void setToCurrentColor(Regiao* regiao);
     void setRegionColor(Regiao* regiao);
     SDL_Color getColorFromName(Cor color);

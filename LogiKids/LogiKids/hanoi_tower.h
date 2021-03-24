@@ -23,7 +23,7 @@ public:
 	Hanoi_Tower();
 	~Hanoi_Tower();
 	void render();
-	void handleEvent(SDL_Event* e);
+	void handleEvent(MEvent* e);// (SDL_Event* e);
 	void resetLevel();
 	void update();
 	TowerIndex getTowerIndex(GameTexture* layer);

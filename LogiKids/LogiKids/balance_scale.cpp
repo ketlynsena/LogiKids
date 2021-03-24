@@ -107,7 +107,7 @@ void BalanceScale::weigh()
 		setScaleState(LEVEL);
 }
 
-void BalanceScale::handleEvent(SDL_Event* e)
+void BalanceScale::handleEvent(MEvent* e)//(SDL_Event* e)
 {
 	if (help->handleEvent(e)) {
 		showTip = true;

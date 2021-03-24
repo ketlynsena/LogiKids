@@ -28,7 +28,7 @@ public:
 	Knapsack();
 	~Knapsack();
 	void render();
-	void handleEvent(SDL_Event* e);
+	void handleEvent(MEvent* e); //(SDL_Event* e);
 	void update();
 	void updateItems();
 	void resetLevel();

@@ -18,6 +18,12 @@ enum sprite_state
 	MOUSE_UP = 3
 };
 
+typedef struct MouseEvent {
+	int type;
+	int x;
+	int y;
+}MEvent;
+
 class GameTexture
 {
 public:
@@ -42,7 +48,7 @@ public:
 	bool grabbed();
 	void setGrabPosition(SDL_Point position);
 	bool isPressed();
-	bool handleEvent(SDL_Event* event);
+	bool handleEvent(MEvent* event);//SDL_Event* event);
 	SDL_Color getPixelColor(const int X, const int Y);
 	bool isWithinBoundaries();
 	void setDropState(bool state);
