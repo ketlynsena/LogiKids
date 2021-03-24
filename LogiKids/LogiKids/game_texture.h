@@ -56,7 +56,7 @@ public:
 	void setGrab(bool state);
 	sprite_state getSpriteState();
 
-private:
+//private:
 	SDL_Texture* spriteTexture;
 	SDL_Texture* spriteClips[4];
 	SDL_Surface* spriteSurface = nullptr;

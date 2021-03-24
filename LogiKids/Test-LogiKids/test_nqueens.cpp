@@ -106,5 +106,36 @@ TEST(TestNQueens, TestCheckConflict)
 	EXPECT_TRUE(nrainhas->checkConflict(queen_index));
 }
 
+TEST(TestNQueens, TestHandleQueenPieceEvent)
+{
+	N_Queens* nrainhas = new N_Queens();
+	TilePosition idx;
+	idx.i = 0;
+	idx.j = 0;
+	MEvent event;
+	event.type = SDL_MOUSEBUTTONDOWN;
+	event.x = 68;
+	event.y = 381;
+	//nrainhas->queens[0]->handleEvent(&event);
+	nrainhas->addQueenToBoard(idx, nrainhas->queens[0]);
+	nrainhas->queens[0]->grab = true;
+	nrainhas->queens[0]->lastDropState = false;
+	nrainhas->handleQueenPieceEvent(&event, nrainhas->queens[0]);
+	EXPECT_FALSE(nrainhas->queens[0]->grabbed());
+
+}
+
+TEST(TestNQueens, TestGetBoardIndex)
+{
+	N_Queens* nrainhas = new N_Queens();
+	TilePosition idx, curridx;
+	idx.i = 0;
+	idx.j = 1;
+	nrainhas->addQueenToBoard(idx, nrainhas->queens[0]);
+	curridx = nrainhas->getBoardIndex(nrainhas->queens[0]);
+	EXPECT_EQ(curridx.i, idx.i);
+	EXPECT_EQ(curridx.j, idx.j);
+}
+
 
 

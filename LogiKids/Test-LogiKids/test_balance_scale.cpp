@@ -42,6 +42,13 @@ TEST(TestBalanceScale, TestGetPlateIndex)
 
 	EXPECT_EQ(idx.plate, balanca->getPlateIndex(balanca->weight[1]).plate);
 	EXPECT_EQ(idx.n, balanca->getPlateIndex(balanca->weight[1]).n);
+
+	idx.plate = RIGHT_PLATE;
+	balanca->addWeightToScale(balanca->weight[2], idx, 2);
+
+	EXPECT_EQ(idx.plate, balanca->getPlateIndex(balanca->weight[2]).plate);
+	EXPECT_EQ(idx.n, balanca->getPlateIndex(balanca->weight[2]).n);
+
 }
 
 TEST(TestBalanceScale, TestAddWeightToSolutionArea)
@@ -128,6 +135,36 @@ TEST(TestBalanceScale, TestGameWon)
 	EXPECT_FALSE(balanca->gameWon());
 }
 
+TEST(TestBalanceScale, TestRenderScale)
+{
+	BalanceScale* balanca = new BalanceScale();
+	balanca->setScaleState(LEAN_LEFT);
+	balanca->renderScale();
+	balanca->setScaleState(LEAN_RIGHT);
+	balanca->renderScale();
+}
 
+TEST(TestBalanceScale, TestHandleEvent)
+{
+	BalanceScale* balanca = new BalanceScale();
+	MEvent event;
+	Index idx;
+	idx.n = 0;
+	idx.plate = LEFT_PLATE;
+
+	balanca->addWeightToScale(balanca->weight[0], idx, 0);
+
+	event.type = SDL_MOUSEBUTTONDOWN;
+	event.x = 760;
+	event.y = 563;
+
+	balanca->handleEvent(&event);
+	EXPECT_FALSE(balanca->showTip);
+
+	event.x = 400;
+	event.y = 416;
+	balanca->handleEvent(&event);
+	EXPECT_EQ(LEVEL, balanca->getScaleState());
+}
 
 

@@ -75,7 +75,7 @@ public:
     static Timer* timer;
     GameState state = GAME_MENU;
 
-private:
+//private:
     bool isRunning;
     SDL_Window* window;
     GameTexture* tela_principal;

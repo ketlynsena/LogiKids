@@ -1,6 +1,7 @@
 #include "pch.h"
-#include "../LogiKids/game.h"
+//#include "../LogiKids/game.h"
 #include "../LogiKids/game_texture.h"
+
 
 TEST(TestGameTexture, TestInitPosition) {
 
@@ -231,7 +232,51 @@ TEST(TestGameTexture, TestResetColor)
 TEST(TestGameTexture, TestSpriteNotPressed)
 {
 	GameTexture* texture = new GameTexture("assets/map_coloring/venda_nova.png", 0, 0, false, false);
-	SDL_Event event;
+	MEvent event;
 
 	EXPECT_FALSE(texture->handleEvent(&event));
+}
+
+TEST(TestGameTexture, TestHandleMouseMotion)
+{
+	GameTexture* texture = new GameTexture("assets/fundo_nrainhas.png", 0, 0, false, false);
+	MEvent event;
+	event.type = SDL_MOUSEMOTION;
+	event.x = 10;
+	event.y = 20;
+
+	texture->handleEvent(&event);
+	EXPECT_EQ(MOUSE_OVER_MOTION, texture->currentSprite);
+
+	event.x = 1000;
+	event.y = 900;
+
+	texture->handleEvent(&event);
+	EXPECT_EQ(MOUSE_OUT, texture->currentSprite);
+}
+
+TEST(TestGameTexture, TestHandleMouseButtonDown)
+{
+	GameTexture* texture = new GameTexture("assets/fundo_nrainhas.png", 0, 0, false, false);
+	MEvent event;
+	event.type = SDL_MOUSEBUTTONDOWN;
+	event.x = 100;
+	event.y = 200;
+
+	texture->handleEvent(&event);
+	EXPECT_TRUE(texture->handleEvent(&event));
+	EXPECT_EQ(MOUSE_DOWN, texture->currentSprite);
+}
+
+TEST(TestGameTexture, TestHandleMouseButtonUp)
+{
+	GameTexture* texture = new GameTexture("assets/fundo_nrainhas.png", 0, 0, false, false);
+	MEvent event;
+	event.type = SDL_MOUSEBUTTONUP;
+	event.x = 100;
+	event.y = 200;
+
+	texture->handleEvent(&event);
+	EXPECT_FALSE(texture->handleEvent(&event));
+	EXPECT_EQ(MOUSE_UP, texture->currentSprite);
 }

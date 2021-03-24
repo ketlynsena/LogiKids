@@ -44,17 +44,29 @@ TEST(TestHanoiTower, TestHandleEvent)
 
 TEST(TestHanoiTower, TestLayerBelowIsLarger)
 {
+	TowerIndex idx;
+	idx.layer = 3;
+	idx.n_tower = 0;
+	EXPECT_TRUE(torre->layerBelowIsLarger(2, idx));
 
 }
 
 TEST(TestHanoiTower, TestNoLayerOnTop)
 {
-
+	TowerIndex idx;
+	idx.layer = 1;
+	idx.n_tower = 1;
+	EXPECT_TRUE(torre->noLayerOnTop(idx));
+	idx.n_tower = 0;
+	EXPECT_FALSE(torre->noLayerOnTop(idx));
 }
 
 TEST(TestHanoiTower, TestPlaceLayerOnTower)
 {
-
+	TowerIndex idx;
+	idx.layer = 3;
+	idx.n_tower = 1;
+	EXPECT_TRUE(torre->placeLayeronTower(torre->cake_layer[3], 3, idx));
 }
 
 TEST(TestHanoiTower, TestPrintTower)
