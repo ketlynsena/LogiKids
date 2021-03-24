@@ -146,5 +146,5 @@
  
 
 ### Retrospectiva:
-  Nessa sprint foi possivel terminar a implementação dos três puzzles que faltavam, problema da mochila, caixeiro viajante e pesos das balanças, como estava previsto. Além disso foi criada parte de dicas e implementamos testes unitarios para as classes restante alcançando uma boa corbertura.
+  Nessa sprint foi possível terminar a implementação dos três puzzles que faltavam, Problema da Mochila, Caixeiro iajante e Pesos das Balanças, como estava previsto. Além disso foi criada a parte de dicas e implementamos testes unitários para as classes restantes, alcançando uma boa corbertura.
 
