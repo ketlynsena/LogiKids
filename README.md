@@ -1,7 +1,38 @@
-# LogiKids - Jogo Educativo
+![LogiKidsLogo](https://github.com/ketlynsena/LogiKids/blob/main/LogiKids/sample_images/logo.png)
 
 ## Introdução
-LogiKids é um jogo educativo para auxiliar crianças no desenvolvimento lógico. Utiliza diversos problemas comuns da Computação de maneira lúdica para estimular o raciocínio e familiarizar o público infantil com problemas lógicos. Possui puzzles variados como o problema das N-Rainhas, Caixeiro Viajante e a Torre de Hanói.
+**LogiKids** é um jogo educativo para auxiliar crianças no desenvolvimento lógico. Utiliza diversos problemas comuns da Computação de maneira lúdica para estimular o raciocínio e familiarizar o público infantil com problemas lógicos. 
+
+## Puzzles
+
+### O problema das N-Rainhas 
+<img src="https://github.com/ketlynsena/LogiKids/blob/main/LogiKids/sample_images/nqueens.png" width="400">
+
+### Coloração de Mapas
+<img src="https://github.com/ketlynsena/LogiKids/blob/main/LogiKids/sample_images/mapcoloring.png" width="400">
+
+### A Torre de Hanói
+<img src="https://github.com/ketlynsena/LogiKids/blob/main/LogiKids/sample_images/hanoi.png" width="400">
+
+### O Problema da Mochila
+<img src="https://github.com/ketlynsena/LogiKids/blob/main/LogiKids/sample_images/knapsack.png" width="400">
+
+### Os Pesos da Balança
+<img src="https://github.com/ketlynsena/LogiKids/blob/main/LogiKids/sample_images/scale.png" width="400">
+
+### O problema do Caixeiro Viajante
+<img src="https://github.com/ketlynsena/LogiKids/blob/main/LogiKids/sample_images/tsp.png" width="400">
+
+## Outras Features
+
+### Seleção de Nível
+<img src="https://github.com/ketlynsena/LogiKids/blob/main/LogiKids/sample_images/levels.png" width="400">
+
+### Dicas
+<img src="https://github.com/ketlynsena/LogiKids/blob/main/LogiKids/sample_images/tip.png" width="400">
+
+### Pontuação
+<img src="https://github.com/ketlynsena/LogiKids/blob/main/LogiKids/sample_images/win.png" width="400">
 
 ## Grupo
 - Ketlyn Caroline Sena de Castro
@@ -14,7 +45,7 @@ LogiKids é um jogo educativo para auxiliar crianças no desenvolvimento lógico
 -	Pontuação do usuário
 -	Interação com objetos na tela
 -	Dicas
--	Seleção de dificuldade
+-	Seleção de nível
 
 ## Tecnologias
 - Linguagem: `C++`
